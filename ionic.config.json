@@ -1,0 +1,7 @@
+{
+  "name": "CLAPPS",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
