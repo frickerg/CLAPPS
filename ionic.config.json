@@ -1,7 +1,7 @@
 {
-  "name": "CLAPPS",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
+	"name": "CLAPPS",
+	"integrations": {
+		"cordova": {}
+	},
+	"type": "ionic-angular"
 }
