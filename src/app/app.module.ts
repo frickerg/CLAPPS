@@ -1,40 +1,42 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { RouteReuseStrategy } from '@angular/router';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { TabsComponent } from '../components/navigation/tabs/tabs.component';
+import { HomePageComponent } from '../pages/home-page/home.page.component';
+import { AboutPageComponent } from '../pages/about-page/about.page.component';
+import { ContactPageComponent } from '../pages/contact-page/contact.page.component';
 
 @NgModule({
 	declarations: [
-		MyApp,
-		AboutPage,
-		ContactPage,
-		HomePage,
-		TabsPage
+		AppComponent,
+		TabsComponent,
+		HomePageComponent,
+		AboutPageComponent,
+		ContactPageComponent
 	],
+	entryComponents: [],
 	imports: [
 		BrowserModule,
-		IonicModule.forRoot(MyApp)
-	],
-	bootstrap: [IonicApp],
-	entryComponents: [
-		MyApp,
-		AboutPage,
-		ContactPage,
-		HomePage,
-		TabsPage
+		IonicModule.forRoot(),
+		AppRoutingModule
 	],
 	providers: [
 		StatusBar,
 		SplashScreen,
-		{ provide: ErrorHandler, useClass: IonicErrorHandler }
+		{
+			provide: RouteReuseStrategy,
+			useClass: IonicRouteStrategy
+		}
+	],
+	bootstrap: [
+		AppComponent
 	]
 })
 export class AppModule { }
