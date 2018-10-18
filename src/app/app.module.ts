@@ -9,17 +9,17 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabsComponent } from '../components/navigation/tabs/tabs.component';
-import { HomePage } from '../pages/home/home.page';
-import { AboutPage } from '../pages/about/about.page';
-import { ContactPage } from '../pages/contact/contact.page';
+import { HomePageComponent } from '../pages/home-page/home.page.component';
+import { AboutPageComponent } from '../pages/about-page/about.page.component';
+import { ContactPageComponent } from '../pages/contact-page/contact.page.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		TabsComponent,
-		HomePage,
-		AboutPage,
-		ContactPage
+		HomePageComponent,
+		AboutPageComponent,
+		ContactPageComponent
 	],
 	entryComponents: [],
 	imports: [

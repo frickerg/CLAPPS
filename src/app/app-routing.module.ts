@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsComponent } from '../components/navigation/tabs/tabs.component';
-import { HomePage } from '../pages/home/home.page';
-import { AboutPage } from '../pages/about/about.page';
-import { ContactPage } from '../pages/contact/contact.page';
+import { HomePageComponent } from '../pages/home-page/home.page.component';
+import { AboutPageComponent } from '../pages/about-page/about.page.component';
+import { ContactPageComponent } from '../pages/contact-page/contact.page.component';
 
 const routes: Routes = [
 	{
@@ -19,17 +19,17 @@ const routes: Routes = [
 			{
 				path: 'home',
 				outlet: 'home',
-				component: HomePage
+				component: HomePageComponent
 			},
 			{
 				path: 'about',
 				outlet: 'about',
-				component: AboutPage
+				component: AboutPageComponent
 			},
 			{
 				path: 'contact',
 				outlet: 'contact',
-				component: ContactPage
+				component: ContactPageComponent
 			}
 		]
 	},
