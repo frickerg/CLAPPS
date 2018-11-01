@@ -12,6 +12,7 @@ import { TabsComponent } from '../components/navigation/tabs/tabs.component';
 import { HomePageComponent } from '../pages/home-page/home.page.component';
 import { DiaryPageComponent } from '../pages/diary-page/diary.page.component';
 import { TipPageComponent } from '../pages/tip-page/tip.page.component';
+import { SensorPageComponent } from '../pages/sensor-page/sensor.page.component';
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,8 @@ import { TipPageComponent } from '../pages/tip-page/tip.page.component';
 		TabsComponent,
 		HomePageComponent,
 		DiaryPageComponent,
-		TipPageComponent
+		TipPageComponent,
+		SensorPageComponent
 	],
 	entryComponents: [],
 	imports: [

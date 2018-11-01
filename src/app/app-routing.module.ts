@@ -5,6 +5,7 @@ import { TabsComponent } from '../components/navigation/tabs/tabs.component';
 import { HomePageComponent } from '../pages/home-page/home.page.component';
 import { DiaryPageComponent } from '../pages/diary-page/diary.page.component';
 import { TipPageComponent } from '../pages/tip-page/tip.page.component';
+import { SensorPageComponent } from '../pages/sensor-page/sensor.page.component';
 
 const routes: Routes = [
 	{
@@ -30,6 +31,11 @@ const routes: Routes = [
 				path: 'tip',
 				outlet: 'tip',
 				component: TipPageComponent
+			},
+			{
+				path: 'sensor',
+				outlet: 'sensor',
+				component: SensorPageComponent
 			}
 		]
 	},
@@ -37,7 +43,7 @@ const routes: Routes = [
 		path: '',
 		redirectTo: '/tabs/(home:home)',
 		pathMatch: 'full'
-	}
+	},
 ];
 
 @NgModule({
