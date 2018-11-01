@@ -10,16 +10,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabsComponent } from '../components/navigation/tabs/tabs.component';
 import { HomePageComponent } from '../pages/home-page/home.page.component';
-import { AboutPageComponent } from '../pages/about-page/about.page.component';
-import { ContactPageComponent } from '../pages/contact-page/contact.page.component';
+import { DiaryPageComponent } from '../pages/diary-page/diary.page.component';
+import { TipPageComponent } from '../pages/tip-page/tip.page.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		TabsComponent,
 		HomePageComponent,
-		AboutPageComponent,
-		ContactPageComponent
+		DiaryPageComponent,
+		TipPageComponent
 	],
 	entryComponents: [],
 	imports: [
