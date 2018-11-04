@@ -1,5 +1,6 @@
 var MetaWear = require('metawear');
 
+console.log('starting metawear');
 MetaWear.discover(function (device) {
 	device.connectAndSetUp(function (error) {
 		var pattern = new MetaWear.LedPattern();
