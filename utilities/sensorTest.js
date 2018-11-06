@@ -3,40 +3,35 @@ var ref = require('ref');
 
 var accelLogger = null;
 
-console.log('starting metawear');
+// Discovers the closest MetaWear sensor
+// INFO: MAC:Address should be passed as a String in the App
+// --> MetaWear.discoverByAddress('E4:A2:16:63:D9:E1', function (device) {
 MetaWear.discover(function (device) {
 	console.log('discovered ' + device.address);
 	device.connectAndSetUp(function (error) {
-		MetaWear.mbl_mw_debug_reset(device.board);
-		if (error) {
-			console.log(error);
-			process.exit(1);
-		}
-
-		console.log('connected ' + device.address);
-
+		// Blinking LedPattern to indicate that the connection was successful
 		var pattern = new MetaWear.LedPattern();
 		MetaWear.mbl_mw_led_load_preset_pattern(pattern.ref(), MetaWear.LedPreset.BLINK);
 		MetaWear.mbl_mw_led_write_pattern(device.board, pattern.ref(), MetaWear.LedColor.GREEN);
 		MetaWear.mbl_mw_led_play(device.board);
-		console.log('pattern performed');
-
-		// start logging
+		console.log('connected ' + device.address);
+		// Start logging
 		startLogging(device, function (error) {
 			if (error) {
 				console.log(error);
 				process.exit(1);
 			}
-			// Stop logging after 10 seconds
+			// Stop logging after 5 seconds
 			setTimeout(function () {
 				downloadLog(device, function (error) {
 					device.once('disconnect', function (reason) {
+						console.log('device ready for next usage');
 						process.exit(0);
 					});
 					MetaWear.mbl_mw_debug_reset(device.board);
+					console.log('reset succesful');
 				});
-			}, 10000);
-			console.log('exit metawear');
+			}, 5000);
 		});
 	});
 });
@@ -45,26 +40,25 @@ function downloadLog(device, callback) {
 	// Shutdown accel
 	MetaWear.mbl_mw_acc_stop(device.board);
 	MetaWear.mbl_mw_acc_disable_acceleration_sampling(device.board);
+
 	// Shutdown log
 	MetaWear.mbl_mw_logging_stop(device.board);
+
 	// Setup handerl for accel data points
 	MetaWear.mbl_mw_logger_subscribe(accelLogger, ref.NULL, MetaWear.FnVoid_VoidP_DataP.toPointer(function onSignal(context, dataPtr) {
 		var data = dataPtr.deref();
 		var pt = data.parseValue();
 		console.log(data.epoch + ' ' + pt.x + ',' + pt.y + ',' + pt.z);
 	}));
+
 	// Setup the handlers for events during the download
 	var downloadHandler = new MetaWear.LogDownloadHandler();
 	downloadHandler.received_progress_update = MetaWear.FnVoid_VoidP_UInt_UInt.toPointer(function onSignal(context, entriesLeft, totalEntries) {
-		console.log('received_progress_update entriesLeft:' + entriesLeft + ' totalEntries:' + totalEntries);
 		if (entriesLeft === 0) {
 			// Remove all log entries if told to stop logging
 			MetaWear.mbl_mw_metawearboard_tear_down(device.board);
 			callback(null);
 		}
-	});
-	downloadHandler.received_unknown_entry = MetaWear.FnVoid_VoidP_UByte_Long_UByteP_UByte.toPointer(function onSignal(context, id, epoch, data, length) {
-		console.log('received_unknown_entry');
 	});
 	downloadHandler.received_unhandled_entry = MetaWear.FnVoid_VoidP_DataP.toPointer(function onSignal(context, dataPtr) {
 		var data = dataPtr.deref();
