@@ -5,4 +5,15 @@ import { Component } from '@angular/core';
 	templateUrl: 'sensor.page.component.html',
 	styleUrls: ['sensor.page.component.scss']
 })
-export class SensorPageComponent { }
+export class SensorPageComponent {
+
+	constructor() {
+
+	}
+
+connect(){
+	//put some code here
+}
+}
+
+
