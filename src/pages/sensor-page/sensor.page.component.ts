@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { delay } from 'q';
 
 @Component({
 	selector: 'app-sensor',
@@ -11,8 +12,11 @@ export class SensorPageComponent {
 
 	}
 
-connect(){
-	//put some code here
+connect() {
+	// put some code here
+
+	document.getElementById('explain').textContent = 'Sensor wird verbunden';
+	document.getElementById('connectionBtn').hidden = true;
 }
 }
 
