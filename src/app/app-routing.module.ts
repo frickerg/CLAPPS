@@ -21,32 +21,27 @@ const routes: Routes = [
 			{
 				path: 'home',
 				outlet: 'home',
-				component: HomePageComponent,
-				loadChildren: '../home/home.page.component#HomePageComponent'
+				component: HomePageComponent
 			},
 			{
 				path: 'diary',
 				outlet: 'diary',
-				component: DiaryPageComponent,
-				loadChildren: '../diary/diary.page.component#DiaryPageComponent'
+				component: DiaryPageComponent
 			},
 			{
 				path: 'tip',
 				outlet: 'tip',
-				component: TipPageComponent,
-				loadChildren: '../tip/tip.page.component#TipPageComponent'
+				component: TipPageComponent
 			},
 			{
 				path: 'sensor',
 				outlet: 'sensor',
-				component: SensorPageComponent,
-				loadChildren: '../sensor/sensor.page.component#SensorPageComponent'
+				component: SensorPageComponent
 			},
 			{
 				path: 'tipDetail',
 				outlet: 'tip',
-				component: TipDetailPageComponent,
-				loadChildren: '../tipDetail/tipDetail.page.component#TipDetailPageComponent'
+				component: TipDetailPageComponent
 			}
 		]
 	},
