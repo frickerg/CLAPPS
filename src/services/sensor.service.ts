@@ -6,7 +6,8 @@ import { Metawear } from 'metawear';
 })
 export class SensorService {
 	sensor: Metawear;
-	availableDevices: Metawear[];
+	availableAddresses: string[];
+	availableDevices = [];
 
 	constructor() {
 	}
@@ -33,4 +34,32 @@ export class SensorService {
 	public logFromDevice(address: string): Metawear {
 		//TODO
 	}
+
+	public onDiscover(device) {
+		this.availableAddresses.forEach((address) => {
+			if (device.address.equalsIgnoreCase(address)) {
+				console.log('discovered ' + address);
+				this.availableDevices.push(device);
+			}
+		});
+		// Complete discovery after finishing scanning for devices
+		if (this.availableAddresses.length == this.availableDevices.length) {
+			this.sensor.stopDiscoverAll(this.onDiscover);
+			setTimeout(function () {
+				console.log('discover complete');
+				this.availableDevices.forEach(function (device) {
+					this.startAccelStream(device);
+				});
+			}, 1000);
+		}
+	}
+
+	public discoverAll() {
+		this.sensor.discoverAll(this.onDiscover);
+	}
+
+	public startAccelStream(device) {
+		//TODO
+	}
+
 }
