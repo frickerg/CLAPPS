@@ -13,6 +13,7 @@ import { HomePageComponent } from '../pages/home-page/home.page.component';
 import { DiaryPageComponent } from '../pages/diary-page/diary.page.component';
 import { TipPageComponent } from '../pages/tip-page/tip.page.component';
 import { SensorPageComponent } from '../pages/sensor-page/sensor.page.component';
+import { TipDetailPageComponent } from '../pages/tipDetail-page/tipDetail.page.component';
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { SensorPageComponent } from '../pages/sensor-page/sensor.page.component'
 		HomePageComponent,
 		DiaryPageComponent,
 		TipPageComponent,
+		TipDetailPageComponent,
 		SensorPageComponent
 	],
 	entryComponents: [],
