@@ -5,19 +5,15 @@ import { Metawear } from 'metawear';
 	providedIn: 'root'
 })
 export class SensorService {
-	sensor: Metawear;
-	availableAddresses: string[];
 	availableDevices = [];
+	availableAddresses = [
+		// MAC-Addresses for testing
+		// TODO: remove this array when the app is up and running and make a separate list in the sensor.page view
+		'E4:A2:16:63:D9:E1'
+	];
 
-	constructor() {
-	}
-
-	public discoverDevice(): Metawear {
-		this.availableDevices = [];
-		return this.sensor.discover(device => {
-			console.log('discovered ' + device.address);
-			this.sensor.push(device);
-		});
+	constructor(private sensor: Metawear) {
+		console.log('sensor service initialized');
 	}
 
 	public connectDeviceByAddress(address: string): Metawear {
@@ -31,7 +27,11 @@ export class SensorService {
 		});
 	}
 
-	public onDiscover(device) {
+	public discoverAll() {
+		this.sensor.discoverAll(this.onDiscover);
+	}
+
+	private onDiscover(device) {
 		this.availableAddresses.forEach((address) => {
 			if (device.address.equalsIgnoreCase(address)) {
 				console.log('discovered ' + address);
@@ -41,17 +41,14 @@ export class SensorService {
 		// Complete discovery after finishing scanning for devices
 		if (this.availableAddresses.length == this.availableDevices.length) {
 			this.sensor.stopDiscoverAll(this.onDiscover);
-			setTimeout(function () {
+			// stream accelerometer for a short amount of time
+			setTimeout(function() {
 				console.log('discover complete');
-				this.availableDevices.forEach(function (device) {
+				this.availableDevices.forEach(device => {
 					this.startAccelStream(device);
 				});
 			}, 1000);
 		}
-	}
-
-	public discoverAll() {
-		this.sensor.discoverAll(this.onDiscover);
 	}
 
 	public startAccelStream(device) {
