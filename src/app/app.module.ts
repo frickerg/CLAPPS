@@ -14,6 +14,7 @@ import { DiaryPageComponent } from '../pages/diary-page/diary.page.component';
 import { TipPageComponent } from '../pages/tip-page/tip.page.component';
 import { SensorPageComponent } from '../pages/sensor-page/sensor.page.component';
 import { TipDetailPageComponent } from '../pages/tipDetail-page/tipDetail.page.component';
+import { SensorService } from '../services/sensor.service';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { TipDetailPageComponent } from '../pages/tipDetail-page/tipDetail.page.c
 		{
 			provide: RouteReuseStrategy,
 			useClass: IonicRouteStrategy
-		}
+		},
+		SensorService
 	],
 	bootstrap: [
 		AppComponent
