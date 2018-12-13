@@ -1,7 +1,8 @@
 package ch.bfh.backio;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.content.*;
+import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.mbientlab.metawear.android.BtleService;
 
-public class HomeActivity extends AppCompatActivity {
-
+public class HomeActivity extends AppCompatActivity implements ServiceConnection {
+	private BtleService.LocalBinder serviceBinder;
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -33,12 +35,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
-        */
-    }
+		getApplicationContext().bindService(new Intent(this, BtleService.class),
+			this, Context.BIND_AUTO_CREATE);
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,9 +61,21 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		///< Unbind the service when the activity is destroyed
+		getApplicationContext().unbindService(this);
+	}
+
+	@Override
+	public void onServiceConnected(ComponentName name, IBinder service) {
+		///< Typecast the binder to the service's LocalBinder class
+		this.serviceBinder = (BtleService.LocalBinder) service;
+	}
+
+	@Override
+	public void onServiceDisconnected(ComponentName componentName) { }
+	
 }
