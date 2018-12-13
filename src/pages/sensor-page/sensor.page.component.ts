@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { delay } from 'q';
+import { SensorService } from '../../services/sensor.service';
 
 @Component({
 	selector: 'app-sensor',
@@ -7,17 +7,15 @@ import { delay } from 'q';
 	styleUrls: ['sensor.page.component.scss']
 })
 export class SensorPageComponent {
+	sensor: SensorService;
 
-	constructor() {
-
+	constructor(sensor: SensorService) {
+		this.sensor = sensor;
 	}
 
-connect() {
-	// put some code here
-
-	document.getElementById('explain').textContent = 'Sensor wird verbunden';
-	document.getElementById('connectionBtn').hidden = true;
-}
+	connect() {
+		this.sensor.discoverAll();
+	}
 }
 
 
