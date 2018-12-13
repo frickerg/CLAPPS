@@ -1,7 +1,0 @@
-{
-	"name": "back.io",
-	"integrations": {
-		"cordova": {}
-	},
-	"type": "angular"
-}
