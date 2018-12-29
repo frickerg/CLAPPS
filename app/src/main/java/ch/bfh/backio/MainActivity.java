@@ -3,12 +3,15 @@ package ch.bfh.backio;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
@@ -22,6 +25,11 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
     private BtleService.LocalBinder serviceBinder;
     private MetaWearBoard metawear;
+    private Button diaryButton;
+    private Button tipsButton;
+    private Button sensorButton;
+    private Button homeButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,42 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
         setContentView(R.layout.activity_main);
 
         getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
+
+		diaryButton = (Button) findViewById(R.id.btn_diary);
+		tipsButton = (Button) findViewById(R.id.btn_tips);
+		sensorButton = (Button) findViewById(R.id.btn_sensor);
+		homeButton = (Button) findViewById(R.id.btn_home);
+
+		Context context = MainActivity.this;
+		diaryButton.setOnClickListener((v -> {
+
+			Class destinationActivity = DiaryActivity.class;
+			Intent startDiaryActivityIntent = new Intent(context, destinationActivity);
+			startActivity(startDiaryActivityIntent);
+			String message = "Button clicked!\nTagebuch";
+			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+		}));
+
+		tipsButton.setOnClickListener((v -> {
+			/*Class destinationActivity = TipsActivity.class;
+			Intent startDiaryActivityIntent = new Intent(context, destinationActivity);
+			startActivity(startDiaryActivityIntent);*/
+			String message = "Button clicked!\nTipps";
+			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+		}));
+
+		sensorButton.setOnClickListener((v -> {
+			/*Class destinationActivity = Sensor.class;
+			Intent startDiaryActivityIntent = new Intent(context, destinationActivity);
+			startActivity(startDiaryActivityIntent);*/
+			String message = "Button clicked!\nSensor";
+			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+		}));
+
+		homeButton.setOnClickListener((v -> {
+			String message = "Button clicked!\nHome";
+			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+		}));
     }
 
     @Override

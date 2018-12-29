@@ -9,8 +9,50 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ch.bfh.backio.MainActivity">
 
-    <fragment xmlns:tools="http://schemas.android.com/tools" android:id="@+id/scanner_fragment"
+    <fragment xmlns:tools="http://schemas.android.com/tools"
+		android:id="@+id/scanner_fragment"
         android:name="com.mbientlab.bletoolbox.scanner.BleScannerFragment"
-        tools:layout="@layout/blescan_device_list" android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        tools:layout="@layout/blescan_device_list"
+		android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="42dp"
+			android:orientation="horizontal"
+			android:gravity="bottom">
+
+			<Button
+				android:id="@+id/btn_home"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="@string/btn_home"
+				android:textAlignment="center"/>
+
+			<Button
+				android:id="@+id/btn_diary"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="@string/btn_diary"
+				android:textAlignment="center"/>
+
+			<Button
+				android:id="@+id/btn_tips"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="@string/btn_tips"
+				android:textAlignment="center"/>
+
+			<Button
+				android:id="@+id/btn_sensor"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="@string/btn_sensor"
+				android:textAlignment="center"/>
+		</LinearLayout>
+	</fragment>
 </RelativeLayout>
