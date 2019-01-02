@@ -9,4 +9,15 @@
 	<string name="btn_diary">Tagebuch</string>
 	<string name="btn_tips">Tipps</string>
 	<string name="btn_sensor">Sensor</string>
+	<string name="btn_tip">Tipps</string>
+	<string name="btn_exercise">Übungen</string>
+	<string name="btn_awarness">Aufklärung</string>
+	<string name="sensor_connect">Sensor koppeln</string>
+	<string name="sensor_disconnect">Sensor entkoppeln</string>
+	<string name="synchronization">Jetzt Synchronisieren</string>
+	<string name="synchroH">24 h Synchronisation</string>
+	<string name="title_home">Startseite</string>
+	<string name="title_diary">Tagebuch</string>
+	<string name="title_tips">Tipps und Übungen</string>
+	<string name="title_sensor">Sensor</string>
 </resources>

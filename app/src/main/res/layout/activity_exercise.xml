@@ -4,50 +4,30 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".TipsActivity">
+	tools:context=".ExerciseActivity">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:layout_gravity="bottom"
 		android:gravity="bottom"
 		android:orientation="vertical">
 
-		<Button
-			android:id="@+id/btn_tip"
+		<ScrollView
 			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:text="@string/btn_tip"
-			android:layout_marginBottom="60dp"
-			android:background="@color/colorPrimary"
-			android:textAlignment="center"
-			android:textColor="#fff" />
+			android:layout_height="match_parent">
 
-		<Button
-			android:id="@+id/btn_exercise"
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:text="@string/btn_exercise"
-			android:layout_marginBottom="60dp"
-			android:background="@color/colorPrimary"
-			android:textAlignment="center"
-			android:textColor="#fff"/>
-
-		<Button
-			android:id="@+id/btn_awarness"
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:text="@string/btn_awarness"
-			android:background="@color/colorPrimary"
-			android:textAlignment="center"
-			android:textColor="#fff"/>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical" />
+		</ScrollView>
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="42dp"
-			android:layout_gravity="bottom"
 			android:gravity="end"
-			android:orientation="horizontal"
-			android:layout_marginTop="250dp">
+			android:orientation="horizontal">
 
 			<Button
 				android:id="@+id/btn_home"
@@ -85,7 +65,5 @@
 				android:text="@string/btn_sensor"
 				android:textAlignment="center" />
 		</LinearLayout>
-
 	</LinearLayout>
-
 </FrameLayout>
