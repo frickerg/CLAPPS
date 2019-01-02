@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,31 +18,40 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ExerciseActivity extends AppCompatActivity {
+public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.JSONAdapterOnClickHandler{
 
 	private Button diaryButton;
 	private Button tipsButton;
 	private Button sensorButton;
 	private Button homeButton;
-	private TextView viewExercise;
 	private ArrayList<String> exerciseList = new ArrayList<>();
+	private RecyclerView recyclerView;
+	private JSONAdapter JSONAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_exercise);
-
+		getExerciseJSON();
 
 		diaryButton = (Button) findViewById(R.id.btn_diary);
 		tipsButton = (Button) findViewById(R.id.btn_tips);
 		sensorButton = (Button) findViewById(R.id.btn_sensor);
 		homeButton = (Button) findViewById(R.id.btn_home);
-		viewExercise = (TextView) findViewById(R.id.exercise_view);
+		recyclerView = (RecyclerView) findViewById(R.id.rv_exercise);
 
-		getExerciseJSON();
+		LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+		recyclerView.setLayoutManager(layoutManager);
+		recyclerView.setHasFixedSize(true);
+		JSONAdapter = new JSONAdapter(this);
+		recyclerView.setAdapter(JSONAdapter);
+
 		for(int i = 0; i<exerciseList.size(); i++){
-			viewExercise.append((exerciseList.get(i))+"\n\n");
+			JSONAdapter.setJSONData(exerciseList.get(i));
 		}
+
+
+
 		Context context = ExerciseActivity.this;
 		diaryButton.setOnClickListener((v -> {
 
@@ -74,6 +85,16 @@ public class ExerciseActivity extends AppCompatActivity {
 			String message = "Button clicked!\nHome";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));
+	}
+
+	@Override
+	public void onClick(String exerciseTitel) {
+		Context context = this;
+		Toast.makeText(context, exerciseTitel, Toast.LENGTH_SHORT).show();
+		Class destinationClass = TipDetailActivity.class;
+		Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+		intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, exerciseTitel);
+		startActivity(intentToStartDetailActivity);
 	}
 
 	private void getExerciseJSON(){

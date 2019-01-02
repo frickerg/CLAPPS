@@ -27,7 +27,8 @@
 		<activity android:name=".TipActivity" />
 		<activity android:name=".ExerciseActivity" />
 		<activity android:name=".AwarnessActivity" />
-		<activity android:name=".TipDetailActivity"></activity>
+		<activity android:name=".TipDetailActivity" />
+		<activity android:name=".ExerciseDetailActivity"></activity>
 	</application>
 
 </manifest>

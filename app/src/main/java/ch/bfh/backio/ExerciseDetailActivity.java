@@ -4,9 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -15,40 +14,41 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
-public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAdapterOnClickHandler {
+public class ExerciseDetailActivity extends AppCompatActivity {
+	private TextView exerciseTitle;
+	private TextView exerciseText;
+	private String exerciseTitleText;
+	private TextView exerciseText2;
 	private Button diaryButton;
 	private Button tipsButton;
 	private Button sensorButton;
 	private Button homeButton;
-	private ArrayList<String> tipList = new ArrayList<>();
-	private RecyclerView recyclerView;
-	private JSONAdapter JSONAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tip);
-		getTipJSON();
+		setContentView(R.layout.activity_exercise_detail);
 
+		exerciseTitle = (TextView) findViewById(R.id.display_exercise_title);
+		exerciseText = (TextView) findViewById(R.id.display_exercise_text);
+		exerciseText2 = (TextView) findViewById(R.id.display_exercise_text2);
 		diaryButton = (Button) findViewById(R.id.btn_diary);
 		tipsButton = (Button) findViewById(R.id.btn_tips);
 		sensorButton = (Button) findViewById(R.id.btn_sensor);
 		homeButton = (Button) findViewById(R.id.btn_home);
-		recyclerView = (RecyclerView) findViewById(R.id.rv_tip);
 
-		LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-		recyclerView.setLayoutManager(layoutManager);
-		recyclerView.setHasFixedSize(true);
-		JSONAdapter = new JSONAdapter(this);
-		recyclerView.setAdapter(JSONAdapter);
+		Intent intentThatStartedThisActivity = getIntent();
 
-		for(int i = 0; i<tipList.size(); i++){
-			JSONAdapter.setJSONData(tipList.get(i));
+		if (intentThatStartedThisActivity != null) {
+			if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
+				exerciseTitleText = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
+				exerciseTitle.setText(exerciseTitleText);
+			}
 		}
 
-		Context context = TipActivity.this;
+		getJSONText();
+		Context context = ExerciseDetailActivity.this;
 		diaryButton.setOnClickListener((v -> {
 
 			Class destinationActivity = DiaryActivity.class;
@@ -81,38 +81,28 @@ public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAd
 			String message = "Button clicked!\nHome";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));
-
 	}
 
-	@Override
-	public void onClick(String tipTitel) {
-		Context context = this;
-		Toast.makeText(context, tipTitel, Toast.LENGTH_SHORT).show();
-		Class destinationClass = TipDetailActivity.class;
-		Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-		intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, tipTitel);
-		startActivity(intentToStartDetailActivity);
-	}
-
-	private void getTipJSON(){
-		String tip;
+	private void getJSONText(){
+		String exercise;
 		try {
-			InputStream is = getAssets().open("tip.json");
+			InputStream is = getAssets().open("exercise.json");
 			int size = is.available();
 			byte[] buffer = new byte[size];
 
 			is.read(buffer);
 			is.close();
 
-			tip = new String(buffer, "UTF-8");
-			JSONObject obj = new JSONObject(tip);
-			JSONArray tipArray = obj.getJSONArray("tip");
+			exercise = new String(buffer, "UTF-8");
+			JSONObject obj = new JSONObject(exercise);
+			JSONArray exerciseArray = obj.getJSONArray("exercise");
 
-			for(int i = 0; i<tipArray.length(); i++){
-				JSONObject obj2 = tipArray.getJSONObject(i);
-				tipList.add(obj2.getString("title"));
-				String message = tipList.get(i);
-				Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
+			for(int i = 0; i<exerciseArray.length(); i++){
+				JSONObject obj2 = exerciseArray.getJSONObject(i);
+				if(exerciseTitleText.equals(obj2.getString("title"))){
+					exerciseText.setText(obj2.getString("text"));
+					exerciseText2.setText(obj2.getString("text2"));
+				}
 			}
 
 		} catch (IOException e) {

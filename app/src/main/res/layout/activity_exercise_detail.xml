@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".ExerciseActivity">
+	tools:context=".ExerciseDetailActivity">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -13,13 +13,24 @@
 		android:gravity="bottom"
 		android:orientation="vertical">
 
-		<android.support.v7.widget.RecyclerView
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:id="@+id/rv_exercise"
-			android:layout_marginTop="20dp">
+		<TextView
+			android:id="@+id/display_exercise_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="22sp" />
 
-		</android.support.v7.widget.RecyclerView>
+		<TextView
+			android:id="@+id/display_exercise_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TextTextTextTExt"
+			android:textSize="22sp" />
+
+		<TextView
+			android:id="@+id/display_exercise_text2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="22sp" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
