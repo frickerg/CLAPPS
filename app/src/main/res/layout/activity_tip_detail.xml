@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".TipDetailActivity">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="bottom"
+		android:gravity="bottom"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/display_tip_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="22sp" />
+		<TextView
+			android:id="@+id/display_tip_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="22sp" />
+		<TextView
+			android:id="@+id/display_tip_subtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="22sp" />
+		<TextView
+			android:id="@+id/display_tip_text2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="22sp" />
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="42dp"
+		android:gravity="end"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/btn_home"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/colorPrimary"
+			android:text="@string/btn_home"
+			android:textAlignment="center" />
+
+		<Button
+			android:id="@+id/btn_diary"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/colorPrimary"
+			android:text="@string/btn_diary"
+			android:textAlignment="center" />
+
+		<Button
+			android:id="@+id/btn_tips"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/colorPrimary"
+			android:text="@string/btn_tips"
+			android:textAlignment="center" />
+
+		<Button
+			android:id="@+id/btn_sensor"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/colorPrimary"
+			android:text="@string/btn_sensor"
+			android:textAlignment="center" />
+	</LinearLayout>
+	</LinearLayout>
+	</FrameLayout>
+

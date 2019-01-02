@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,40 +14,44 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
-public class TipActivity extends AppCompatActivity implements TipAdapter.TipAdapterOnClickHandler {
+public class TipDetailActivity extends AppCompatActivity {
+
+	private TextView tipTitle;
+	private TextView tipText;
+	private TextView tipSubtitle;
+	private TextView tipText2;
+	private String tipTitleText;
 	private Button diaryButton;
 	private Button tipsButton;
 	private Button sensorButton;
 	private Button homeButton;
-	private ArrayList<String> tipList = new ArrayList<>();
-	private RecyclerView recyclerView;
-	private TipAdapter tipAdapter;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tip);
-		getTipJSON();
+		setContentView(R.layout.activity_tip_detail);
 
+		tipTitle = (TextView) findViewById(R.id.display_tip_title);
+		tipText = (TextView) findViewById(R.id.display_tip_text);
+		tipSubtitle = (TextView) findViewById(R.id.display_tip_subtitle);
+		tipText2 = (TextView) findViewById(R.id.display_tip_text2);
 		diaryButton = (Button) findViewById(R.id.btn_diary);
 		tipsButton = (Button) findViewById(R.id.btn_tips);
 		sensorButton = (Button) findViewById(R.id.btn_sensor);
 		homeButton = (Button) findViewById(R.id.btn_home);
-		recyclerView = (RecyclerView) findViewById(R.id.rv_tip);
 
-		LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-		recyclerView.setLayoutManager(layoutManager);
-		recyclerView.setHasFixedSize(true);
-		tipAdapter = new TipAdapter(this);
-		recyclerView.setAdapter(tipAdapter);
 
-		for(int i = 0; i<tipList.size(); i++){
-			tipAdapter.setTipData(tipList.get(i));
+		Intent intentThatStartedThisActivity = getIntent();
+
+		if (intentThatStartedThisActivity != null) {
+			if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
+				tipTitleText = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
+				tipTitle.setText(tipTitleText);
+			}
 		}
 
-		Context context = TipActivity.this;
+		getJSONText();
+		Context context = TipDetailActivity.this;
 		diaryButton.setOnClickListener((v -> {
 
 			Class destinationActivity = DiaryActivity.class;
@@ -83,20 +84,9 @@ public class TipActivity extends AppCompatActivity implements TipAdapter.TipAdap
 			String message = "Button clicked!\nHome";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));
-
 	}
 
-	@Override
-	public void onClick(String tipTitel) {
-		Context context = this;
-		Toast.makeText(context, tipTitel, Toast.LENGTH_SHORT).show();
-		Class destinationClass = TipDetailActivity.class;
-		Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-		intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, tipTitel);
-		startActivity(intentToStartDetailActivity);
-	}
-
-	private void getTipJSON(){
+	private void getJSONText(){
 		String tip;
 		try {
 			InputStream is = getAssets().open("tip.json");
@@ -112,9 +102,11 @@ public class TipActivity extends AppCompatActivity implements TipAdapter.TipAdap
 
 			for(int i = 0; i<tipArray.length(); i++){
 				JSONObject obj2 = tipArray.getJSONObject(i);
-				tipList.add(obj2.getString("title"));
-				String message = tipList.get(i);
-				Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
+				if(tipTitleText.equals(obj2.getString("title"))){
+					tipText.setText(obj2.getString("text"));
+					tipSubtitle.setText(obj2.getString("subtitle"));
+					tipText2.setText(obj2.getString("text2"));
+				}
 			}
 
 		} catch (IOException e) {

@@ -26,7 +26,8 @@
 		<activity android:name=".SensorActivity" />
 		<activity android:name=".TipActivity" />
 		<activity android:name=".ExerciseActivity" />
-		<activity android:name=".AwarnessActivity"></activity>
+		<activity android:name=".AwarnessActivity" />
+		<activity android:name=".TipDetailActivity"></activity>
 	</application>
 
 </manifest>
