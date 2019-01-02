@@ -21,7 +21,9 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".DiaryActivity"></activity>
+		<activity android:name=".DiaryActivity" />
+		<activity android:name=".TipsActivity" />
+		<activity android:name=".SensorActivity"></activity>
 	</application>
 
 </manifest>

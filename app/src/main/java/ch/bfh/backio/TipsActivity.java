@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class DiaryActivity extends AppCompatActivity {
+public class TipsActivity extends AppCompatActivity {
 
 	private Button diaryButton;
 	private Button tipsButton;
@@ -17,23 +17,24 @@ public class DiaryActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_diary);
+		setContentView(R.layout.activity_tips);
 
 		diaryButton = (Button) findViewById(R.id.btn_diary);
 		tipsButton = (Button) findViewById(R.id.btn_tips);
 		sensorButton = (Button) findViewById(R.id.btn_sensor);
 		homeButton = (Button) findViewById(R.id.btn_home);
 
-		Context context = DiaryActivity.this;
+		Context context = TipsActivity.this;
 		diaryButton.setOnClickListener((v -> {
-			String message = "Button clicked!\nyou are here!";
+
+			Class destinationActivity = DiaryActivity.class;
+			Intent startDiaryActivityIntent = new Intent(context, destinationActivity);
+			startActivity(startDiaryActivityIntent);
+			String message = "Button clicked!\nTagebuch";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));
 
 		tipsButton.setOnClickListener((v -> {
-			Class tipsnActivity = TipsActivity.class;
-			Intent startTipsActivityIntent = new Intent(context, tipsnActivity);
-			startActivity(startTipsActivityIntent);
 			String message = "Button clicked!\nTipps";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));

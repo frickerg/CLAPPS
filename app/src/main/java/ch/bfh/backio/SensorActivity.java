@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class DiaryActivity extends AppCompatActivity {
+public class SensorActivity extends AppCompatActivity {
 
 	private Button diaryButton;
 	private Button tipsButton;
@@ -17,16 +17,20 @@ public class DiaryActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_diary);
+		setContentView(R.layout.activity_sensor);
 
 		diaryButton = (Button) findViewById(R.id.btn_diary);
 		tipsButton = (Button) findViewById(R.id.btn_tips);
 		sensorButton = (Button) findViewById(R.id.btn_sensor);
 		homeButton = (Button) findViewById(R.id.btn_home);
 
-		Context context = DiaryActivity.this;
+		Context context = SensorActivity.this;
 		diaryButton.setOnClickListener((v -> {
-			String message = "Button clicked!\nyou are here!";
+
+			Class destinationActivity = DiaryActivity.class;
+			Intent startDiaryActivityIntent = new Intent(context, destinationActivity);
+			startActivity(startDiaryActivityIntent);
+			String message = "Button clicked!\nTagebuch";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));
 
@@ -39,9 +43,6 @@ public class DiaryActivity extends AppCompatActivity {
 		}));
 
 		sensorButton.setOnClickListener((v -> {
-			Class destinationActivity = SensorActivity.class;
-			Intent startSensorActivityIntent = new Intent(context, destinationActivity);
-			startActivity(startSensorActivityIntent);
 			String message = "Button clicked!\nSensor";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));

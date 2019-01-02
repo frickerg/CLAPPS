@@ -54,17 +54,17 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		}));
 
 		tipsButton.setOnClickListener((v -> {
-			/*Class destinationActivity = TipsActivity.class;
-			Intent startDiaryActivityIntent = new Intent(context, destinationActivity);
-			startActivity(startDiaryActivityIntent);*/
+			Class tipsnActivity = TipsActivity.class;
+			Intent startTipsActivityIntent = new Intent(context, tipsnActivity);
+			startActivity(startTipsActivityIntent);
 			String message = "Button clicked!\nTipps";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));
 
 		sensorButton.setOnClickListener((v -> {
-			/*Class destinationActivity = Sensor.class;
-			Intent startDiaryActivityIntent = new Intent(context, destinationActivity);
-			startActivity(startDiaryActivityIntent);*/
+			Class destinationActivity = SensorActivity.class;
+			Intent startSensorActivityIntent = new Intent(context, destinationActivity);
+			startActivity(startSensorActivityIntent);
 			String message = "Button clicked!\nSensor";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		}));
