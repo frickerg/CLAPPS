@@ -20,4 +20,7 @@
 	<string name="title_diary">Tagebuch</string>
 	<string name="title_tips">Tipps und Übungen</string>
 	<string name="title_sensor">Sensor</string>
+	<string name="title_awarness">Aufklärung</string>
+	<string name="title_exercise">Übungen</string>
+	<string name="title_tip">Tipps</string>
 </resources>

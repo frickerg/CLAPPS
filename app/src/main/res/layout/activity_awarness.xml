@@ -12,6 +12,10 @@
 		android:layout_gravity="bottom"
 		android:gravity="bottom"
 		android:orientation="vertical">
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text=""/>
 
 		<ScrollView
 			android:layout_width="match_parent"
