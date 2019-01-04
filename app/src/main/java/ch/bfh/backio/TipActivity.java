@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -18,10 +19,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAdapterOnClickHandler {
-	private Button diaryButton;
-	private Button tipsButton;
-	private Button sensorButton;
-	private Button homeButton;
+	private LinearLayout diaryButton;
+	private LinearLayout tipsButton;
+	private LinearLayout sensorButton;
+	private LinearLayout homeButton;
 	private ArrayList<String> tipList = new ArrayList<>();
 	private RecyclerView recyclerView;
 	private JSONAdapter JSONAdapter;
@@ -32,10 +33,10 @@ public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAd
 		setContentView(R.layout.activity_tip);
 		getTipJSON();
 
-		diaryButton = (Button) findViewById(R.id.btn_diary);
-		tipsButton = (Button) findViewById(R.id.btn_tips);
-		sensorButton = (Button) findViewById(R.id.btn_sensor);
-		homeButton = (Button) findViewById(R.id.btn_home);
+		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
+		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
+		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
+		homeButton = (LinearLayout) findViewById(R.id.btn_home);
 		recyclerView = (RecyclerView) findViewById(R.id.rv_tip);
 
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

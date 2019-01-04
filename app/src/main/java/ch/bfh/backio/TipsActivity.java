@@ -5,14 +5,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class TipsActivity extends AppCompatActivity {
 
-	private Button diaryButton;
-	private Button tipsButton;
-	private Button sensorButton;
-	private Button homeButton;
+	private LinearLayout diaryButton;
+	private LinearLayout tipsButton;
+	private LinearLayout sensorButton;
+	private LinearLayout homeButton;
 	private Button tipButton;
 	private Button exerciseButton;
 	private Button awarnessButton;
@@ -22,10 +23,10 @@ public class TipsActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tips);
 
-		diaryButton = (Button) findViewById(R.id.btn_diary);
-		tipsButton = (Button) findViewById(R.id.btn_tips);
-		sensorButton = (Button) findViewById(R.id.btn_sensor);
-		homeButton = (Button) findViewById(R.id.btn_home);
+		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
+		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
+		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
+		homeButton = (LinearLayout) findViewById(R.id.btn_home);
 		tipButton = (Button) findViewById(R.id.btn_tip);
 		exerciseButton = (Button) findViewById(R.id.btn_exercise);
 		awarnessButton = (Button) findViewById(R.id.btn_awarness);

@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
@@ -25,10 +26,10 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
     private BtleService.LocalBinder serviceBinder;
     private MetaWearBoard metawear;
-    private Button diaryButton;
-    private Button tipsButton;
-    private Button sensorButton;
-    private Button homeButton;
+    private LinearLayout diaryButton;
+    private LinearLayout tipsButton;
+    private LinearLayout sensorButton;
+    private LinearLayout homeButton;
 
 
     @Override
@@ -38,10 +39,10 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
         getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
 
-		diaryButton = (Button) findViewById(R.id.btn_diary);
-		tipsButton = (Button) findViewById(R.id.btn_tips);
-		sensorButton = (Button) findViewById(R.id.btn_sensor);
-		homeButton = (Button) findViewById(R.id.btn_home);
+		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
+		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
+		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
+		homeButton = (LinearLayout) findViewById(R.id.btn_home);
 
 		Context context = MainActivity.this;
 		diaryButton.setOnClickListener((v -> {

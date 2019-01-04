@@ -5,13 +5,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class AwarnessActivity extends AppCompatActivity {
-	private Button diaryButton;
-	private Button tipsButton;
-	private Button sensorButton;
-	private Button homeButton;
+	private LinearLayout diaryButton;
+	private LinearLayout tipsButton;
+	private LinearLayout sensorButton;
+	private LinearLayout homeButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +20,10 @@ public class AwarnessActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_awarness);
 
 
-		diaryButton = (Button) findViewById(R.id.btn_diary);
-		tipsButton = (Button) findViewById(R.id.btn_tips);
-		sensorButton = (Button) findViewById(R.id.btn_sensor);
-		homeButton = (Button) findViewById(R.id.btn_home);
+		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
+		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
+		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
+		homeButton = (LinearLayout) findViewById(R.id.btn_home);
 
 		Context context = AwarnessActivity.this;
 		diaryButton.setOnClickListener((v -> {

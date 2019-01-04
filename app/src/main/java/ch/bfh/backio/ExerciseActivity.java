@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +21,10 @@ import java.util.ArrayList;
 
 public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.JSONAdapterOnClickHandler{
 
-	private Button diaryButton;
-	private Button tipsButton;
-	private Button sensorButton;
-	private Button homeButton;
+	private LinearLayout diaryButton;
+	private LinearLayout tipsButton;
+	private LinearLayout sensorButton;
+	private LinearLayout homeButton;
 	private ArrayList<String> exerciseList = new ArrayList<>();
 	private RecyclerView recyclerView;
 	private JSONAdapter JSONAdapter;
@@ -34,10 +35,10 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 		setContentView(R.layout.activity_exercise);
 		getExerciseJSON();
 
-		diaryButton = (Button) findViewById(R.id.btn_diary);
-		tipsButton = (Button) findViewById(R.id.btn_tips);
-		sensorButton = (Button) findViewById(R.id.btn_sensor);
-		homeButton = (Button) findViewById(R.id.btn_home);
+		/*diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
+		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
+		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
+		homeButton = (LinearLayout) findViewById(R.id.btn_home);*/
 		recyclerView = (RecyclerView) findViewById(R.id.rv_exercise);
 
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -52,7 +53,7 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 
 
 
-		Context context = ExerciseActivity.this;
+		/*Context context = ExerciseActivity.this;
 		diaryButton.setOnClickListener((v -> {
 
 			Class destinationActivity = DiaryActivity.class;
@@ -84,7 +85,7 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 			startActivity(startMainActivityIntent);
 			String message = "Button clicked!\nHome";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-		}));
+		}));*/
 	}
 
 	@Override

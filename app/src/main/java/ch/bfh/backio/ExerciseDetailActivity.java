@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +21,10 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 	private TextView exerciseText;
 	private String exerciseTitleText;
 	private TextView exerciseText2;
-	private Button diaryButton;
-	private Button tipsButton;
-	private Button sensorButton;
-	private Button homeButton;
+	private LinearLayout diaryButton;
+	private LinearLayout tipsButton;
+	private LinearLayout sensorButton;
+	private LinearLayout homeButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,10 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 		exerciseTitle = (TextView) findViewById(R.id.display_exercise_title);
 		exerciseText = (TextView) findViewById(R.id.display_exercise_text);
 		//exerciseText2 = (TextView) findViewById(R.id.display_exercise_text2);
-		diaryButton = (Button) findViewById(R.id.btn_diary);
-		tipsButton = (Button) findViewById(R.id.btn_tips);
-		sensorButton = (Button) findViewById(R.id.btn_sensor);
-		homeButton = (Button) findViewById(R.id.btn_home);
+		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
+		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
+		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
+		homeButton = (LinearLayout) findViewById(R.id.btn_home);
 
 
 		Intent intentThatStartedThisActivity = getIntent();
