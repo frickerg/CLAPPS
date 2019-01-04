@@ -12,34 +12,108 @@
 		android:layout_gravity="bottom"
 		android:gravity="bottom"
 		android:orientation="vertical"
-		android:padding="16dp">
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/title_awarness"/>
+		android:paddingBottom="16dp"
+		android:paddingRight="10dp"
+		android:paddingLeft="10dp">
 
 		<ScrollView
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="match_parent"
+			android:layout_marginTop="50dp">
 
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:orientation="vertical" />
+				android:orientation="vertical" >
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_bold"
+					android:text="@string/title_text_awarness"
+					android:textColor="@color/textColor"
+					android:textSize="20sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt1"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt2"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt3"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt4"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_medium"
+					android:text="@string/subtitle_awarness"
+					android:textColor="@color/textColor"
+					android:textSize="18sp"/>
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt5"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt6"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt7"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt8"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+			</LinearLayout>
 		</ScrollView>
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="42dp"
-			android:layout_gravity="bottom"
 			android:gravity="end"
-			android:orientation="horizontal"
-			android:layout_marginTop="250dp">
+			android:orientation="horizontal">
 
 			<LinearLayout
 				android:id="@+id/btn_home"
-				android:layout_width="91dp"
+				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
+				android:layout_weight="1"
 				android:orientation="vertical">
 
 				<ImageButton
@@ -50,10 +124,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_home"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -66,16 +140,15 @@
 				<ImageButton
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_import_contacts_black_24dp" />
+					android:src="@drawable/ic_import_contacts_black_24dp" />
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:text="@string/btn_diary"
-					android:layout_gravity="bottom"
-					android:textAlignment="center"
 					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:text="@string/btn_diary"
+					android:textAlignment="center"
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -88,17 +161,15 @@
 				<ImageButton
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
 					app:srcCompat="@drawable/ic_content_paste_green_24dp" />
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_tips"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/colorPrimary"/>
+					android:textColor="@color/colorPrimary" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -116,13 +187,14 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_sensor"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 		</LinearLayout>
 	</LinearLayout>
+
 
 </FrameLayout>
