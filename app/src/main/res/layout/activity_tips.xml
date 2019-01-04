@@ -20,7 +20,9 @@
 			android:layout_marginBottom="60dp"
 			android:background="@color/colorPrimary"
 			android:textAlignment="center"
-			android:textColor="#fff" />
+			android:textColor="#fff"
+			android:fontFamily="@font/roboto_bold"
+			android:textSize="20sp"/>
 
 		<Button
 			android:id="@+id/btn_exercise"
@@ -30,7 +32,9 @@
 			android:layout_marginBottom="60dp"
 			android:background="@color/colorPrimary"
 			android:textAlignment="center"
-			android:textColor="#fff"/>
+			android:textColor="#fff"
+			android:fontFamily="@font/roboto_bold"
+			android:textSize="20sp"/>
 
 		<Button
 			android:id="@+id/btn_awarness"
@@ -39,7 +43,9 @@
 			android:text="@string/btn_awarness"
 			android:background="@color/colorPrimary"
 			android:textAlignment="center"
-			android:textColor="#fff"/>
+			android:textColor="#fff"
+			android:fontFamily="@font/roboto_bold"
+			android:textSize="20sp"/>
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -56,7 +62,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_home"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 
 			<Button
 				android:id="@+id/btn_diary"
@@ -65,7 +72,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_diary"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 
 			<Button
 				android:id="@+id/btn_tips"
@@ -74,7 +82,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_tips"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 
 			<Button
 				android:id="@+id/btn_sensor"
@@ -83,7 +92,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_sensor"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 		</LinearLayout>
 
 	</LinearLayout>

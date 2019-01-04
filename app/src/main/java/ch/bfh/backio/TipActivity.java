@@ -111,8 +111,6 @@ public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAd
 			for(int i = 0; i<tipArray.length(); i++){
 				JSONObject obj2 = tipArray.getJSONObject(i);
 				tipList.add(obj2.getString("title"));
-				String message = tipList.get(i);
-				Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
 			}
 
 		} catch (IOException e) {

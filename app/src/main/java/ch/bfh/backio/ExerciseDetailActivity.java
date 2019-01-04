@@ -32,11 +32,12 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
 		exerciseTitle = (TextView) findViewById(R.id.display_exercise_title);
 		exerciseText = (TextView) findViewById(R.id.display_exercise_text);
-		exerciseText2 = (TextView) findViewById(R.id.display_exercise_text2);
+		//exerciseText2 = (TextView) findViewById(R.id.display_exercise_text2);
 		diaryButton = (Button) findViewById(R.id.btn_diary);
 		tipsButton = (Button) findViewById(R.id.btn_tips);
 		sensorButton = (Button) findViewById(R.id.btn_sensor);
 		homeButton = (Button) findViewById(R.id.btn_home);
+
 
 		Intent intentThatStartedThisActivity = getIntent();
 
@@ -84,7 +85,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 	}
 
 	private void getJSONText(){
-		String exercise;
+		String tip;
 		try {
 			InputStream is = getAssets().open("exercise.json");
 			int size = is.available();
@@ -93,18 +94,17 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 			is.read(buffer);
 			is.close();
 
-			exercise = new String(buffer, "UTF-8");
-			JSONObject obj = new JSONObject(exercise);
-			JSONArray exerciseArray = obj.getJSONArray("exercise");
+			tip = new String(buffer, "UTF-8");
+			JSONObject obj = new JSONObject(tip);
+			JSONArray tipArray = obj.getJSONArray("exercise");
 
-			for(int i = 0; i<exerciseArray.length(); i++){
-				JSONObject obj2 = exerciseArray.getJSONObject(i);
-				if(exerciseTitleText.equals(obj2.getString("title"))){
-					exerciseText.setText(obj2.getString("text"));
-					exerciseText2.setText(obj2.getString("text2"));
+			for(int i = 0; i<tipArray.length(); i++){
+				JSONObject obj2 = tipArray.getJSONObject(i);
+				if(tipArray.getJSONObject(i).getString("title").equals(exerciseTitleText)){
+					exerciseText.setText("Test");
+					exerciseTitle.setText("Hallo");
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {

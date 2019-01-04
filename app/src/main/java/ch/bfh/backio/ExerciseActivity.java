@@ -114,8 +114,6 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 			for(int i = 0; i<tipArray.length(); i++){
 				JSONObject obj2 = tipArray.getJSONObject(i);
 				exerciseList.add(obj2.getString("title"));
-				String message = exerciseList.get(i);
-				Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

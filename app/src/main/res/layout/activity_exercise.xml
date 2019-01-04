@@ -34,7 +34,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_home"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 
 			<Button
 				android:id="@+id/btn_diary"
@@ -43,7 +44,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_diary"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 
 			<Button
 				android:id="@+id/btn_tips"
@@ -52,7 +54,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_tips"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 
 			<Button
 				android:id="@+id/btn_sensor"
@@ -61,7 +64,8 @@
 				android:layout_weight="1"
 				android:background="@color/colorPrimary"
 				android:text="@string/btn_sensor"
-				android:textAlignment="center" />
+				android:textAlignment="center"
+				android:fontFamily="@font/roboto_light"/>
 		</LinearLayout>
 	</LinearLayout>
 </FrameLayout>
