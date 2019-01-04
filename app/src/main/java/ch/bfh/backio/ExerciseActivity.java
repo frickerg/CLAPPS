@@ -35,10 +35,10 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 		setContentView(R.layout.activity_exercise);
 		getExerciseJSON();
 
-		/*diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
+		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
 		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
 		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
-		homeButton = (LinearLayout) findViewById(R.id.btn_home);*/
+		homeButton = (LinearLayout) findViewById(R.id.btn_home);
 		recyclerView = (RecyclerView) findViewById(R.id.rv_exercise);
 
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -53,7 +53,7 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 
 
 
-		/*Context context = ExerciseActivity.this;
+		Context context = ExerciseActivity.this;
 		diaryButton.setOnClickListener((v -> {
 
 			Class destinationActivity = DiaryActivity.class;
@@ -85,7 +85,7 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 			startActivity(startMainActivityIntent);
 			String message = "Button clicked!\nHome";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-		}));*/
+		}));
 	}
 
 	@Override
