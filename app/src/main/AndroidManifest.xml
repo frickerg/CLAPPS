@@ -11,24 +11,23 @@
 		android:theme="@style/AppTheme">
 		<service android:name="com.mbientlab.metawear.android.BtleService" />
 
-		<activity
-			android:name=".MainActivity"
-			android:label="@string/app_name"
-			android:theme="@style/AppTheme.NoActionBar">
+		<activity android:name=".MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
-
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".DiaryActivity" />
-		<activity android:name=".TipsActivity" />
-		<activity android:name=".SensorActivity" />
 		<activity android:name=".TipActivity" />
 		<activity android:name=".ExerciseActivity" />
 		<activity android:name=".AwarnessActivity" />
 		<activity android:name=".TipDetailActivity" />
 		<activity android:name=".ExerciseDetailActivity" />
+		<activity
+			android:name=".DeviceSetupActivity"
+			android:label="@string/app_name"
+			android:theme="@style/AppTheme.NoActionBar">
+		</activity>
+
 	</application>
 
 </manifest>
