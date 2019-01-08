@@ -10,6 +10,7 @@
 	<string name="btn_tips">Tipps</string>
 	<string name="btn_sensor">Sensor</string>
 	<string name="btn_tip">Tipps</string>
+	<string name="btn_sensor_connect">Sensor verbinden</string>
 	<string name="btn_exercise">Übungen</string>
 	<string name="btn_awarness">Aufklärung</string>
 	<string name="btn_connect">Sensor Verbinden</string>
@@ -43,4 +44,5 @@
 
 	<!-- TODO: Remove or change this placeholder text -->
 	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="btn_sensor_disconnect">Sensor abkoppeln</string>
 </resources>

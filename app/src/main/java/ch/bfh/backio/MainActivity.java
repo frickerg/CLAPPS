@@ -13,6 +13,7 @@ import bolts.Task;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
+import ch.bfh.backio.SensorService;
 
 import java.util.UUID;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	public static final int REQUEST_START_APP = 1;
 	private BtleService.LocalBinder serviceBinder;
 	private MetaWearBoard metawear;
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			int id = ic_home_green_24dp;
 			setButton((ImageButton) findViewById(btn_home_image), id);
 		}));
+
+
 	}
 
 	@Override
@@ -87,7 +92,8 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 			case REQUEST_START_APP:
-				((BleScannerFragment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
+				//((BleScannerFagment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
+
 				break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
