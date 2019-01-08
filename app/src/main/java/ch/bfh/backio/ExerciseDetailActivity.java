@@ -33,7 +33,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
 		exerciseTitle = (TextView) findViewById(R.id.display_exercise_title);
 		exerciseText = (TextView) findViewById(R.id.display_exercise_text);
-		//exerciseText2 = (TextView) findViewById(R.id.display_exercise_text2);
+		exerciseText2 = (TextView) findViewById(R.id.display_exercise_text2);
 		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
 		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
 		sensorButton = (LinearLayout) findViewById(R.id.btn_sensor);
@@ -102,8 +102,8 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 			for(int i = 0; i<tipArray.length(); i++){
 				JSONObject obj2 = tipArray.getJSONObject(i);
 				if(tipArray.getJSONObject(i).getString("title").equals(exerciseTitleText)){
-					exerciseText.setText("Test");
-					exerciseTitle.setText("Hallo");
+					exerciseText.setText(obj2.getString("text"));
+					exerciseText2.setText(obj2.getString("text2"));
 				}
 			}
 		} catch (IOException e) {

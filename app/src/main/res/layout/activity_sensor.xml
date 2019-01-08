@@ -22,11 +22,12 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:orientation="horizontal">
+				android:orientation="horizontal"
+				android:layout_marginTop="50dp">
 
 				<ImageView
 					android:id="@+id/imageView"
-					android:layout_width="200dp"
+					android:layout_width="match_parent"
 
 					android:layout_height="200dp"
 					android:layout_weight="1"
@@ -35,12 +36,33 @@
 					android:scaleType="fitCenter"
 					app:srcCompat="@drawable/rclip5" />
 
-				<TextView
-					android:id="@+id/textView"
+				<LinearLayout
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
+					android:layout_height="match_parent"
 					android:layout_weight="1"
-					android:text="TextView" />
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/textView"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:fontFamily="@font/roboto_bold"
+						android:text="@string/title_sensor"
+						android:textColor="@color/textColor" />
+
+					<TextView
+						android:id="@+id/textView8"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:fontFamily="@font/roboto_regular"
+						android:text="@string/text_Sensor"
+						android:textColor="@color/textColor"
+						android:textSize="18sp" />
+
+				</LinearLayout>
+
 			</LinearLayout>
 
 			<LinearLayout
@@ -48,12 +70,34 @@
 				android:layout_height="60dp"
 				android:orientation="horizontal">
 
-				<TextView
-					android:id="@+id/textView3"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+				<ImageButton
+					android:id="@+id/btn_refresh"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
 					android:layout_weight="1"
-					android:text="TextView" />
+					app:srcCompat="@drawable/ic_refresh_black_24dp" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/textView3"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/sync_now" />
+
+					<TextView
+						android:id="@+id/textView7"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/last_sync" />
+				</LinearLayout>
+
 			</LinearLayout>
 
 			<LinearLayout
@@ -66,7 +110,10 @@
 					android:layout_width="match_parent"
 					android:layout_height="60dp"
 					android:layout_weight="1"
-					android:text="Switch" />
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/sync_time"
+					android:textColor="@color/textColor"
+					android:textSize="18sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -75,11 +122,16 @@
 				android:orientation="horizontal">
 
 				<Button
-					android:id="@+id/button4"
+					android:id="@+id/btn_sensorConnection"
 					android:layout_width="match_parent"
 					android:layout_height="60dp"
 					android:layout_weight="1"
-					android:text="Button" />
+					android:background="@color/colorPrimary"
+					android:fontFamily="@font/roboto_bold"
+					android:text="@string/btn_disconnect"
+					android:textAlignment="center"
+					android:textColor="@color/textColor"
+					android:textSize="18sp" />
 			</LinearLayout>
 
 		</LinearLayout>
@@ -87,15 +139,14 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="42dp"
-			android:layout_gravity="bottom"
-			android:gravity="end"
-			android:orientation="horizontal"
-			android:layout_marginTop="250dp">
+			android:gravity="bottom"
+			android:orientation="horizontal">
 
 			<LinearLayout
 				android:id="@+id/btn_home"
-				android:layout_width="91dp"
+				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
+				android:layout_weight="1"
 				android:orientation="vertical">
 
 				<ImageButton
@@ -106,10 +157,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_home"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -127,11 +178,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:text="@string/btn_diary"
-					android:layout_gravity="bottom"
-					android:textAlignment="center"
 					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:text="@string/btn_diary"
+					android:textAlignment="center"
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -144,17 +194,15 @@
 				<ImageButton
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
 					app:srcCompat="@drawable/ic_content_paste_black_24dp" />
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_tips"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -172,12 +220,11 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_sensor"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/colorPrimary"/>
+					android:textColor="@color/colorPrimary" />
 			</LinearLayout>
-
 		</LinearLayout>
 	</LinearLayout>
 

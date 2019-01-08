@@ -33,7 +33,7 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_exercise);
-		getExerciseJSON();
+		Context context = ExerciseActivity.this;
 
 		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
 		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
@@ -47,13 +47,15 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 		JSONAdapter = new JSONAdapter(this);
 		recyclerView.setAdapter(JSONAdapter);
 
+		exerciseList = JSONAdapter.readJSON(context, "exercise.json", "exercise", "title");
+
 		for(int i = 0; i<exerciseList.size(); i++){
 			JSONAdapter.setJSONData(exerciseList.get(i));
 		}
 
 
 
-		Context context = ExerciseActivity.this;
+
 		diaryButton.setOnClickListener((v -> {
 
 			Class destinationActivity = DiaryActivity.class;
@@ -92,34 +94,10 @@ public class ExerciseActivity extends AppCompatActivity implements JSONAdapter.J
 	public void onClick(String exerciseTitel) {
 		Context context = this;
 		Toast.makeText(context, exerciseTitel, Toast.LENGTH_SHORT).show();
-		Class destinationClass = TipDetailActivity.class;
+		Class destinationClass = ExerciseDetailActivity.class;
 		Intent intentToStartDetailActivity = new Intent(context, destinationClass);
 		intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, exerciseTitel);
 		startActivity(intentToStartDetailActivity);
 	}
 
-	private void getExerciseJSON(){
-		String tip;
-		try {
-			InputStream is = getAssets().open("exercise.json");
-			int size = is.available();
-			byte[] buffer = new byte[size];
-
-			is.read(buffer);
-			is.close();
-
-			tip = new String(buffer, "UTF-8");
-			JSONObject obj = new JSONObject(tip);
-			JSONArray tipArray = obj.getJSONArray("exercise");
-
-			for(int i = 0; i<tipArray.length(); i++){
-				JSONObject obj2 = tipArray.getJSONObject(i);
-				exerciseList.add(obj2.getString("title"));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
 }

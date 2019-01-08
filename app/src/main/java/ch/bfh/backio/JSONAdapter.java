@@ -7,11 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterViewHolder> {
 	private ArrayList<String> jsonData = new ArrayList<>();
 	private final JSONAdapterOnClickHandler click;
+	private ArrayList<String> jsonList = new ArrayList<>();
 
 
 	public interface JSONAdapterOnClickHandler {
@@ -64,6 +71,35 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 	public int getItemCount() {
 		if (null == jsonData) return 0;
 		return jsonData.size();
+	}
+
+	public ArrayList<String> readJSON(Context context, String url, String titleJSON, String name){
+		String tip;
+		try {
+			InputStream is = context.getAssets().open(url);
+			int size = is.available();
+			byte[] buffer = new byte[size];
+
+			is.read(buffer);
+			is.close();
+
+			tip = new String(buffer, "UTF-8");
+			JSONObject obj = new JSONObject(tip);
+			JSONArray tipArray = obj.getJSONArray(titleJSON);
+
+			for(int i = 0; i<tipArray.length(); i++){
+				JSONObject obj2 = tipArray.getJSONObject(i);
+				jsonList.add(obj2.getString(name));
+			}
+
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jsonList;
 	}
 
 }

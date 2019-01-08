@@ -31,7 +31,8 @@ public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAd
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tip);
-		getTipJSON();
+		Context context = TipActivity.this;
+
 
 		diaryButton = (LinearLayout) findViewById(R.id.btn_diary);
 		tipsButton = (LinearLayout) findViewById(R.id.btn_tips);
@@ -45,11 +46,12 @@ public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAd
 		JSONAdapter = new JSONAdapter(this);
 		recyclerView.setAdapter(JSONAdapter);
 
+		tipList = JSONAdapter.readJSON(context, "tip.json", "tip", "title");
+
 		for(int i = 0; i<tipList.size(); i++){
 			JSONAdapter.setJSONData(tipList.get(i));
 		}
 
-		Context context = TipActivity.this;
 		diaryButton.setOnClickListener((v -> {
 
 			Class destinationActivity = DiaryActivity.class;
@@ -95,29 +97,4 @@ public class TipActivity extends AppCompatActivity implements JSONAdapter.JSONAd
 		startActivity(intentToStartDetailActivity);
 	}
 
-	private void getTipJSON(){
-		String tip;
-		try {
-			InputStream is = getAssets().open("tip.json");
-			int size = is.available();
-			byte[] buffer = new byte[size];
-
-			is.read(buffer);
-			is.close();
-
-			tip = new String(buffer, "UTF-8");
-			JSONObject obj = new JSONObject(tip);
-			JSONArray tipArray = obj.getJSONArray("tip");
-
-			for(int i = 0; i<tipArray.length(); i++){
-				JSONObject obj2 = tipArray.getJSONObject(i);
-				tipList.add(obj2.getString("title"));
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
 }

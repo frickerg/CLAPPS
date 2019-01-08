@@ -10,25 +10,64 @@
 	android:paddingTop="@dimen/activity_vertical_margin"
 	tools:context="ch.bfh.backio.MainActivity">
 
-    <fragment xmlns:tools="http://schemas.android.com/tools"
+   <!-- <fragment xmlns:tools="http://schemas.android.com/tools"
 		android:id="@+id/scanner_fragment"
         android:name="com.mbientlab.bletoolbox.scanner.BleScannerFragment"
         tools:layout="@layout/blescan_device_list"
 		android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent" >-->
 
+	<!--</fragment>-->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:gravity="bottom">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:layout_marginTop="50dp">
+
+			<ImageButton
+				android:id="@+id/img_posture"
+				android:layout_width="match_parent"
+				android:layout_height="400dp"
+				android:scaleType="fitEnd"
+				app:srcCompat="@drawable/haltung_gut" />
+
+			<Button
+				android:id="@+id/btn_connectSensor"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/colorPrimary"
+				android:fontFamily="@font/roboto_bold"
+				android:text="@string/sensor_connect"
+				android:textAlignment="center"
+				android:textColor="@color/textColor"
+				android:textSize="20sp"
+				android:visibility="invisible" />
+
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv_dailyTip"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+			</android.support.v7.widget.RecyclerView>
+
+
+		</LinearLayout>
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="42dp"
-			android:layout_gravity="bottom"
-			android:gravity="end"
 			android:orientation="horizontal"
-			android:layout_marginTop="250dp">
+			android:gravity="bottom">
 
 			<LinearLayout
 				android:id="@+id/btn_home"
-				android:layout_width="91dp"
+				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
+				android:layout_weight="1"
 				android:orientation="vertical">
 
 				<ImageButton
@@ -39,10 +78,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_home"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/colorPrimary"/>
+					android:textColor="@color/colorPrimary" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -60,11 +99,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:text="@string/btn_diary"
-					android:layout_gravity="bottom"
-					android:textAlignment="center"
 					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:text="@string/btn_diary"
+					android:textAlignment="center"
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -77,17 +115,15 @@
 				<ImageButton
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
 					app:srcCompat="@drawable/ic_content_paste_black_24dp" />
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_tips"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -105,12 +141,12 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_sensor"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 		</LinearLayout>
-	</fragment>
+	</LinearLayout>
 </RelativeLayout>

@@ -122,7 +122,7 @@ public abstract class DeviceSetupActivity extends AppCompatActivity implements S
             ReconnectDialogFragment dialogFragment= ReconnectDialogFragment.newInstance(btDevice);
             dialogFragment.show(getSupportFragmentManager(), RECONNECT_DIALOG_TAG);
 
-            metawear.connectAsync().continueWithTask(task -> task.isCancelled() || !task.isFaulted() ? task : MainActivity.reconnect(metawear))
+          /*  metawear.connectAsync().continueWithTask(task -> task.isCancelled() || !task.isFaulted() ? task : MainActivity.reconnect(metawear))
                     .continueWith((Continuation<Void, Void>) task -> {
                         if (!task.isCancelled()) {
                             runOnUiThread(() -> {
@@ -134,7 +134,7 @@ public abstract class DeviceSetupActivity extends AppCompatActivity implements S
                         }
 
                         return null;
-                    });
+                    });*/
         });
     }
 
