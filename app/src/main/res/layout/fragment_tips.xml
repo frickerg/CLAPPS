@@ -4,85 +4,49 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".SensorActivity">
+	tools:context=".TipsFragment">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_gravity="bottom"
 		android:gravity="bottom"
 		android:orientation="vertical"
 		android:padding="16dp">
 
-		<LinearLayout
+		<Button
+			android:id="@+id/btn_tip"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
+			android:layout_height="60dp"
+			android:text="@string/btn_tip"
+			android:layout_marginBottom="60dp"
+			android:background="@color/colorPrimary"
+			android:textAlignment="center"
+			android:textColor="#fff"
+			android:fontFamily="@font/roboto_bold"
+			android:textSize="20sp"/>
 
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="horizontal">
+		<Button
+			android:id="@+id/btn_exercise"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:text="@string/btn_exercise"
+			android:layout_marginBottom="60dp"
+			android:background="@color/colorPrimary"
+			android:textAlignment="center"
+			android:textColor="#fff"
+			android:fontFamily="@font/roboto_bold"
+			android:textSize="20sp"/>
 
-				<ImageView
-					android:id="@+id/imageView"
-					android:layout_width="200dp"
-
-					android:layout_height="200dp"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:cropToPadding="true"
-					android:scaleType="fitCenter"
-					app:srcCompat="@drawable/rclip5" />
-
-				<TextView
-					android:id="@+id/textView"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:text="TextView" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				android:orientation="horizontal">
-
-				<TextView
-					android:id="@+id/textView3"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:text="TextView" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				android:orientation="horizontal">
-
-				<Switch
-					android:id="@+id/switch1"
-					android:layout_width="match_parent"
-					android:layout_height="60dp"
-					android:layout_weight="1"
-					android:text="Switch" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:orientation="horizontal">
-
-				<Button
-					android:id="@+id/button4"
-					android:layout_width="match_parent"
-					android:layout_height="60dp"
-					android:layout_weight="1"
-					android:text="Button" />
-			</LinearLayout>
-
-		</LinearLayout>
+		<Button
+			android:id="@+id/btn_awarness"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:text="@string/btn_awarness"
+			android:background="@color/colorPrimary"
+			android:textAlignment="center"
+			android:textColor="#fff"
+			android:fontFamily="@font/roboto_bold"
+			android:textSize="20sp"/>
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -145,7 +109,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					app:srcCompat="@drawable/ic_content_paste_black_24dp" />
+					app:srcCompat="@drawable/ic_content_paste_green_24dp" />
 
 				<TextView
 					android:layout_width="match_parent"
@@ -154,7 +118,7 @@
 					android:text="@string/btn_tips"
 					android:textAlignment="center"
 					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/colorPrimary"/>
 			</LinearLayout>
 
 			<LinearLayout
@@ -167,7 +131,7 @@
 				<ImageButton
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_bluetooth_green_24dp" />
+					app:srcCompat="@drawable/ic_bluetooth_black_24dp" />
 
 				<TextView
 					android:layout_width="match_parent"
@@ -175,10 +139,11 @@
 					android:text="@string/btn_sensor"
 					android:textAlignment="center"
 					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/colorPrimary"/>
+					android:textColor="@color/textColor"/>
 			</LinearLayout>
 
 		</LinearLayout>
+
 	</LinearLayout>
 
 </FrameLayout>

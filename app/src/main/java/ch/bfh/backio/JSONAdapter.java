@@ -13,7 +13,6 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 	private ArrayList<String> jsonData = new ArrayList<>();
 	private final JSONAdapterOnClickHandler click;
 
-
 	public interface JSONAdapterOnClickHandler {
 		void onClick(String json);
 	}
@@ -21,7 +20,6 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 	public JSONAdapter(JSONAdapterOnClickHandler clickHandler) {
 		click = clickHandler;
 	}
-
 	public void setJSONData(String jsonData){
 		this.jsonData.add(jsonData);
 	}
