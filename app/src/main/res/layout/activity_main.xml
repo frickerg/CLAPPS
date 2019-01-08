@@ -1,152 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:paddingBottom="@dimen/activity_vertical_margin"
 	android:paddingLeft="@dimen/activity_horizontal_margin"
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
-	tools:context="ch.bfh.backio.MainActivity">
+	tools:context=".MainActivity">
 
-	<!-- <fragment xmlns:tools="http://schemas.android.com/tools"
-		 android:id="@+id/scanner_fragment"
-		 android:name="com.mbientlab.bletoolbox.scanner.BleScannerFragment"
-		 tools:layout="@layout/blescan_device_list"
-		 android:layout_width="match_parent"
-		 android:layout_height="match_parent" >-->
-
-	<!--</fragment>-->
-	<LinearLayout
+	<FrameLayout
+		android:id="@+id/contentFrame"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical"
-		android:gravity="bottom">
+		android:layout_height="match_parent">
+
+	</FrameLayout>
+
+	<LinearLayout
+		android:id="@+id/navbar"
+		android:layout_width="match_parent"
+		android:layout_height="42dp"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_gravity="bottom"
+		android:gravity="end"
+		android:orientation="horizontal"
+		android:baselineAligned="false">
+
 		<LinearLayout
-			android:layout_width="match_parent"
+			android:id="@+id/btn_home"
+			android:layout_width="91dp"
 			android:layout_height="match_parent"
-			android:orientation="vertical"
-			android:layout_marginTop="50dp">
+			android:orientation="vertical">
 
 			<ImageButton
-				android:id="@+id/img_posture"
-				android:layout_width="match_parent"
-				android:layout_height="400dp"
-				android:scaleType="fitEnd"
-				app:srcCompat="@drawable/haltung_gut" />
-
-			<Button
-				android:id="@+id/btn_connectSensor"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="@color/colorPrimary"
-				android:fontFamily="@font/roboto_bold"
-				android:text="@string/sensor_connect"
-				android:textAlignment="center"
-				android:textColor="@color/textColor"
-				android:textSize="20sp"
-				android:visibility="invisible" />
+				android:contentDescription="@string/btn_home"
+				app:srcCompat="@drawable/ic_home_green_24dp" />
 
-			<android.support.v7.widget.RecyclerView
-				android:id="@+id/rv_dailyTip"
+			<TextView
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-
-			</android.support.v7.widget.RecyclerView>
-
-
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/roboto_light"
+				android:text="@string/btn_home"
+				android:textAlignment="center"
+				android:textColor="@color/colorPrimary" />
 		</LinearLayout>
+
 		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="42dp"
-			android:orientation="horizontal"
-			android:gravity="bottom">
+			android:id="@+id/btn_diary"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:orientation="vertical">
 
-			<LinearLayout
-				android:id="@+id/btn_home"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
+			<ImageButton
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:contentDescription="@string/btn_diary"
+				app:srcCompat="@drawable/ic_import_contacts_black_24dp" />
 
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_home_green_24dp" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:fontFamily="@font/roboto_light"
+				android:text="@string/btn_diary"
+				android:textAlignment="center"
+				android:textColor="@color/textColor" />
+		</LinearLayout>
 
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_home"
-					android:textAlignment="center"
-					android:textColor="@color/colorPrimary" />
-			</LinearLayout>
+		<LinearLayout
+			android:id="@+id/btn_tips"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:orientation="vertical">
 
-			<LinearLayout
-				android:id="@+id/btn_diary"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
+			<ImageButton
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:contentDescription="@string/btn_tips"
+				app:srcCompat="@drawable/ic_content_paste_black_24dp" />
 
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_import_contacts_black_24dp" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/roboto_light"
+				android:text="@string/btn_tips"
+				android:textAlignment="center"
+				android:textColor="@color/textColor" />
+		</LinearLayout>
 
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_diary"
-					android:textAlignment="center"
-					android:textColor="@color/textColor" />
-			</LinearLayout>
+		<LinearLayout
+			android:id="@+id/btn_sensor"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:orientation="vertical">
 
-			<LinearLayout
-				android:id="@+id/btn_tips"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
+			<ImageButton
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:contentDescription="@string/title_sensor"
+				app:srcCompat="@drawable/ic_bluetooth_black_24dp" />
 
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_content_paste_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_tips"
-					android:textAlignment="center"
-					android:textColor="@color/textColor" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/btn_sensor"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_bluetooth_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_sensor"
-					android:textAlignment="center"
-					android:textColor="@color/textColor" />
-			</LinearLayout>
-
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/roboto_light"
+				android:text="@string/btn_sensor"
+				android:textAlignment="center"
+				android:textColor="@color/textColor" />
 		</LinearLayout>
 	</LinearLayout>
 </RelativeLayout>
