@@ -14,7 +14,8 @@
 		android:orientation="vertical"
 		android:paddingBottom="16dp"
 		android:paddingLeft="10dp"
-		android:paddingRight="10dp">
+		android:paddingRight="10dp"
+		android:layout_marginTop="20dp">
 
 		<TextView
 			android:id="@+id/display_exercise_title"
@@ -31,14 +32,7 @@
 			android:fontFamily="@font/roboto_regular"
 			android:textColor="@color/textColor"/>
 		<TextView
-			android:id="@+id/display_tip_subtitle"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="20sp"
-			android:fontFamily="@font/roboto_medium"
-			android:textColor="@color/textColor"/>
-		<TextView
-			android:id="@+id/display_tip_text2"
+			android:id="@+id/display_exercise_text2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="18sp"

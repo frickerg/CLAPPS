@@ -1,6 +1,5 @@
 package ch.bfh.backio;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,15 +13,19 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ExerciseDetailActivity extends AppCompatActivity {
-	private TextView exerciseTitle = findViewById(R.id.display_exercise_title);
-	private TextView exerciseText = findViewById(R.id.display_exercise_text);
-	//private TextView exerciseText2 = findViewById(R.id.display_exercise_text2);
+	private TextView exerciseTitle;
+	private TextView exerciseText;
 	private String exerciseTitleText;
+	private TextView exerciseText2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_exercise_detail);
+
+		exerciseTitle = findViewById(R.id.display_exercise_title);
+		exerciseText = findViewById(R.id.display_exercise_text);
+		exerciseText2 = findViewById(R.id.display_exercise_text2);
 
 		Intent intentThatStartedThisActivity = getIntent();
 		if (intentThatStartedThisActivity != null) {
@@ -33,8 +36,6 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 		}
 
 		getJSONText();
-		Context context = ExerciseDetailActivity.this;
-		//this.initListeners(context);
 	}
 
 	private void getJSONText(){
@@ -54,8 +55,8 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 			for(int i = 0; i<tipArray.length(); i++){
 				JSONObject obj2 = tipArray.getJSONObject(i);
 				if(tipArray.getJSONObject(i).getString("title").equals(exerciseTitleText)){
-					exerciseText.setText("Test");
-					exerciseTitle.setText("Hallo");
+					exerciseText.setText(obj2.getString("text"));
+					exerciseText2.setText(obj2.getString("text2"));
 				}
 			}
 		} catch (IOException | JSONException e) {

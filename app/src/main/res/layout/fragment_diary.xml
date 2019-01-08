@@ -11,8 +11,7 @@
 		android:layout_height="match_parent"
 		android:layout_gravity="bottom"
 		android:gravity="bottom"
-		android:orientation="vertical"
-		android:padding="16dp">
+		android:orientation="vertical">
 
 		<ScrollView
 			android:layout_width="match_parent"
@@ -27,15 +26,14 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="42dp"
-			android:layout_gravity="bottom"
 			android:gravity="end"
-			android:orientation="horizontal"
-			android:layout_marginTop="250dp">
+			android:orientation="horizontal">
 
 			<LinearLayout
 				android:id="@+id/btn_home"
-				android:layout_width="91dp"
+				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
+				android:layout_weight="1"
 				android:orientation="vertical">
 
 				<ImageButton
@@ -46,10 +44,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_home"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -67,11 +65,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:text="@string/btn_diary"
-					android:layout_gravity="bottom"
-					android:textAlignment="center"
 					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/colorPrimary"/>
+					android:text="@string/btn_diary"
+					android:textAlignment="center"
+					android:textColor="@color/colorPrimary" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -84,17 +81,15 @@
 				<ImageButton
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
 					app:srcCompat="@drawable/ic_content_paste_black_24dp" />
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_tips"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -112,10 +107,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_light"
 					android:text="@string/btn_sensor"
 					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
+					android:textColor="@color/textColor" />
 			</LinearLayout>
 
 		</LinearLayout>
