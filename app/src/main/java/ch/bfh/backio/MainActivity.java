@@ -4,9 +4,10 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.*;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import bolts.Task;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
@@ -14,6 +15,16 @@ import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
 
 import java.util.UUID;
+
+import static ch.bfh.backio.R.drawable.ic_import_contacts_black_24dp;
+import static ch.bfh.backio.R.drawable.ic_home_black_24dp;
+import static ch.bfh.backio.R.drawable.ic_content_paste_black_24dp;
+import static ch.bfh.backio.R.drawable.ic_bluetooth_black_24dp;
+import static ch.bfh.backio.R.drawable.ic_import_contacts_green_24dp;
+import static ch.bfh.backio.R.drawable.ic_home_green_24dp;
+import static ch.bfh.backio.R.drawable.ic_content_paste_green_24dp;
+import static ch.bfh.backio.R.drawable.ic_bluetooth_green_24dp;
+import static ch.bfh.backio.R.id.*;
 
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
 	private static final int REQUEST_START_APP = 1;
@@ -27,18 +38,22 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
 
 		Context context = MainActivity.this;
-		findViewById(R.id.btn_diary).setOnClickListener((v -> {
+		findViewById(btn_diary).setOnClickListener(v -> {
 			String message = "Button clicked!\nTagebuch";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new DiaryFragment()).commit();
-		}));
+			int id=ic_import_contacts_green_24dp;
+			setButton((ImageButton)findViewById(btn_diary_image), id );
+		});
 
 		findViewById(R.id.btn_tips).setOnClickListener((v -> {
 			String message = "Button clicked!\nTipps";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new TipsFragment()).commit();
+			int id=ic_content_paste_green_24dp;
+			setButton((ImageButton)findViewById(btn_tips_image), id );
 		}));
 
 		findViewById(R.id.btn_sensor).setOnClickListener((v -> {
@@ -46,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new SensorFragment()).commit();
+			int id=ic_bluetooth_green_24dp;
+			setButton((ImageButton)findViewById(btn_sensor_image), id );
 		}));
 
 		findViewById(R.id.btn_home).setOnClickListener((v -> {
@@ -53,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new HomeFragment()).commit();
+			int id=ic_home_green_24dp;
+			setButton((ImageButton)findViewById(btn_home_image), id );
 		}));
 	}
 
@@ -70,6 +89,24 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			((BleScannerFragment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	public void setButton(ImageButton clickedButton, int newImage){
+
+		ImageButton btnDiary = (ImageButton)findViewById(btn_diary_image);
+		btnDiary.setImageResource(ic_import_contacts_black_24dp);
+
+		ImageButton btnHome = (ImageButton)findViewById(R.id.btn_home_image);
+		btnHome.setImageResource(ic_home_black_24dp);
+
+		ImageButton btnSensor = (ImageButton)findViewById(R.id.btn_sensor_image);
+		btnSensor.setImageResource(ic_bluetooth_black_24dp);
+
+		ImageButton btnTips = (ImageButton)findViewById(R.id.btn_tips_image);
+		btnTips.setImageResource(ic_content_paste_black_24dp);
+
+		clickedButton.setImageResource(newImage);
+
 	}
 
 	@Override
