@@ -9,20 +9,14 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:gravity="bottom"
+		android:gravity="top|bottom"
 		android:orientation="vertical"
 		android:padding="16dp">
 
-		<ScrollView
+		<ImageView
+			android:src="@drawable/diary"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:orientation="vertical"/>
-		</ScrollView>
-
+			android:layout_height="618dp" android:id="@+id/imageView" android:scaleType="fitStart"/>
 	</LinearLayout>
 
 </RelativeLayout>

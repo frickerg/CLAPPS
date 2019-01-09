@@ -22,33 +22,76 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_marginTop="50dp"
-		android:orientation="vertical">
+		android:orientation="vertical" android:gravity="center">
 
-		<ImageButton
-			android:id="@+id/img_posture"
+		<LinearLayout
+			android:orientation="vertical"
 			android:layout_width="match_parent"
-			android:layout_height="400dp"
-			android:scaleType="fitEnd"
-			app:srcCompat="@drawable/haltung_gut" />
+			android:layout_height="200dp">
+			<Button
+				android:id="@+id/btn_connectSensor"
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="#32b66b"
+				android:fontFamily="@font/roboto_bold"
+				android:text="@string/sensor_connect"
+				android:textAlignment="center"
+				android:textColor="@color/textColor"
+				android:textSize="20sp"
+				android:visibility="visible" style="@style/Widget.AppCompat.Button.Borderless"/>
+			<ImageButton
+				android:id="@+id/img_posture"
+				android:layout_width="match_parent"
+				android:layout_height="195dp"
+				android:scaleType="fitCenter"
+				app:srcCompat="@drawable/haltung_gut"/>
+		</LinearLayout>
 
-		<Button
-			android:id="@+id/btn_connectSensor"
+		<View
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/colorPrimary"
-			android:fontFamily="@font/roboto_bold"
-			android:text="@string/sensor_connect"
-			android:textAlignment="center"
-			android:textColor="@color/textColor"
-			android:textSize="20sp"
-			android:visibility="invisible" />
+			android:layout_height="1dp"
+			android:background="@android:color/darker_gray"
+			android:layout_marginTop="2dp"/>
 
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/rv_dailyTip"
+		<LinearLayout
+			android:orientation="horizontal"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content">
+			<ImageView
+				android:src="@drawable/training1"
+				android:layout_width="187dp"
+				android:layout_height="match_parent" android:id="@+id/img_training1"
+				android:scaleType="fitCenter"/>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_marginTop="5dp"
+				android:layout_height="81dp" android:id="@+id/textView2" android:layout_weight="1"
+				android:textAppearance="@android:style/TextAppearance.Material.Medium"
+				tools:text="@string/tip_tip2"
+				android:text="@string/tip_tip2"/>
+		</LinearLayout>
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="@android:color/darker_gray"
+			android:layout_marginTop="2dp"/>
 
-		</android.support.v7.widget.RecyclerView>
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+			<ImageView
+				android:src="@drawable/training2"
+				android:layout_width="187dp"
+				android:layout_height="82dp" android:id="@+id/imageView2"
+				android:scaleType="fitCenter"/>
+			<TextView
+				android:text="@string/tip_tip1"
+				android:layout_marginTop="5dp"
+				android:layout_width="wrap_content"
+				android:layout_height="73dp" android:id="@+id/textView" android:layout_weight="1"
+				android:textAppearance="@android:style/TextAppearance.Material.Medium" tools:text="@string/tip_tip1"/>
+		</LinearLayout>
 
 
 	</LinearLayout>
