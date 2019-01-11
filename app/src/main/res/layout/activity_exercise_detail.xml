@@ -1,138 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:layout_marginTop="@dimen/activity_vertical_margin"
 	tools:context=".ExerciseDetailActivity">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_gravity="bottom"
-		android:gravity="bottom"
+		android:gravity="top"
 		android:orientation="vertical"
-		android:paddingBottom="16dp"
 		android:paddingLeft="10dp"
-		android:paddingRight="10dp"
-		android:layout_marginTop="20dp">
+		android:paddingRight="10dp">
 
 		<TextView
 			android:id="@+id/display_exercise_title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="22sp"
 			android:fontFamily="@font/roboto_bold"
-			android:textColor="@color/textColor"/>
+			android:textColor="@color/textColor"
+			android:textSize="22sp" />
+
 		<TextView
 			android:id="@+id/display_exercise_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="18sp"
 			android:fontFamily="@font/roboto_regular"
-			android:textColor="@color/textColor"/>
+			android:textColor="@color/textColor"
+			android:textSize="18sp" />
+
 		<TextView
 			android:id="@+id/display_exercise_text2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="18sp"
 			android:fontFamily="@font/roboto_regular"
-			android:textColor="@color/textColor"/>
+			android:textColor="@color/textColor"
+			android:textSize="18sp" />
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="42dp"
-			android:layout_gravity="bottom"
-			android:gravity="end"
-			android:orientation="horizontal"
-			android:layout_marginTop="250dp">
-
-			<LinearLayout
-				android:id="@+id/btn_home"
-				android:layout_width="91dp"
-				android:layout_height="match_parent"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_home_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/btn_home"
-					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/btn_diary"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_import_contacts_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/btn_diary"
-					android:layout_gravity="bottom"
-					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/btn_tips"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					app:srcCompat="@drawable/ic_content_paste_green_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:text="@string/btn_tips"
-					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/colorPrimary"/>
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/btn_sensor"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_bluetooth_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/btn_sensor"
-					android:textAlignment="center"
-					android:fontFamily="@font/roboto_light"
-					android:textColor="@color/textColor"/>
-			</LinearLayout>
-
-		</LinearLayout>
 	</LinearLayout>
-</FrameLayout>
+</RelativeLayout>
