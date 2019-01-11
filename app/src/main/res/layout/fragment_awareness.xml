@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".fragments.AwarenessFragment">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="bottom"
+		android:layout_marginBottom="@dimen/navbar_height"
+		android:gravity="top|bottom"
+		android:orientation="vertical"
+		android:padding="16dp">
+
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_bold"
+					android:text="@string/title_text_awarness"
+					android:textColor="@color/textColor"
+					android:textSize="20sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt1"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt2"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt3"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt4"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_medium"
+					android:text="@string/subtitle_awarness"
+					android:textColor="@color/textColor"
+					android:textSize="18sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt5"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt6"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt7"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/roboto_regular"
+					android:text="@string/text_awarness_pt8"
+					android:textColor="@color/textColor"
+					android:textSize="14sp" />
+			</LinearLayout>
+		</ScrollView>
+
+	</LinearLayout>
+
+
+</FrameLayout>
