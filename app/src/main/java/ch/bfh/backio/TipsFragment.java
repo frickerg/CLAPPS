@@ -2,7 +2,6 @@ package ch.bfh.backio;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,11 +23,10 @@ public class TipsFragment extends Fragment {
 		final Button awarenessButton = getView().findViewById(R.id.btn_awarness);
 
 		tipButton.setOnClickListener((v -> {
-			Class destinationActivity = TipActivity.class;
-			Intent startTipActivityIntent = new Intent(this.getContext(), destinationActivity);
-			startActivity(startTipActivityIntent);
 			String message = "Button clicked!\nTip";
-			Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
+			Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			ft.replace(android.R.id.content, new TipFragment()).commit();
 		}));
 
 		exerciseButton.setOnClickListener((v -> {

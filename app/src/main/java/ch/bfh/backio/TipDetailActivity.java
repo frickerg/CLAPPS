@@ -1,6 +1,5 @@
 package ch.bfh.backio;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,19 +13,23 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class TipDetailActivity extends AppCompatActivity {
-
-	private TextView tipTitle = findViewById(R.id.display_tip_title);
-	private TextView tipText = findViewById(R.id.display_tip_text);
-	private TextView tipSubtitle = findViewById(R.id.display_tip_subtitle);
-	private TextView tipText2 = findViewById(R.id.display_tip_text2);
+	private TextView tipTitle;
+	private TextView tipText;
+	private TextView tipSubtitle;
+	private TextView tipText2;
 	private String tipTitleText;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tip_detail);
 
-		Intent intentThatStartedThisActivity = getIntent();
+		tipTitle = findViewById(R.id.display_tip_title);
+		tipText = findViewById(R.id.display_tip_text);
+		tipSubtitle = findViewById(R.id.display_tip_subtitle);
+		tipText2 = findViewById(R.id.display_tip_text2);
 
+		Intent intentThatStartedThisActivity = getIntent();
 		if (intentThatStartedThisActivity != null) {
 			if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
 				tipTitleText = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
@@ -35,11 +38,9 @@ public class TipDetailActivity extends AppCompatActivity {
 		}
 
 		getJSONText();
-		Context context = TipDetailActivity.this;
-		//this.initListeners(context);
 	}
 
-	private void getJSONText(){
+	private void getJSONText() {
 		String tip;
 		try {
 			InputStream is = getAssets().open("tip.json");
@@ -53,9 +54,9 @@ public class TipDetailActivity extends AppCompatActivity {
 			JSONObject obj = new JSONObject(tip);
 			JSONArray tipArray = obj.getJSONArray("tip");
 
-			for(int i = 0; i<tipArray.length(); i++){
+			for (int i = 0; i < tipArray.length(); i++) {
 				JSONObject obj2 = tipArray.getJSONObject(i);
-				if(tipTitleText.equals(obj2.getString("title"))){
+				if (tipTitleText.equals(obj2.getString("title"))) {
 					tipText.setText(obj2.getString("text"));
 					tipSubtitle.setText(obj2.getString("subtitle"));
 					tipText2.setText(obj2.getString("text2"));

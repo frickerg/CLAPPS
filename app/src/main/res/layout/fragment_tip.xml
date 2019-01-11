@@ -4,26 +4,19 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".TipActivity">
+	android:paddingBottom="@dimen/navbar_height"
+	tools:context=".TipFragment">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_gravity="bottom"
 		android:gravity="bottom"
 		android:orientation="vertical"
 		android:paddingBottom="16dp">
 
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/title_tips" />
-
 		<android.support.v7.widget.RecyclerView
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
 			android:id="@+id/rv_tip"
-			android:layout_marginTop="20dp">
-		</android.support.v7.widget.RecyclerView>
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 	</LinearLayout>
 </FrameLayout>

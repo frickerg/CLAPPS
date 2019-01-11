@@ -12,33 +12,33 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-public class ExerciseFragment extends Fragment implements JSONAdapter.JSONAdapterOnClickHandler{
+public class TipFragment extends Fragment implements JSONAdapter.JSONAdapterOnClickHandler {
 	private JSONAdapter JSONAdapter = new JSONAdapter(this);
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_exercise, container, false);
-		RecyclerView recyclerView = rootView.findViewById(R.id.rv_exercise);
+		View rootView = inflater.inflate(R.layout.fragment_tip, container, false);
+		RecyclerView recyclerView = rootView.findViewById(R.id.rv_tip);
 
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(JSONAdapter);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-		ArrayList<String> exerciseList = JSONAdapter.readJSON(getContext(), "exercise.json", "exercise", "title");
+		ArrayList<String> tipList = JSONAdapter.readJSON(getContext(), "tip.json", "tip", "title");
 
-		for(String exercise : exerciseList){
-			JSONAdapter.setJSONData(exercise);
+		for(String tip : tipList){
+			JSONAdapter.setJSONData(tip);
 		}
 		return rootView;
 	}
 
 	@Override
-	public void onClick(String exerciseTitle) {
-		Toast.makeText(getActivity(), exerciseTitle, Toast.LENGTH_SHORT).show();
-		Class destinationClass = ExerciseDetailActivity.class;
+	public void onClick(String tipTitle) {
+		Toast.makeText(getContext(), tipTitle, Toast.LENGTH_SHORT).show();
+		Class destinationClass = TipDetailActivity.class;
 		Intent intentToStartDetailActivity = new Intent(getActivity(), destinationClass);
-		intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, exerciseTitle);
+		intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, tipTitle);
 		startActivity(intentToStartDetailActivity);
 	}
 

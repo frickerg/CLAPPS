@@ -38,7 +38,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 		getJSONText();
 	}
 
-	private void getJSONText(){
+	private void getJSONText() {
 		String tip;
 		try {
 			InputStream is = getAssets().open("exercise.json");
@@ -52,9 +52,9 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 			JSONObject obj = new JSONObject(tip);
 			JSONArray tipArray = obj.getJSONArray("exercise");
 
-			for(int i = 0; i<tipArray.length(); i++){
+			for (int i = 0; i < tipArray.length(); i++) {
 				JSONObject obj2 = tipArray.getJSONObject(i);
-				if(tipArray.getJSONObject(i).getString("title").equals(exerciseTitleText)){
+				if (tipArray.getJSONObject(i).getString("title").equals(exerciseTitleText)) {
 					exerciseText.setText(obj2.getString("text"));
 					exerciseText2.setText(obj2.getString("text2"));
 				}

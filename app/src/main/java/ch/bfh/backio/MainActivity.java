@@ -13,7 +13,6 @@ import bolts.Task;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
-import ch.bfh.backio.SensorService;
 
 import java.util.UUID;
 

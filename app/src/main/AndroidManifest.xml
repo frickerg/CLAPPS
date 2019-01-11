@@ -17,7 +17,6 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".TipActivity" />
 		<activity android:name=".TipDetailActivity" />
 		<activity android:name=".ExerciseDetailActivity" />
 		<activity
