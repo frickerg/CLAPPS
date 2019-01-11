@@ -1,10 +1,11 @@
-package ch.bfh.backio;
+package ch.bfh.backio.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import ch.bfh.backio.R;
 
 public class AwarenessFragment extends Fragment {
 	@Override

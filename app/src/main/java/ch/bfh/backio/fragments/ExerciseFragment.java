@@ -1,4 +1,4 @@
-package ch.bfh.backio;
+package ch.bfh.backio.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -10,9 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import ch.bfh.backio.services.JSONAdapter;
+import ch.bfh.backio.R;
+import ch.bfh.backio.activites.ExerciseDetailActivity;
+
 import java.util.ArrayList;
 
-public class ExerciseFragment extends Fragment implements JSONAdapter.JSONAdapterOnClickHandler{
+public class ExerciseFragment extends Fragment implements ch.bfh.backio.services.JSONAdapter.JSONAdapterOnClickHandler {
 	private JSONAdapter JSONAdapter = new JSONAdapter(this);
 
 	@Override

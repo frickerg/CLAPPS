@@ -1,4 +1,4 @@
-package ch.bfh.backio;
+package ch.bfh.backio.services;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;

@@ -1,4 +1,4 @@
-package ch.bfh.backio;
+package ch.bfh.backio.activites;
 
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -10,6 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import bolts.Task;
+import ch.bfh.backio.fragments.HomeFragment;
+import ch.bfh.backio.R;
+import ch.bfh.backio.fragments.SensorFragment;
+import ch.bfh.backio.fragments.AdvisorFragment;
+import ch.bfh.backio.fragments.DiaryFragment;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			String message = "Button clicked!\nTipps";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			ft.replace(android.R.id.content, new TipsFragment()).commit();
+			ft.replace(android.R.id.content, new AdvisorFragment()).commit();
 			int id = ic_content_paste_green_24dp;
 			setButton((ImageButton) findViewById(btn_tips_image), id);
 		}));

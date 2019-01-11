@@ -1,4 +1,4 @@
-package ch.bfh.backio;
+package ch.bfh.backio.activites;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -15,9 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ch.bfh.backio.fragments.DeviceSetupActivityFragment;
+import ch.bfh.backio.R;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
-import ch.bfh.backio.DeviceSetupActivityFragment.FragmentSettings;
+import ch.bfh.backio.fragments.DeviceSetupActivityFragment.FragmentSettings;
 
 import bolts.Continuation;
 

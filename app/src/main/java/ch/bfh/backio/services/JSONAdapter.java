@@ -1,4 +1,4 @@
-package ch.bfh.backio;
+package ch.bfh.backio.services;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ch.bfh.backio.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

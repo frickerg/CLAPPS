@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:paddingBottom="@dimen/navbar_height"
-	tools:context=".DiaryFragment">
+	tools:context=".fragments.DiaryFragment">
 
 	<LinearLayout
 		android:layout_width="match_parent"

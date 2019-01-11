@@ -6,7 +6,7 @@
 	android:paddingLeft="@dimen/activity_horizontal_margin"
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
-	tools:context="ch.bfh.backio.DeviceSetupActivity"
+	tools:context="ch.bfh.backio.activites.DeviceSetupActivity"
 	tools:showIn="@layout/activity_device_setup">
 
 </RelativeLayout>
