@@ -1,66 +1,34 @@
 package ch.bfh.backio.activites;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import ch.bfh.backio.R;
-import org.json.JSONArray;
+import ch.bfh.backio.services.JSONBroker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class ExerciseDetailActivity extends AppCompatActivity {
-	private TextView exerciseTitle;
-	private TextView exerciseText;
-	private String exerciseTitleText;
-	private TextView exerciseText2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_exercise_detail);
 
-		exerciseTitle = findViewById(R.id.display_exercise_title);
-		exerciseText = findViewById(R.id.display_exercise_text);
-		exerciseText2 = findViewById(R.id.display_exercise_text2);
+		TextView exerciseTitle = findViewById(R.id.display_exercise_title);
+		TextView exerciseText = findViewById(R.id.display_exercise_text);
+		TextView exerciseText2 = findViewById(R.id.display_exercise_text2);
 
-		Intent intentThatStartedThisActivity = getIntent();
-		if (intentThatStartedThisActivity != null) {
-			if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
-				exerciseTitleText = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
-				exerciseTitle.setText(exerciseTitleText);
-			}
-		}
-
-		getJSONText();
-	}
-
-	private void getJSONText() {
-		String tip;
+		String extraText = JSONBroker.retrieveIntentExtraTextString(getIntent());
+		exerciseTitle.setText(extraText);
 		try {
-			InputStream is = getAssets().open("exercise.json");
-			int size = is.available();
-			byte[] buffer = new byte[size];
-
-			is.read(buffer);
-			is.close();
-
-			tip = new String(buffer, "UTF-8");
-			JSONObject obj = new JSONObject(tip);
-			JSONArray tipArray = obj.getJSONArray("exercise");
-
-			for (int i = 0; i < tipArray.length(); i++) {
-				JSONObject obj2 = tipArray.getJSONObject(i);
-				if (tipArray.getJSONObject(i).getString("title").equals(exerciseTitleText)) {
-					exerciseText.setText(obj2.getString("text"));
-					exerciseText2.setText(obj2.getString("text2"));
-				}
-			}
-		} catch (IOException | JSONException e) {
+			JSONObject jsonObject = JSONBroker.retrieveJsonObject(getAssets(), "exercise.json", "exercise", extraText);
+			exerciseText.setText(jsonObject.getString("text"));
+			exerciseText2.setText(jsonObject.getString("text2"));
+		} catch (JSONException | IOException e) {
 			e.printStackTrace();
 		}
 	}
