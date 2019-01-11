@@ -1,6 +1,7 @@
 package ch.bfh.backio;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -8,7 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import static ch.bfh.backio.R.drawable.ic_content_paste_green_24dp;
+import static ch.bfh.backio.R.id.btn_tips_image;
 
 public class TipsFragment extends Fragment {
 	@Override
@@ -31,11 +36,10 @@ public class TipsFragment extends Fragment {
 		}));
 
 		exerciseButton.setOnClickListener((v -> {
-			Class destinationActivity = ExerciseActivity.class;
-			Intent startExerciseActivityIntent = new Intent(this.getContext(), destinationActivity);
-			startActivity(startExerciseActivityIntent);
 			String message = "Button clicked!\nÜbungen";
-			Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
+			Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			ft.replace(android.R.id.content, new ExerciseFragment()).commit();
 		}));
 
 		awarnessButton.setOnClickListener((v -> {

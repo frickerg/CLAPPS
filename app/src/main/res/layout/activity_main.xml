@@ -20,13 +20,14 @@
 	<LinearLayout
 		android:id="@+id/navbar"
 		android:layout_width="match_parent"
-		android:layout_height="42dp"
+		android:layout_height="@dimen/navbar_height"
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
 		android:layout_gravity="bottom"
+		android:baselineAligned="false"
 		android:gravity="end"
 		android:orientation="horizontal"
-		android:baselineAligned="false">
+		android:paddingTop="18dp">
 
 		<LinearLayout
 			android:id="@+id/btn_home"
