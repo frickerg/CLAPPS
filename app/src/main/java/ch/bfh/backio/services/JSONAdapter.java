@@ -1,4 +1,4 @@
-package ch.bfh.backio;
+package ch.bfh.backio.services;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ch.bfh.backio.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +21,6 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 	private final JSONAdapterOnClickHandler click;
 	private ArrayList<String> jsonList = new ArrayList<>();
 
-
 	public interface JSONAdapterOnClickHandler {
 		void onClick(String json);
 	}
@@ -28,7 +28,6 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 	public JSONAdapter(JSONAdapterOnClickHandler clickHandler) {
 		click = clickHandler;
 	}
-
 	public void setJSONData(String jsonData){
 		this.jsonData.add(jsonData);
 	}
@@ -91,9 +90,6 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 				JSONObject obj2 = tipArray.getJSONObject(i);
 				jsonList.add(obj2.getString(name));
 			}
-
-
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {

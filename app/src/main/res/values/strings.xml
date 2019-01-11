@@ -10,6 +10,7 @@
 	<string name="btn_tips">Tipps</string>
 	<string name="btn_sensor">Sensor</string>
 	<string name="btn_tip">Tipps</string>
+	<string name="btn_sensor_connect">Sensor verbinden</string>
 	<string name="btn_exercise">Übungen</string>
 	<string name="btn_awarness">Aufklärung</string>
 	<string name="btn_connect">Sensor Verbinden</string>
@@ -40,4 +41,10 @@
 	<string name="text_awarness_pt6">Die Erkenntnisse von Thosars Team ermöglichen es uns jedoch, aktiv vorzubeugen. Einmal in der Stunde fünf Minuten zu gehen lässt sich schliesslich recht einfach in den Arbeitsalltag integrieren.</string>
 	<string name="text_awarness_pt7">Dabei muss es sich nicht immer um einen „richtigen“ Spaziergang handeln. Zwar ist Bewegung an der frischen Luft am gesündesten, doch der Chef sieht es bestimmt nicht gern, wenn die Mitarbeiter zu jeder vollen Stunde fünf Minuten vor dem Bürogebäude auf und ab gehen.</string>
 	<string name="text_awarness_pt8">Zum Glück geht es auch einfacher: Ein Gang zum Kopierer oder in die Kaffeeküche und öfter mal die Treppe zu benutzen tun es ja auch. Und vielleicht lassen sich gar das eine oder andere Minitrampolin oder Laufband auf der Büroetage integrieren.</string>
+
+	<!-- TODO: Remove or change this placeholder text -->
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="btn_sensor_disconnect">Sensor abkoppeln</string>
+	<string name="tip_tip1">Tipp: Mache eine Übung mit einem Pilates-Kissen</string>
+	<string name="tip_tip2">Tipp: Führe eine Ruderübung durch.</string>
 </resources>

@@ -4,27 +4,25 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".AwarnessActivity">
+	tools:context=".fragments.AwarenessFragment">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_gravity="bottom"
-		android:gravity="bottom"
+		android:layout_marginBottom="@dimen/navbar_height"
+		android:gravity="top|bottom"
 		android:orientation="vertical"
-		android:paddingBottom="16dp"
-		android:paddingRight="10dp"
-		android:paddingLeft="10dp">
+		android:padding="16dp">
 
 		<ScrollView
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="50dp">
+			android:layout_height="match_parent">
 
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:orientation="vertical" >
+				android:orientation="vertical">
 
 				<TextView
 					android:layout_width="match_parent"
@@ -65,13 +63,15 @@
 					android:text="@string/text_awarness_pt4"
 					android:textColor="@color/textColor"
 					android:textSize="14sp" />
+
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/roboto_medium"
 					android:text="@string/subtitle_awarness"
 					android:textColor="@color/textColor"
-					android:textSize="18sp"/>
+					android:textSize="18sp" />
+
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -79,6 +79,7 @@
 					android:text="@string/text_awarness_pt5"
 					android:textColor="@color/textColor"
 					android:textSize="14sp" />
+
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -86,6 +87,7 @@
 					android:text="@string/text_awarness_pt6"
 					android:textColor="@color/textColor"
 					android:textSize="14sp" />
+
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -93,6 +95,7 @@
 					android:text="@string/text_awarness_pt7"
 					android:textColor="@color/textColor"
 					android:textSize="14sp" />
+
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -103,97 +106,6 @@
 			</LinearLayout>
 		</ScrollView>
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="42dp"
-			android:gravity="end"
-			android:orientation="horizontal">
-
-			<LinearLayout
-				android:id="@+id/btn_home"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_home_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_home"
-					android:textAlignment="center"
-					android:textColor="@color/textColor" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/btn_diary"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:src="@drawable/ic_import_contacts_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_diary"
-					android:textAlignment="center"
-					android:textColor="@color/textColor" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/btn_tips"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_content_paste_green_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_tips"
-					android:textAlignment="center"
-					android:textColor="@color/colorPrimary" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/btn_sensor"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<ImageButton
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/ic_bluetooth_black_24dp" />
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/roboto_light"
-					android:text="@string/btn_sensor"
-					android:textAlignment="center"
-					android:textColor="@color/textColor" />
-			</LinearLayout>
-
-		</LinearLayout>
 	</LinearLayout>
 
 
