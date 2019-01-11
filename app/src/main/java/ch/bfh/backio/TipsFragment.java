@@ -9,11 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
-
-import static ch.bfh.backio.R.drawable.ic_content_paste_green_24dp;
-import static ch.bfh.backio.R.id.btn_tips_image;
 
 public class TipsFragment extends Fragment {
 	@Override
@@ -25,7 +21,7 @@ public class TipsFragment extends Fragment {
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		final Button tipButton =  getView().findViewById(R.id.btn_tip);
 		final Button exerciseButton = getView().findViewById(R.id.btn_exercise);
-		final Button awarnessButton = getView().findViewById(R.id.btn_awarness);
+		final Button awarenessButton = getView().findViewById(R.id.btn_awarness);
 
 		tipButton.setOnClickListener((v -> {
 			Class destinationActivity = TipActivity.class;
@@ -42,12 +38,11 @@ public class TipsFragment extends Fragment {
 			ft.replace(android.R.id.content, new ExerciseFragment()).commit();
 		}));
 
-		awarnessButton.setOnClickListener((v -> {
-			Class destinationActivity = AwarnessActivity.class;
-			Intent startAwarnessActivityIntent = new Intent(this.getContext(), destinationActivity);
-			startActivity(startAwarnessActivityIntent);
+		awarenessButton.setOnClickListener((v -> {
 			String message = "Button clicked!\nAufklärung";
-			Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
+			Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			ft.replace(android.R.id.content, new AwarenessFragment()).commit();
 		}));
 	}
 }

@@ -18,7 +18,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".TipActivity" />
-		<activity android:name=".AwarnessActivity" />
 		<activity android:name=".TipDetailActivity" />
 		<activity android:name=".ExerciseDetailActivity" />
 		<activity
