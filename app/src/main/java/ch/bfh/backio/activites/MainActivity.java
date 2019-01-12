@@ -193,9 +193,6 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			.continueWith(task -> {
 				if (!task.isCancelled()) {
 					runOnUiThread(connectDialog::dismiss);
-					Intent navActivityIntent = new Intent(MainActivity.this, DeviceSetupActivity.class);
-					navActivityIntent.putExtra(DeviceSetupActivity.EXTRA_BT_DEVICE, device);
-					startActivityForResult(navActivityIntent, REQUEST_START_APP);
 				}
 				return null;
 			});
