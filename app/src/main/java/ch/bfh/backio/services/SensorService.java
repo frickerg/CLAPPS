@@ -24,28 +24,51 @@ import com.mbientlab.metawear.module.AccelerometerBosch;
 import com.mbientlab.metawear.module.Haptic;
 import com.mbientlab.metawear.module.Led;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
 public class SensorService implements ServiceConnection {
 
+	/** The sensor mac address stick on. */
 	private final String SENSOR_MAC_ADDRESS_STICK_ON = "ED:F4:81:B2:78:47";
 	//private final String SENSOR_MAC_ADDRESS_CLIP_ON = "C6:9B:12:3C:59:02";
 
 
+	/** The service binder. */
 	private BtleService.LocalBinder serviceBinder;
+	
+	/** The context. */
 	private Context context;
+	
+	/** The board. */
 	private MetaWearBoard board;
+	
+	/** The led. */
 	private Led led;
+	
+	/** The acc. */
 	private AccelerometerBmi160 acc;
 	// private popaDatabase database;
 
+	/** The evaluate counter. */
 	//Posture evaluation
 	private int evaluateCounter = 0;
+	
+	/** The init posture. */
 	private boolean initPosture = true;
+	
+	/** The init X. */
 	private float initX;
+	
+	/** The x treshold. */
 	private float xTreshold;
 
+	/**
+	 * Instantiates a new sensor service.
+	 *
+	 * @param ctxt the ctxt
+	 */
 	public SensorService(Context ctxt){
 		this.context = ctxt;
 		// database = popaDatabase.getDatabase(context);
@@ -53,12 +76,23 @@ public class SensorService implements ServiceConnection {
 		context.startService(new Intent(context, BtleService.class));
 	}
 
+	/**
+	 * On service connected.
+	 *
+	 * @param name the name
+	 * @param service the service
+	 */
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		serviceBinder = (BtleService.LocalBinder) service;
 		retrieveBoard();
 	}
 
+	/**
+	 * On service disconnected.
+	 *
+	 * @param componentName the component name
+	 */
 	@Override
 	public void onServiceDisconnected(ComponentName componentName) {
 	}
@@ -120,7 +154,7 @@ public class SensorService implements ServiceConnection {
 	}
 
 	/**
-	 * Close the connection to the mbientlab Sensor
+	 * Close the connection to the mbientlab Sensor.
 	 */
 	public void disconnectSensor(){
 		board.disconnectAsync().continueWith(task -> {
@@ -140,6 +174,8 @@ public class SensorService implements ServiceConnection {
 
 	/**
 	 * This method evaluates on every reaction of the sensor if the position changed by more than 25%.
+	 *
+	 * @param x the x
 	 */
 	private void evaluatePosition(float x){
 		if(evaluateCounter == 300){

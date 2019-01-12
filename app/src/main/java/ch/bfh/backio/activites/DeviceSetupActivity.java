@@ -25,16 +25,38 @@ import bolts.Continuation;
 
 import static android.content.DialogInterface.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DeviceSetupActivity.
+ */
 public class DeviceSetupActivity extends AppCompatActivity implements ServiceConnection, FragmentSettings {
+	
+	/** The Constant EXTRA_BT_DEVICE. */
 	public final static String EXTRA_BT_DEVICE = "com.mbientlab.metawear.starter.DeviceSetupActivity.EXTRA_BT_DEVICE";
 
+	/**
+	 * The Class ReconnectDialogFragment.
+	 */
 	public static class ReconnectDialogFragment extends DialogFragment implements ServiceConnection {
+		
+		/** The Constant KEY_BLUETOOTH_DEVICE. */
 		private static final String KEY_BLUETOOTH_DEVICE = "com.mbientlab.metawear.starter.DeviceSetupActivity.ReconnectDialogFragment.KEY_BLUETOOTH_DEVICE";
 
+		/** The reconnect dialog. */
 		private ProgressDialog reconnectDialog = null;
+		
+		/** The bt device. */
 		private BluetoothDevice btDevice = null;
+		
+		/** The current mw board. */
 		private MetaWearBoard currentMwBoard = null;
 
+		/**
+		 * New instance.
+		 *
+		 * @param btDevice the bt device
+		 * @return the reconnect dialog fragment
+		 */
 		public static ReconnectDialogFragment newInstance(BluetoothDevice btDevice) {
 			Bundle args = new Bundle();
 			args.putParcelable(KEY_BLUETOOTH_DEVICE, btDevice);
@@ -45,6 +67,12 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 			return newFragment;
 		}
 
+		/**
+		 * On create dialog.
+		 *
+		 * @param savedInstanceState the saved instance state
+		 * @return the dialog
+		 */
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -65,21 +93,41 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 			return reconnectDialog;
 		}
 
+		/**
+		 * On service connected.
+		 *
+		 * @param name the name
+		 * @param service the service
+		 */
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			currentMwBoard = ((BtleService.LocalBinder) service).getMetaWearBoard(btDevice);
 		}
 
+		/**
+		 * On service disconnected.
+		 *
+		 * @param name the name
+		 */
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
 		}
 	}
 
+	/** The bt device. */
 	private BluetoothDevice btDevice;
+	
+	/** The metawear. */
 	private MetaWearBoard metawear;
 
+	/** The reconnect dialog tag. */
 	private final String RECONNECT_DIALOG_TAG = "reconnect_dialog_tag";
 
+	/**
+	 * On create.
+	 *
+	 * @param savedInstanceState the saved instance state
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,6 +139,12 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
 	}
 
+	/**
+	 * On create options menu.
+	 *
+	 * @param menu the menu
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -98,6 +152,12 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 		return true;
 	}
 
+	/**
+	 * On options item selected.
+	 *
+	 * @param item the item
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -110,12 +170,21 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * On back pressed.
+	 */
 	@Override
 	public void onBackPressed() {
 		metawear.disconnectAsync();
 		super.onBackPressed();
 	}
 
+	/**
+	 * On service connected.
+	 *
+	 * @param name the name
+	 * @param service the service
+	 */
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		metawear = ((BtleService.LocalBinder) service).getMetaWearBoard(btDevice);
@@ -139,10 +208,18 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 		});
 	}
 
+	/**
+	 * On service disconnected.
+	 *
+	 * @param name the name
+	 */
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.backio.fragments.DeviceSetupActivityFragment.FragmentSettings#getBtDevice()
+	 */
 	@Override
 	public BluetoothDevice getBtDevice() {
 		return btDevice;

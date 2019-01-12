@@ -31,11 +31,26 @@ import static ch.bfh.backio.R.drawable.ic_content_paste_green_24dp;
 import static ch.bfh.backio.R.drawable.ic_bluetooth_green_24dp;
 import static ch.bfh.backio.R.id.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainActivity.
+ */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
+	
+	/** The Constant REQUEST_START_APP. */
 	public static final int REQUEST_START_APP = 1;
+	
+	/** The service binder. */
 	private BtleService.LocalBinder serviceBinder;
+	
+	/** The metawear. */
 	private MetaWearBoard metawear;
 
+	/**
+	 * On create.
+	 *
+	 * @param savedInstanceState the saved instance state
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 	}
 
+	/**
+	 * On destroy.
+	 */
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -90,6 +108,13 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		getApplicationContext().unbindService(this);
 	}
 
+	/**
+	 * On activity result.
+	 *
+	 * @param requestCode the request code
+	 * @param resultCode the result code
+	 * @param data the data
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
@@ -102,6 +127,12 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 
+	/**
+	 * Sets the button.
+	 *
+	 * @param clickedButton the clicked button
+	 * @param newImage the new image
+	 */
 	public void setButton(ImageButton clickedButton, int newImage) {
 
 		ImageButton btnDiary = (ImageButton) findViewById(btn_diary_image);
@@ -120,16 +151,31 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 	}
 
+	/**
+	 * Gets the filter service uuids.
+	 *
+	 * @return the filter service uuids
+	 */
 	@Override
 	public UUID[] getFilterServiceUuids() {
 		return new UUID[]{MetaWearBoard.METAWEAR_GATT_SERVICE};
 	}
 
+	/**
+	 * Gets the scan duration.
+	 *
+	 * @return the scan duration
+	 */
 	@Override
 	public long getScanDuration() {
 		return 10000L;
 	}
 
+	/**
+	 * On device selected.
+	 *
+	 * @param device the device
+	 */
 	@Override
 	public void onDeviceSelected(final BluetoothDevice device) {
 		metawear = serviceBinder.getMetaWearBoard(device);
@@ -155,16 +201,33 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			});
 	}
 
+	/**
+	 * On service connected.
+	 *
+	 * @param name the name
+	 * @param service the service
+	 */
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		serviceBinder = (BtleService.LocalBinder) service;
 	}
 
+	/**
+	 * On service disconnected.
+	 *
+	 * @param name the name
+	 */
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
 
 	}
 
+	/**
+	 * Reconnect.
+	 *
+	 * @param board the board
+	 * @return the task
+	 */
 	public static Task<Void> reconnect(final MetaWearBoard board) {
 		return board.connectAsync().continueWithTask(task -> task.isFaulted() ? reconnect(board) : task);
 	}

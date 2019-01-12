@@ -11,8 +11,17 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExerciseDetailActivity.
+ */
 public class ExerciseDetailActivity extends AppCompatActivity {
 
+	/**
+	 * On create.
+	 *
+	 * @param savedInstanceState the saved instance state
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

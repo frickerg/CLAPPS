@@ -10,7 +10,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JSONBroker.
+ */
 public abstract class JSONBroker {
+	
+	/**
+	 * Retrieve intent extra text string.
+	 *
+	 * @param intentThatStartedThisActivity the intent that started this activity
+	 * @return the string
+	 */
 	public static String retrieveIntentExtraTextString(Intent intentThatStartedThisActivity) {
 		if (intentThatStartedThisActivity != null && intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
 			return intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
@@ -18,6 +29,17 @@ public abstract class JSONBroker {
 		return "[empty]";
 	}
 
+	/**
+	 * Retrieve json object.
+	 *
+	 * @param assetManager the asset manager
+	 * @param jsonFileName the json file name
+	 * @param jsonArrayName the json array name
+	 * @param title the title
+	 * @return the JSON object
+	 * @throws JSONException the JSON exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static JSONObject retrieveJsonObject(AssetManager assetManager, String jsonFileName, String jsonArrayName, CharSequence title) throws JSONException, IOException {
 		InputStream is = assetManager.open(jsonFileName);
 		int size = is.available();
