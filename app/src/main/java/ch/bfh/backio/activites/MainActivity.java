@@ -15,8 +15,6 @@ import ch.bfh.backio.R;
 import ch.bfh.backio.fragments.SensorFragment;
 import ch.bfh.backio.fragments.AdvisorFragment;
 import ch.bfh.backio.fragments.DiaryFragment;
-import ch.bfh.backio.services.persistence.database.AppDatabase;
-import ch.bfh.backio.services.persistence.utils.DatabaseInitializer;
 import ch.bfh.backio.services.SensorService;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
@@ -91,19 +89,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		getApplicationContext().unbindService(this);
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
-			case REQUEST_START_APP:
-				System.out.println("hoi");
-				//((BleScannerFagment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
-				break;
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}
-
-
-	public void setButton(ImageButton clickedButton, int newImage) {
+	private void setButton(ImageButton clickedButton, int newImage) {
 		ImageButton btnDiary = findViewById(btn_diary_image);
 		btnDiary.setImageResource(ic_import_contacts_black_24dp);
 
@@ -131,17 +117,10 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 	@Override
 	public void onDeviceSelected(final BluetoothDevice device) {
-		metawear = serviceBinder.getMetaWearBoard(device);
-
-		final ProgressDialog connectDialog = new ProgressDialog(this);
-		connectDialog.setTitle(getString(R.string.title_connecting));
-		connectDialog.setMessage(getString(R.string.message_wait));
-		connectDialog.setCancelable(false);
-		connectDialog.setCanceledOnTouchOutside(false);
-		connectDialog.setIndeterminate(true);
-		connectDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel), (dialogInterface, i) -> metawear.disconnectAsync());
+		final ProgressDialog connectDialog = createConnectDialog();
 		connectDialog.show();
 
+		metawear = serviceBinder.getMetaWearBoard(device);
 		metawear.connectAsync().continueWithTask(task -> task.isCancelled() || !task.isFaulted() ? task : reconnect(metawear))
 			.continueWith(task -> {
 				if (!task.isCancelled()) {
@@ -165,10 +144,21 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
-
+		// TODO: write disconnect handling method
 	}
 
-	public static Task<Void> reconnect(final MetaWearBoard board) {
+	private ProgressDialog createConnectDialog() {
+		ProgressDialog connectDialog = new ProgressDialog(this);
+		connectDialog.setTitle(getString(R.string.title_connecting));
+		connectDialog.setMessage(getString(R.string.message_wait));
+		connectDialog.setCancelable(false);
+		connectDialog.setCanceledOnTouchOutside(false);
+		connectDialog.setIndeterminate(true);
+		connectDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel), (dialogInterface, i) -> metawear.disconnectAsync());
+		return connectDialog;
+	}
+
+	protected static Task<Void> reconnect(final MetaWearBoard board) {
 		return board.connectAsync().continueWithTask(task -> task.isFaulted() ? reconnect(board) : task);
 	}
 }

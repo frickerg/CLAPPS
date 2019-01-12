@@ -131,7 +131,6 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 					} else {
 						finish();
 					}
-
 					return null;
 				});
 		});
