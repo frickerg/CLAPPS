@@ -2,13 +2,11 @@ package ch.bfh.backio.services;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import bolts.Continuation;
 import bolts.Task;
 import ch.bfh.backio.services.persistence.database.AppDatabase;
 import ch.bfh.backio.services.persistence.entity.Value;
-import ch.bfh.backio.services.persistence.utils.DatabaseInitializer;
 import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.Route;
@@ -23,7 +21,6 @@ import com.mbientlab.metawear.module.AccelerometerBosch;
 import com.mbientlab.metawear.module.Haptic;
 import com.mbientlab.metawear.module.Led;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +46,7 @@ public abstract class SensorService {
 
 	public static void setService(Context ctxt) {
 		context = ctxt;
-		dbValues = AppDatabase.getAppDatabase(context);
+		dbValues = AppDatabase.getAppDatabase(ctxt);
 
 		// TODO: check if required
 		// context.bindService(new Intent(context, BtleService.class), serviceConnection, Context.BIND_AUTO_CREATE);
@@ -170,12 +167,12 @@ public abstract class SensorService {
 	 * On every sensor reaction the persist method hands the data to the DBController to persist the data in the RPL.
 	 *
 	 * @param parameter - The parameter
-	 * @param value - The value
+	 * @param value     - The value
 	 */
-	private static void saveData(int parameter, float value){
+	private static void saveData(int parameter, float value) {
 		boolean goodPosture;
 
-		if(value < (value - xTreshold)){
+		if (value < (value - xTreshold)) {
 			goodPosture = false;
 		} else {
 			goodPosture = true;

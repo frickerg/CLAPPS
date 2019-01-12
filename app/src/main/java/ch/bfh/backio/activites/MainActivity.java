@@ -44,12 +44,10 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
-		getApplicationContext().bindService(new Intent(this, SensorService.class), this, BIND_AUTO_CREATE);
-
-
-
 
 		Context context = MainActivity.this;
+		SensorService.setService(context);
+
 		findViewById(btn_diary).setOnClickListener(v -> {
 			String message = "Button clicked!\nTagebuch";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
@@ -97,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 			case REQUEST_START_APP:
+				System.out.println("hoi");
 				//((BleScannerFagment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
 				break;
 		}
@@ -151,8 +150,12 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 					navActivityIntent.putExtra(DeviceSetupActivity.EXTRA_BT_DEVICE, device);
 					startActivityForResult(navActivityIntent, REQUEST_START_APP);
 				}
-				return null;
-			});
+				return task;
+			}).onSuccessTask(task -> {
+			System.out.println("success task");
+			metawear = SensorService.retrieveBoard(device, serviceBinder);
+			return task;
+		});
 	}
 
 	@Override
