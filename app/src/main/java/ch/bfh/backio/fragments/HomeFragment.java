@@ -23,7 +23,7 @@ public class HomeFragment extends Fragment {
 
 			// initialize new sensor object
 			// use getActivity instead of this
-			SensorService metaSensor = new SensorService(getActivity());
+			SensorService.setService(getActivity());
 
 			// metaSensor.disconnectSensor();
 

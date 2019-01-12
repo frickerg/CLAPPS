@@ -9,12 +9,12 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import ch.bfh.backio.R;
+import ch.bfh.backio.services.SensorService;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
 
@@ -29,12 +29,10 @@ public class DeviceSetupActivityFragment extends Fragment implements ServiceConn
 	private MetaWearBoard metawear = null;
 	private FragmentSettings settings;
 
-	public DeviceSetupActivityFragment() {
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		SensorService.setService(getActivity());
 
 		Activity owner = getActivity();
 		if (!(owner instanceof FragmentSettings)) {
