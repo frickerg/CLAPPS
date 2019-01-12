@@ -20,6 +20,8 @@ import com.mbientlab.metawear.module.AccelerometerBmi160.OutputDataRate;
 import com.mbientlab.metawear.module.AccelerometerBosch;
 import com.mbientlab.metawear.module.Haptic;
 import com.mbientlab.metawear.module.Led;
+import com.mbientlab.metawear.module.AccelerometerBosch.NoMotionDataProducer;
+
 
 import java.util.Date;
 import java.util.List;
@@ -38,8 +40,11 @@ public class SensorService {
 	/** The led. */
 	private Led led;
 	
-	/** The acc. */
+	/** The accelerometer bmi 160 */
 	private AccelerometerBmi160 acc;
+
+	/** The accelerometer bosch */
+	private AccelerometerBosch accBosch;
 
 	/** The db values. */
 	// initialize database for sensor values
@@ -81,12 +86,49 @@ public class SensorService {
 		// the other one is in MainActivity and should absolutely stay there!
 		board = serviceBinder.getMetaWearBoard(btDevice);
 		board.connectAsync().onSuccessTask(task -> {
+			// get and configure BMI160 accelerometer
 			acc = board.getModule(AccelerometerBmi160.class);
 			acc.configure()
 				.odr(OutputDataRate.ODR_50_HZ)
 				.range(AccelerometerBosch.AccRange.AR_2G)
 				.commit();
 
+			// get and configure Bosch accelerometer
+			AccelerometerBosch accBosch = board.getModule(AccelerometerBosch.class);
+			final NoMotionDataProducer noMotion = accBosch.motion(NoMotionDataProducer.class);
+			noMotion.configure()
+				.duration(10000)
+				.threshold(0.1f)
+				.commit();
+
+			// data route for Bosch accelerometer
+			noMotion.addRouteAsync(new RouteBuilder() {
+				@Override
+				public void configure(RouteComponent source) {
+					source.stream(new Subscriber() {
+						@Override
+						public void apply(Data data, Object... env) {
+							Log.i("MainActivity", "No motion detected");
+
+							// write to db that no motion was detected
+							// value 1 for "no motion"
+							// parameter 1 is motion detection
+							saveData(1, 1f);
+
+						}
+					});
+				}
+			}).continueWith(new Continuation<Route, Void>() {
+				@Override
+				public Void then(Task<Route> task) throws Exception {
+					noMotion.start();
+					accBosch.start();
+					return null;
+				}
+			});
+
+
+			// data route for BMI160 accelerometer
 			return acc.acceleration().addRouteAsync(new RouteBuilder() {
 				@Override
 				public void configure(RouteComponent source) {
@@ -104,6 +146,7 @@ public class SensorService {
 							}
 							evaluatePosition(x);
 
+							// parameter 5 is acceleration x axis
 							saveData(5, x);
 
 							List<Value> valueList = dbValues.valueDao().getAll();
