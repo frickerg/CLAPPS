@@ -20,5 +20,4 @@
 		<activity android:name=".activites.TipDetailActivity" />
 		<activity android:name=".activites.ExerciseDetailActivity" />
 	</application>
-
 </manifest>
