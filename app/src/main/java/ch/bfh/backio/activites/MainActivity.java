@@ -15,6 +15,7 @@ import ch.bfh.backio.R;
 import ch.bfh.backio.fragments.SensorFragment;
 import ch.bfh.backio.fragments.AdvisorFragment;
 import ch.bfh.backio.fragments.DiaryFragment;
+import ch.bfh.backio.services.SensorService;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
@@ -32,8 +33,8 @@ import static ch.bfh.backio.R.drawable.ic_bluetooth_green_24dp;
 import static ch.bfh.backio.R.id.*;
 
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
-	public static final int REQUEST_START_APP = 1;
-	private BtleService.LocalBinder serviceBinder;
+	private static final int REQUEST_START_APP = 1;
+	private static BtleService.LocalBinder serviceBinder;
 	private MetaWearBoard metawear;
 
 	@Override
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
+		getApplicationContext().bindService(new Intent(this, SensorService.class), this, BIND_AUTO_CREATE);
 
 		Context context = MainActivity.this;
 		findViewById(btn_diary).setOnClickListener(v -> {
@@ -48,8 +50,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new DiaryFragment()).commit();
-			int id = ic_import_contacts_green_24dp;
-			setButton((ImageButton) findViewById(btn_diary_image), id);
+			setButton(findViewById(btn_diary_image), ic_import_contacts_green_24dp);
 		});
 
 		findViewById(R.id.btn_tips).setOnClickListener((v -> {
@@ -57,8 +58,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new AdvisorFragment()).commit();
-			int id = ic_content_paste_green_24dp;
-			setButton((ImageButton) findViewById(btn_tips_image), id);
+			setButton(findViewById(btn_tips_image), ic_content_paste_green_24dp);
 		}));
 
 		findViewById(R.id.btn_sensor).setOnClickListener((v -> {
@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new SensorFragment()).commit();
-			int id = ic_bluetooth_green_24dp;
-			setButton((ImageButton) findViewById(btn_sensor_image), id);
+			setButton(findViewById(btn_sensor_image), ic_bluetooth_green_24dp);
 		}));
 
 		findViewById(R.id.btn_home).setOnClickListener((v -> {
@@ -75,8 +74,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new HomeFragment()).commit();
-			int id = ic_home_green_24dp;
-			setButton((ImageButton) findViewById(btn_home_image), id);
+			setButton(findViewById(btn_home_image), ic_home_green_24dp);
 		}));
 
 
@@ -85,8 +83,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
-		///< Unbind the service when the activity is destroyed
+		// Unbind the service when the activity is destroyed
 		getApplicationContext().unbindService(this);
 	}
 
@@ -95,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		switch (requestCode) {
 			case REQUEST_START_APP:
 				//((BleScannerFagment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
-
 				break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
@@ -103,21 +99,19 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 
 	public void setButton(ImageButton clickedButton, int newImage) {
-
-		ImageButton btnDiary = (ImageButton) findViewById(btn_diary_image);
+		ImageButton btnDiary = findViewById(btn_diary_image);
 		btnDiary.setImageResource(ic_import_contacts_black_24dp);
 
-		ImageButton btnHome = (ImageButton) findViewById(R.id.btn_home_image);
+		ImageButton btnHome = findViewById(R.id.btn_home_image);
 		btnHome.setImageResource(ic_home_black_24dp);
 
-		ImageButton btnSensor = (ImageButton) findViewById(R.id.btn_sensor_image);
+		ImageButton btnSensor = findViewById(R.id.btn_sensor_image);
 		btnSensor.setImageResource(ic_bluetooth_black_24dp);
 
-		ImageButton btnTips = (ImageButton) findViewById(R.id.btn_tips_image);
+		ImageButton btnTips = findViewById(R.id.btn_tips_image);
 		btnTips.setImageResource(ic_content_paste_black_24dp);
 
 		clickedButton.setImageResource(newImage);
-
 	}
 
 	@Override
@@ -168,5 +162,4 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	public static Task<Void> reconnect(final MetaWearBoard board) {
 		return board.connectAsync().continueWithTask(task -> task.isFaulted() ? reconnect(board) : task);
 	}
-
 }

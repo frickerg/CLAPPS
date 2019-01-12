@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import ch.bfh.backio.fragments.DeviceSetupActivityFragment;
 import ch.bfh.backio.R;
+import ch.bfh.backio.services.SensorService;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
 import ch.bfh.backio.fragments.DeviceSetupActivityFragment.FragmentSettings;
@@ -83,12 +84,9 @@ public class DeviceSetupActivity extends AppCompatActivity implements ServiceCon
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_device_setup);
-		Toolbar toolbar = findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-
-		btDevice = getIntent().getParcelableExtra(EXTRA_BT_DEVICE);
-		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
+		Intent intent = new Intent(DeviceSetupActivity.this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
 	}
 
 	@Override

@@ -1,12 +1,7 @@
 package ch.bfh.backio.services;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.util.Log;
 import bolts.Continuation;
 import bolts.Task;
@@ -27,54 +22,38 @@ import com.mbientlab.metawear.module.Led;
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
-public class SensorService implements ServiceConnection {
-
-	private final String SENSOR_MAC_ADDRESS_STICK_ON = "ED:F4:81:B2:78:47";
-	//private final String SENSOR_MAC_ADDRESS_CLIP_ON = "C6:9B:12:3C:59:02";
-
-
-	private BtleService.LocalBinder serviceBinder;
-	private Context context;
-	private MetaWearBoard board;
-	private Led led;
-	private AccelerometerBmi160 acc;
+public abstract class SensorService {
+	private static Context context;
+	private static MetaWearBoard board;
+	private static Led led;
+	private static AccelerometerBmi160 acc;
 	// private popaDatabase database;
 
 	//Posture evaluation
-	private int evaluateCounter = 0;
-	private boolean initPosture = true;
-	private float initX;
-	private float xTreshold;
+	private static int evaluateCounter = 0;
+	private static boolean initPosture = true;
+	private static float initX;
+	private static float xTreshold;
 
-	public SensorService(Context ctxt){
-		this.context = ctxt;
+	public static void setService(Context ctxt) {
+		context = ctxt;
 		// database = popaDatabase.getDatabase(context);
-		context.bindService(new Intent(context, BtleService.class), this, Context.BIND_AUTO_CREATE);
-		context.startService(new Intent(context, BtleService.class));
-	}
 
-	@Override
-	public void onServiceConnected(ComponentName name, IBinder service) {
-		serviceBinder = (BtleService.LocalBinder) service;
-		retrieveBoard();
-	}
-
-	@Override
-	public void onServiceDisconnected(ComponentName componentName) {
+		// TODO: check if required
+		// context.bindService(new Intent(context, BtleService.class), serviceConnection, Context.BIND_AUTO_CREATE);
+		// context.startService(new Intent(context, BtleService.class));
 	}
 
 	/**
 	 * Tries to build up a connection to the given MAC-Address of the mbientlab sensor via Bluetooth.
 	 * When the connection is open, the gyroscope send with a frequency of 200 Hz data of the sensor.
 	 */
-	public void retrieveBoard() {
-		final BluetoothManager btManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
-		final BluetoothDevice remoteDevice = btManager.getAdapter().getRemoteDevice(SENSOR_MAC_ADDRESS_STICK_ON);
+	public static MetaWearBoard retrieveBoard(BluetoothDevice btDevice, BtleService.LocalBinder serviceBinder) {
+		//final BluetoothManager btManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
 
-		board = serviceBinder.getMetaWearBoard(remoteDevice);
-
+		// the other one is in MainActivity and should absolutely stay there!
+		board = serviceBinder.getMetaWearBoard(btDevice);
 		board.connectAsync().onSuccessTask(task -> {
-
 			acc = board.getModule(AccelerometerBmi160.class);
 			acc.configure()
 				.odr(OutputDataRate.ODR_50_HZ)
@@ -93,7 +72,7 @@ public class SensorService implements ServiceConnection {
 
 							Log.d("SensorData: ", "X: " + x + " , Timestamp: " + ts);
 
-							if(initPosture){
+							if (initPosture) {
 								initializePosture(x);
 							}
 							evaluatePosition(x);
@@ -105,7 +84,7 @@ public class SensorService implements ServiceConnection {
 		}).continueWith(new Continuation<Route, Void>() {
 			@Override
 			public Void then(Task<Route> task) throws Exception {
-				if(task.isFaulted()){
+				if (task.isFaulted()) {
 					Log.d("SensorService: ", "Failed to connect");
 					return null;
 				} else {
@@ -117,12 +96,13 @@ public class SensorService implements ServiceConnection {
 				return null;
 			}
 		});
+		return board;
 	}
 
 	/**
 	 * Close the connection to the mbientlab Sensor
 	 */
-	public void disconnectSensor(){
+	public static void disconnectSensor() {
 		board.disconnectAsync().continueWith(task -> {
 			Log.d("SensorService: ", "Disconnected");
 			return null;
@@ -132,7 +112,7 @@ public class SensorService implements ServiceConnection {
 	/**
 	 * Gets the Led Module from the sensor and lights up green 3 times.
 	 */
-	private void playLed(){
+	private static void playLed() {
 		led = board.getModule(Led.class);
 		led.editPattern(Led.Color.GREEN);
 		led.play();
@@ -141,12 +121,12 @@ public class SensorService implements ServiceConnection {
 	/**
 	 * This method evaluates on every reaction of the sensor if the position changed by more than 25%.
 	 */
-	private void evaluatePosition(float x){
-		if(evaluateCounter == 300){
+	private static void evaluatePosition(float x) {
+		if (evaluateCounter == 300) {
 			vibrate();
 			evaluateCounter = 0;
 		} else {
-			if(x < (x - xTreshold)){
+			if (x < (x - xTreshold)) {
 				evaluateCounter++;
 			}
 		}
@@ -154,9 +134,10 @@ public class SensorService implements ServiceConnection {
 
 	/**
 	 * Initializes the posture of the patient with the x axis.
+	 *
 	 * @param x - X-Axis
 	 */
-	private void initializePosture(float x){
+	private static void initializePosture(float x) {
 		initPosture = false;
 		initX = x;
 		xTreshold = (initX / 100) * 25;
@@ -165,17 +146,18 @@ public class SensorService implements ServiceConnection {
 	/**
 	 * Vibrate the board.
 	 */
-	private void vibrate(){
+	private static void vibrate() {
 		board.getModule(Haptic.class).startBuzzer((short) 500);
 	}
 
 	/**
 	 * On every sensor reaction the persist method hands the data to the DBController to persist the data in the RPL.
 	 *
-	 * @param x - X-Axis
+	 * @param x         - X-Axis
 	 * @param timestamp - Timestamp of the recorded data
 	 */
-	/*private void persist(float x, String timestamp){
+	private void persist(float x, String timestamp) {
+		/*
 		boolean goodPosture;
 
 		if(x < (x - xTreshold)){
@@ -191,5 +173,6 @@ public class SensorService implements ServiceConnection {
 			pd.setPosture(goodPosture);
 			database.daoAccess().insertPostureData(pd);
 		}).start();
-	}*/
+		*/
+	}
 }

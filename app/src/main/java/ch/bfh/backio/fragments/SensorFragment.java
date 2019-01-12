@@ -15,20 +15,4 @@ public class SensorFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_sensor, container, false);
 	}
-
-
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		final Button sensorConnectButton = getView().findViewById(R.id.btn_sensor_connect);
-
-		sensorConnectButton.setOnClickListener((v -> {
-
-			// initialize new sensor object
-			// use getActivity instead of this
-			SensorService metaSensor = new SensorService(getActivity());
-
-			// metaSensor.disconnectSensor();
-
-		} ));
-	}
 }
