@@ -43,12 +43,12 @@
 				android:textSize="20sp"
 				android:visibility="visible" />
 
-			<ImageButton
+			<ImageView
 				android:id="@+id/img_posture"
 				android:layout_width="match_parent"
 				android:layout_height="195dp"
 				android:scaleType="fitCenter"
-				app:srcCompat="@drawable/haltung_gut" />
+				android:layout_weight="1" android:src="@drawable/haltung_posa_to_posb"/>
 		</LinearLayout>
 
 		<View
