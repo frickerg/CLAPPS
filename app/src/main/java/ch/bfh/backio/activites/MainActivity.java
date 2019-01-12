@@ -37,8 +37,14 @@ import static ch.bfh.backio.R.id.*;
  * The Class MainActivity.
  */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
+	
+	/** The service binder. */
 	private static BtleService.LocalBinder serviceBinder;
+	
+	/** The metawear. */
 	private MetaWearBoard metawear;
+	
+	/** The sensor service. */
 	private SensorService sensorService;
 
 	/**
@@ -99,6 +105,12 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		getApplicationContext().unbindService(this);
 	}
 
+	/**
+	 * Sets the button.
+	 *
+	 * @param clickedButton the clicked button
+	 * @param newImage the new image
+	 */
 	private void setButton(ImageButton clickedButton, int newImage) {
 		ImageButton btnDiary = findViewById(btn_diary_image);
 		btnDiary.setImageResource(ic_import_contacts_black_24dp);
@@ -180,6 +192,11 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		// TODO: write disconnect handling method
 	}
 
+	/**
+	 * Creates the connect dialog.
+	 *
+	 * @return the progress dialog
+	 */
 	private ProgressDialog createConnectDialog() {
 		ProgressDialog connectDialog = new ProgressDialog(this);
 		connectDialog.setTitle(getString(R.string.title_connecting));
@@ -191,6 +208,12 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		return connectDialog;
 	}
 
+	/**
+	 * Reconnect.
+	 *
+	 * @param board the board
+	 * @return the task
+	 */
 	private static Task<Void> reconnect(final MetaWearBoard board) {
 		return board.connectAsync().continueWithTask(task -> task.isFaulted() ? reconnect(board) : task);
 	}

@@ -26,10 +26,13 @@ import java.util.List;
 
 import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestamp;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
 public class SensorService {
+	
+	/** The board. */
 	private MetaWearBoard board;
 	
 	/** The led. */
@@ -38,9 +41,11 @@ public class SensorService {
 	/** The acc. */
 	private AccelerometerBmi160 acc;
 
+	/** The db values. */
 	// initialize database for sensor values
 	private AppDatabase dbValues;
 
+	/** The evaluate counter. */
 	//Posture evaluation
 	private int evaluateCounter = 0;
 	
@@ -53,6 +58,11 @@ public class SensorService {
 	/** The x treshold. */
 	private float xTreshold;
 
+	/**
+	 * Instantiates a new sensor service.
+	 *
+	 * @param ctxt the ctxt
+	 */
 	public SensorService(Context ctxt) {
 		dbValues = AppDatabase.getAppDatabase(ctxt);
 	}
@@ -60,6 +70,10 @@ public class SensorService {
 	/**
 	 * Tries to build up a connection to the given MAC-Address of the mbientlab sensor via Bluetooth.
 	 * When the connection is open, the gyroscope send with a frequency of 200 Hz data of the sensor.
+	 *
+	 * @param btDevice the bt device
+	 * @param serviceBinder the service binder
+	 * @return the meta wear board
 	 */
 	public MetaWearBoard retrieveBoard(BluetoothDevice btDevice, BtleService.LocalBinder serviceBinder) {
 		//final BluetoothManager btManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
