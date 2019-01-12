@@ -10,6 +10,9 @@ import android.os.IBinder;
 import android.util.Log;
 import bolts.Continuation;
 import bolts.Task;
+import ch.bfh.backio.services.persistence.database.AppDatabase;
+import ch.bfh.backio.services.persistence.entity.Value;
+import ch.bfh.backio.services.persistence.utils.DatabaseInitializer;
 import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.Route;
@@ -23,6 +26,12 @@ import com.mbientlab.metawear.module.AccelerometerBmi160.OutputDataRate;
 import com.mbientlab.metawear.module.AccelerometerBosch;
 import com.mbientlab.metawear.module.Haptic;
 import com.mbientlab.metawear.module.Led;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestamp;
 
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
@@ -38,7 +47,9 @@ public class SensorService implements ServiceConnection {
 	private MetaWearBoard board;
 	private Led led;
 	private AccelerometerBmi160 acc;
-	// private popaDatabase database;
+
+	// initialize database for sensor values
+	private AppDatabase dbValues;
 
 	//Posture evaluation
 	private int evaluateCounter = 0;
@@ -48,7 +59,8 @@ public class SensorService implements ServiceConnection {
 
 	public SensorService(Context ctxt){
 		this.context = ctxt;
-		// database = popaDatabase.getDatabase(context);
+		dbValues = AppDatabase.getAppDatabase(context);
+
 		context.bindService(new Intent(context, BtleService.class), this, Context.BIND_AUTO_CREATE);
 		context.startService(new Intent(context, BtleService.class));
 	}
@@ -97,7 +109,11 @@ public class SensorService implements ServiceConnection {
 								initializePosture(x);
 							}
 							evaluatePosition(x);
-							//persist(x, ts);
+
+							saveData(5, x);
+
+							List<Value> valueList = dbValues.valueDao().getAll();
+							Log.d("DBData: ", "Rows Count: " + valueList.size());
 						}
 					});
 				}
@@ -175,21 +191,22 @@ public class SensorService implements ServiceConnection {
 	 * @param x - X-Axis
 	 * @param timestamp - Timestamp of the recorded data
 	 */
-	/*private void persist(float x, String timestamp){
+	private void saveData(int parameter, float value){
 		boolean goodPosture;
 
-		if(x < (x - xTreshold)){
+		if(value < (value - xTreshold)){
 			goodPosture = false;
 		} else {
 			goodPosture = true;
 		}
 
 		new Thread(() -> {
-			PostureData pd = new PostureData();
-			pd.setX(x);
-			pd.setTimestamp(Calendar.getInstance().getTime());
-			pd.setPosture(goodPosture);
-			database.daoAccess().insertPostureData(pd);
+			Value newValue = new Value();
+			newValue.setParameter(parameter);
+			newValue.setValue(value);
+			newValue.setDatetime(dateToTimestamp(new Date()));
+			// pd.setPosture(goodPosture);
+			dbValues.valueDao().insertAll(newValue);
 		}).start();
-	}*/
+	}
 }

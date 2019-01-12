@@ -15,6 +15,8 @@ import ch.bfh.backio.R;
 import ch.bfh.backio.fragments.SensorFragment;
 import ch.bfh.backio.fragments.AdvisorFragment;
 import ch.bfh.backio.fragments.DiaryFragment;
+import ch.bfh.backio.services.persistence.database.AppDatabase;
+import ch.bfh.backio.services.persistence.utils.DatabaseInitializer;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
+
+
+
 
 		Context context = MainActivity.this;
 		findViewById(btn_diary).setOnClickListener(v -> {
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			ft.replace(android.R.id.content, new HomeFragment()).commit();
 			int id = ic_home_green_24dp;
 			setButton((ImageButton) findViewById(btn_home_image), id);
+			//DatabaseInitializer.populateAsync(AppDatabase.getAppDatabase(this));
 		}));
 
 
@@ -94,8 +100,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 			case REQUEST_START_APP:
-				//((BleScannerFagment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
-
+				//((BleScannerFragment) getFragmentManager().findFragmentById(R.id.scanner_fragment)).startBleScan();
 				break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
