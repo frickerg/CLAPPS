@@ -33,10 +33,9 @@ import static ch.bfh.backio.R.drawable.ic_bluetooth_green_24dp;
 import static ch.bfh.backio.R.id.*;
 
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
-	private static final int REQUEST_START_APP = 1;
-
 	private static BtleService.LocalBinder serviceBinder;
 	private MetaWearBoard metawear;
+	private SensorService sensorService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
 
 		Context context = MainActivity.this;
-		SensorService.setService(context);
+		sensorService = new SensorService(context);
 
 		findViewById(btn_diary).setOnClickListener(v -> {
 			String message = "Button clicked!\nTagebuch";
@@ -79,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			setButton(findViewById(btn_home_image), ic_home_green_24dp);
 			//DatabaseInitializer.populateAsync(AppDatabase.getAppDatabase(this));
 		}));
-
-
 	}
 
 	@Override
@@ -130,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 				return task;
 			}).onSuccessTask(task -> {
 			System.out.println("success task");
-			metawear = SensorService.retrieveBoard(device, serviceBinder);
+			metawear = sensorService.retrieveBoard(device, serviceBinder);
 			return task;
 		});
 	}
@@ -156,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		return connectDialog;
 	}
 
-	protected static Task<Void> reconnect(final MetaWearBoard board) {
+	private static Task<Void> reconnect(final MetaWearBoard board) {
 		return board.connectAsync().continueWithTask(task -> task.isFaulted() ? reconnect(board) : task);
 	}
 }

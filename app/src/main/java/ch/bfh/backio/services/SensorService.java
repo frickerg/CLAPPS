@@ -29,35 +29,29 @@ import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestam
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
-public abstract class SensorService {
-	private static Context context;
-	private static MetaWearBoard board;
-	private static Led led;
-	private static AccelerometerBmi160 acc;
+public class SensorService {
+	private MetaWearBoard board;
+	private Led led;
+	private AccelerometerBmi160 acc;
 
 	// initialize database for sensor values
-	private static AppDatabase dbValues;
+	private AppDatabase dbValues;
 
 	//Posture evaluation
-	private static int evaluateCounter = 0;
-	private static boolean initPosture = true;
-	private static float initX;
-	private static float xTreshold;
+	private int evaluateCounter = 0;
+	private boolean initPosture = true;
+	private float initX;
+	private float xTreshold;
 
-	public static void setService(Context ctxt) {
-		context = ctxt;
+	public SensorService(Context ctxt) {
 		dbValues = AppDatabase.getAppDatabase(ctxt);
-
-		// TODO: check if required
-		// context.bindService(new Intent(context, BtleService.class), serviceConnection, Context.BIND_AUTO_CREATE);
-		// context.startService(new Intent(context, BtleService.class));
 	}
 
 	/**
 	 * Tries to build up a connection to the given MAC-Address of the mbientlab sensor via Bluetooth.
 	 * When the connection is open, the gyroscope send with a frequency of 200 Hz data of the sensor.
 	 */
-	public static MetaWearBoard retrieveBoard(BluetoothDevice btDevice, BtleService.LocalBinder serviceBinder) {
+	public MetaWearBoard retrieveBoard(BluetoothDevice btDevice, BtleService.LocalBinder serviceBinder) {
 		//final BluetoothManager btManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
 
 		// the other one is in MainActivity and should absolutely stay there!
@@ -115,7 +109,7 @@ public abstract class SensorService {
 	/**
 	 * Close the connection to the mbientlab Sensor
 	 */
-	public static void disconnectSensor() {
+	public void disconnectSensor() {
 		board.disconnectAsync().continueWith(task -> {
 			Log.d("SensorService: ", "Disconnected");
 			return null;
@@ -125,7 +119,7 @@ public abstract class SensorService {
 	/**
 	 * Gets the Led Module from the sensor and lights up green 3 times.
 	 */
-	private static void playLed() {
+	private void playLed() {
 		led = board.getModule(Led.class);
 		led.editPattern(Led.Color.GREEN);
 		led.play();
@@ -134,7 +128,7 @@ public abstract class SensorService {
 	/**
 	 * This method evaluates on every reaction of the sensor if the position changed by more than 25%.
 	 */
-	private static void evaluatePosition(float x) {
+	private void evaluatePosition(float x) {
 		if (evaluateCounter == 300) {
 			vibrate();
 			evaluateCounter = 0;
@@ -150,7 +144,7 @@ public abstract class SensorService {
 	 *
 	 * @param x - X-Axis
 	 */
-	private static void initializePosture(float x) {
+	private void initializePosture(float x) {
 		initPosture = false;
 		initX = x;
 		xTreshold = (initX / 100) * 25;
@@ -159,7 +153,7 @@ public abstract class SensorService {
 	/**
 	 * Vibrate the board.
 	 */
-	private static void vibrate() {
+	private void vibrate() {
 		board.getModule(Haptic.class).startBuzzer((short) 500);
 	}
 
@@ -169,7 +163,7 @@ public abstract class SensorService {
 	 * @param parameter - The parameter
 	 * @param value     - The value
 	 */
-	private static void saveData(int parameter, float value) {
+	private void saveData(int parameter, float value) {
 		boolean goodPosture;
 
 		if (value < (value - xTreshold)) {

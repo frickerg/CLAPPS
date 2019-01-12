@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import ch.bfh.backio.R;
-import ch.bfh.backio.services.SensorService;
 
 public class HomeFragment extends Fragment {
 	@Override
@@ -20,13 +19,7 @@ public class HomeFragment extends Fragment {
 		final Button sensorConnectButton = getView().findViewById(R.id.btn_connectSensor);
 
 		sensorConnectButton.setOnClickListener((v -> {
-
-			// initialize new sensor object
-			// use getActivity instead of this
-			SensorService.setService(getActivity());
-
-			// metaSensor.disconnectSensor();
-
+			//TODO: connection required here?
 		} ));
 	}
 
