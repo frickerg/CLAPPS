@@ -34,6 +34,7 @@ import static ch.bfh.backio.R.id.*;
 
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
 	private static final int REQUEST_START_APP = 1;
+
 	private static BtleService.LocalBinder serviceBinder;
 	private MetaWearBoard metawear;
 
@@ -125,9 +126,6 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			.continueWith(task -> {
 				if (!task.isCancelled()) {
 					runOnUiThread(connectDialog::dismiss);
-					Intent navActivityIntent = new Intent(MainActivity.this, DeviceSetupActivity.class);
-					navActivityIntent.putExtra(DeviceSetupActivity.EXTRA_BT_DEVICE, device);
-					startActivityForResult(navActivityIntent, REQUEST_START_APP);
 				}
 				return task;
 			}).onSuccessTask(task -> {
