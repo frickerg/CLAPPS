@@ -11,7 +11,7 @@ import ch.bfh.backio.R;
 /**
  * The Class SensorFragment.
  */
-public class SensorFragment extends Fragment {
+public class SensorConnectedFragment extends Fragment {
 	/**
 	 * On create view.
 	 *
@@ -22,6 +22,6 @@ public class SensorFragment extends Fragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_sensor, container, false);
+		return inflater.inflate(R.layout.fragment_sensor_connected, container, false);
 	}
 }

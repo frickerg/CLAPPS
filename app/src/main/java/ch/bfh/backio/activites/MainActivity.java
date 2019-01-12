@@ -10,11 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import bolts.Task;
-import ch.bfh.backio.fragments.HomeFragment;
+import ch.bfh.backio.fragments.*;
 import ch.bfh.backio.R;
-import ch.bfh.backio.fragments.SensorFragment;
-import ch.bfh.backio.fragments.AdvisorFragment;
-import ch.bfh.backio.fragments.DiaryFragment;
 import ch.bfh.backio.services.SensorService;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
@@ -37,13 +34,13 @@ import static ch.bfh.backio.R.id.*;
  * The Class MainActivity.
  */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
-	
+
 	/** The service binder. */
 	private static BtleService.LocalBinder serviceBinder;
-	
+
 	/** The metawear. */
 	private MetaWearBoard metawear;
-	
+
 	/** The sensor service. */
 	private SensorService sensorService;
 
@@ -81,7 +78,11 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			String message = "Button clicked!\nSensor";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			ft.replace(android.R.id.content, new SensorFragment()).commit();
+			if(isMetawearConnected()) {
+				ft.replace(android.R.id.content, new SensorConnectedFragment()).commit();
+			} else {
+				ft.replace(android.R.id.content, new SensorFragment()).commit();
+			}
 			setButton(findViewById(btn_sensor_image), ic_bluetooth_green_24dp);
 		}));
 
@@ -167,6 +168,10 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			}).onSuccessTask(task -> {
 			System.out.println("success task");
 			metawear = sensorService.retrieveBoard(device, serviceBinder);
+
+			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			ft.replace(android.R.id.content, new SensorConnectedFragment()).commit();
+
 			return task;
 		});
 	}
@@ -216,5 +221,9 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	 */
 	private static Task<Void> reconnect(final MetaWearBoard board) {
 		return board.connectAsync().continueWithTask(task -> task.isFaulted() ? reconnect(board) : task);
+	}
+
+	private boolean isMetawearConnected() {
+		return (metawear != null && metawear.isConnected());
 	}
 }
