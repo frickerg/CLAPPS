@@ -1,18 +1,12 @@
 package ch.bfh.backio.services;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.util.Log;
 import bolts.Continuation;
 import bolts.Task;
 import ch.bfh.backio.services.persistence.database.AppDatabase;
 import ch.bfh.backio.services.persistence.entity.Value;
-import ch.bfh.backio.services.persistence.utils.DatabaseInitializer;
 import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.Route;
@@ -27,66 +21,66 @@ import com.mbientlab.metawear.module.AccelerometerBosch;
 import com.mbientlab.metawear.module.Haptic;
 import com.mbientlab.metawear.module.Led;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestamp;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
-public class SensorService implements ServiceConnection {
-
-	private final String SENSOR_MAC_ADDRESS_STICK_ON = "ED:F4:81:B2:78:47";
-	//private final String SENSOR_MAC_ADDRESS_CLIP_ON = "C6:9B:12:3C:59:02";
-
-
-	private BtleService.LocalBinder serviceBinder;
-	private Context context;
+public class SensorService {
+	
+	/** The board. */
 	private MetaWearBoard board;
+	
+	/** The led. */
 	private Led led;
+	
+	/** The acc. */
 	private AccelerometerBmi160 acc;
 
+	/** The db values. */
 	// initialize database for sensor values
 	private AppDatabase dbValues;
 
+	/** The evaluate counter. */
 	//Posture evaluation
 	private int evaluateCounter = 0;
+	
+	/** The init posture. */
 	private boolean initPosture = true;
+	
+	/** The init X. */
 	private float initX;
+	
+	/** The x treshold. */
 	private float xTreshold;
 
-	public SensorService(Context ctxt){
-		this.context = ctxt;
-		dbValues = AppDatabase.getAppDatabase(context);
-
-		context.bindService(new Intent(context, BtleService.class), this, Context.BIND_AUTO_CREATE);
-		context.startService(new Intent(context, BtleService.class));
-	}
-
-	@Override
-	public void onServiceConnected(ComponentName name, IBinder service) {
-		serviceBinder = (BtleService.LocalBinder) service;
-		retrieveBoard();
-	}
-
-	@Override
-	public void onServiceDisconnected(ComponentName componentName) {
+	/**
+	 * Instantiates a new sensor service.
+	 *
+	 * @param ctxt the ctxt
+	 */
+	public SensorService(Context ctxt) {
+		dbValues = AppDatabase.getAppDatabase(ctxt);
 	}
 
 	/**
 	 * Tries to build up a connection to the given MAC-Address of the mbientlab sensor via Bluetooth.
 	 * When the connection is open, the gyroscope send with a frequency of 200 Hz data of the sensor.
+	 *
+	 * @param btDevice the bt device
+	 * @param serviceBinder the service binder
+	 * @return the meta wear board
 	 */
-	public void retrieveBoard() {
-		final BluetoothManager btManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
-		final BluetoothDevice remoteDevice = btManager.getAdapter().getRemoteDevice(SENSOR_MAC_ADDRESS_STICK_ON);
+	public MetaWearBoard retrieveBoard(BluetoothDevice btDevice, BtleService.LocalBinder serviceBinder) {
+		//final BluetoothManager btManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
 
-		board = serviceBinder.getMetaWearBoard(remoteDevice);
-
+		// the other one is in MainActivity and should absolutely stay there!
+		board = serviceBinder.getMetaWearBoard(btDevice);
 		board.connectAsync().onSuccessTask(task -> {
-
 			acc = board.getModule(AccelerometerBmi160.class);
 			acc.configure()
 				.odr(OutputDataRate.ODR_50_HZ)
@@ -105,7 +99,7 @@ public class SensorService implements ServiceConnection {
 
 							Log.d("SensorData: ", "X: " + x + " , Timestamp: " + ts);
 
-							if(initPosture){
+							if (initPosture) {
 								initializePosture(x);
 							}
 							evaluatePosition(x);
@@ -121,7 +115,7 @@ public class SensorService implements ServiceConnection {
 		}).continueWith(new Continuation<Route, Void>() {
 			@Override
 			public Void then(Task<Route> task) throws Exception {
-				if(task.isFaulted()){
+				if (task.isFaulted()) {
 					Log.d("SensorService: ", "Failed to connect");
 					return null;
 				} else {
@@ -133,12 +127,13 @@ public class SensorService implements ServiceConnection {
 				return null;
 			}
 		});
+		return board;
 	}
 
 	/**
-	 * Close the connection to the mbientlab Sensor
+	 * Close the connection to the mbientlab Sensor.
 	 */
-	public void disconnectSensor(){
+	public void disconnectSensor() {
 		board.disconnectAsync().continueWith(task -> {
 			Log.d("SensorService: ", "Disconnected");
 			return null;
@@ -148,7 +143,7 @@ public class SensorService implements ServiceConnection {
 	/**
 	 * Gets the Led Module from the sensor and lights up green 3 times.
 	 */
-	private void playLed(){
+	private void playLed() {
 		led = board.getModule(Led.class);
 		led.editPattern(Led.Color.GREEN);
 		led.play();
@@ -156,13 +151,15 @@ public class SensorService implements ServiceConnection {
 
 	/**
 	 * This method evaluates on every reaction of the sensor if the position changed by more than 25%.
+	 *
+	 * @param x the x
 	 */
-	private void evaluatePosition(float x){
-		if(evaluateCounter == 300){
+	private void evaluatePosition(float x) {
+		if (evaluateCounter == 300) {
 			vibrate();
 			evaluateCounter = 0;
 		} else {
-			if(x < (x - xTreshold)){
+			if (x < (x - xTreshold)) {
 				evaluateCounter++;
 			}
 		}
@@ -170,9 +167,10 @@ public class SensorService implements ServiceConnection {
 
 	/**
 	 * Initializes the posture of the patient with the x axis.
+	 *
 	 * @param x - X-Axis
 	 */
-	private void initializePosture(float x){
+	private void initializePosture(float x) {
 		initPosture = false;
 		initX = x;
 		xTreshold = (initX / 100) * 25;
@@ -181,20 +179,20 @@ public class SensorService implements ServiceConnection {
 	/**
 	 * Vibrate the board.
 	 */
-	private void vibrate(){
+	private void vibrate() {
 		board.getModule(Haptic.class).startBuzzer((short) 500);
 	}
 
 	/**
 	 * On every sensor reaction the persist method hands the data to the DBController to persist the data in the RPL.
 	 *
-	 * @param x - X-Axis
-	 * @param timestamp - Timestamp of the recorded data
+	 * @param parameter - The parameter
+	 * @param value     - The value
 	 */
-	private void saveData(int parameter, float value){
+	private void saveData(int parameter, float value) {
 		boolean goodPosture;
 
-		if(value < (value - xTreshold)){
+		if (value < (value - xTreshold)) {
 			goodPosture = false;
 		} else {
 			goodPosture = true;

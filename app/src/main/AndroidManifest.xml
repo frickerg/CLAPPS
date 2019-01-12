@@ -19,12 +19,5 @@
 		</activity>
 		<activity android:name=".activites.TipDetailActivity" />
 		<activity android:name=".activites.ExerciseDetailActivity" />
-		<activity
-			android:name=".activites.DeviceSetupActivity"
-			android:label="@string/app_name"
-			android:theme="@style/AppTheme.NoActionBar">
-		</activity>
-
 	</application>
-
 </manifest>

@@ -7,13 +7,29 @@ import android.content.Context;
 import ch.bfh.backio.services.persistence.dao.ValueDao;
 import ch.bfh.backio.services.persistence.entity.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AppDatabase.
+ */
 @Database(entities = {Value.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
+	/** The instance. */
 	private static AppDatabase INSTANCE;
 
+	/**
+	 * Value dao.
+	 *
+	 * @return the value dao
+	 */
 	public abstract ValueDao valueDao();
 
+	/**
+	 * Gets the app database.
+	 *
+	 * @param context the context
+	 * @return the app database
+	 */
 	public static AppDatabase getAppDatabase(Context context) {
 		if (INSTANCE == null) {
 			INSTANCE =
@@ -27,6 +43,9 @@ public abstract class AppDatabase extends RoomDatabase {
 		return INSTANCE;
 	}
 
+	/**
+	 * Destroy instance.
+	 */
 	public static void destroyInstance() {
 		INSTANCE = null;
 	}
