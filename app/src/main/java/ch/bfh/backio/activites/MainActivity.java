@@ -32,11 +32,20 @@ import static ch.bfh.backio.R.drawable.ic_content_paste_green_24dp;
 import static ch.bfh.backio.R.drawable.ic_bluetooth_green_24dp;
 import static ch.bfh.backio.R.id.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainActivity.
+ */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
 	private static BtleService.LocalBinder serviceBinder;
 	private MetaWearBoard metawear;
 	private SensorService sensorService;
 
+	/**
+	 * On create.
+	 *
+	 * @param savedInstanceState the saved instance state
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		}));
 	}
 
+	/**
+	 * On destroy.
+	 */
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -103,16 +115,31 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		clickedButton.setImageResource(newImage);
 	}
 
+	/**
+	 * Gets the filter service uuids.
+	 *
+	 * @return the filter service uuids
+	 */
 	@Override
 	public UUID[] getFilterServiceUuids() {
 		return new UUID[]{MetaWearBoard.METAWEAR_GATT_SERVICE};
 	}
 
+	/**
+	 * Gets the scan duration.
+	 *
+	 * @return the scan duration
+	 */
 	@Override
 	public long getScanDuration() {
 		return 10000L;
 	}
 
+	/**
+	 * On device selected.
+	 *
+	 * @param device the device
+	 */
 	@Override
 	public void onDeviceSelected(final BluetoothDevice device) {
 		final ProgressDialog connectDialog = createConnectDialog();
@@ -132,11 +159,22 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		});
 	}
 
+	/**
+	 * On service connected.
+	 *
+	 * @param name the name
+	 * @param service the service
+	 */
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		serviceBinder = (BtleService.LocalBinder) service;
 	}
 
+	/**
+	 * On service disconnected.
+	 *
+	 * @param name the name
+	 */
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
 		// TODO: write disconnect handling method

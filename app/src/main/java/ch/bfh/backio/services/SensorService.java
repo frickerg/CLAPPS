@@ -31,7 +31,11 @@ import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestam
  */
 public class SensorService {
 	private MetaWearBoard board;
+	
+	/** The led. */
 	private Led led;
+	
+	/** The acc. */
 	private AccelerometerBmi160 acc;
 
 	// initialize database for sensor values
@@ -39,8 +43,14 @@ public class SensorService {
 
 	//Posture evaluation
 	private int evaluateCounter = 0;
+	
+	/** The init posture. */
 	private boolean initPosture = true;
+	
+	/** The init X. */
 	private float initX;
+	
+	/** The x treshold. */
 	private float xTreshold;
 
 	public SensorService(Context ctxt) {
@@ -107,7 +117,7 @@ public class SensorService {
 	}
 
 	/**
-	 * Close the connection to the mbientlab Sensor
+	 * Close the connection to the mbientlab Sensor.
 	 */
 	public void disconnectSensor() {
 		board.disconnectAsync().continueWith(task -> {
@@ -127,6 +137,8 @@ public class SensorService {
 
 	/**
 	 * This method evaluates on every reaction of the sensor if the position changed by more than 25%.
+	 *
+	 * @param x the x
 	 */
 	private void evaluatePosition(float x) {
 		if (evaluateCounter == 300) {

@@ -11,15 +11,34 @@ import android.widget.Button;
 import android.widget.Toast;
 import ch.bfh.backio.R;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdvisorFragment.
+ */
 public class AdvisorFragment extends Fragment {
+	
+	/**
+	 * On create view.
+	 *
+	 * @param inflater the inflater
+	 * @param container the container
+	 * @param savedInstanceState the saved instance state
+	 * @return the view
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_advisor, container, false);
 	}
 
+	/**
+	 * On view created.
+	 *
+	 * @param view the view
+	 * @param savedInstanceState the saved instance state
+	 */
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		final Button tipButton =  getView().findViewById(R.id.btn_tip);
+		final Button tipButton = getView().findViewById(R.id.btn_tip);
 		final Button exerciseButton = getView().findViewById(R.id.btn_exercise);
 		final Button awarenessButton = getView().findViewById(R.id.btn_awarness);
 

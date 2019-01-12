@@ -16,31 +16,76 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JSONAdapter.
+ */
 public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterViewHolder> {
+	
+	/** The json data. */
 	private ArrayList<String> jsonData = new ArrayList<>();
+	
+	/** The click. */
 	private final JSONAdapterOnClickHandler click;
+	
+	/** The json list. */
 	private ArrayList<String> jsonList = new ArrayList<>();
 
+	/**
+	 * The Interface JSONAdapterOnClickHandler.
+	 */
 	public interface JSONAdapterOnClickHandler {
+		
+		/**
+		 * On click.
+		 *
+		 * @param json the json
+		 */
 		void onClick(String json);
 	}
 
+	/**
+	 * Instantiates a new JSON adapter.
+	 *
+	 * @param clickHandler the click handler
+	 */
 	public JSONAdapter(JSONAdapterOnClickHandler clickHandler) {
 		click = clickHandler;
 	}
-	public void setJSONData(String jsonData){
+
+	/**
+	 * Sets the JSON data.
+	 *
+	 * @param jsonData the new JSON data
+	 */
+	public void setJSONData(String jsonData) {
 		this.jsonData.add(jsonData);
 	}
 
+	/**
+	 * The Class JSONAdapterViewHolder.
+	 */
 	public class JSONAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+		
+		/** The json view. */
 		public final TextView jsonView;
 
+		/**
+		 * Instantiates a new JSON adapter view holder.
+		 *
+		 * @param view the view
+		 */
 		public JSONAdapterViewHolder(View view) {
 			super(view);
 			jsonView = (TextView) view.findViewById(R.id.json_view);
 			view.setOnClickListener(this);
 		}
 
+		/**
+		 * On click.
+		 *
+		 * @param v the v
+		 */
 		@Override
 		public void onClick(View v) {
 			int adapterPosition = getAdapterPosition();
@@ -49,6 +94,13 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 		}
 	}
 
+	/**
+	 * On create view holder.
+	 *
+	 * @param viewGroup the view group
+	 * @param viewType the view type
+	 * @return the JSON adapter view holder
+	 */
 	@Override
 	public JSONAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 		Context context = viewGroup.getContext();
@@ -60,19 +112,39 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 		return new JSONAdapterViewHolder(view);
 	}
 
+	/**
+	 * On bind view holder.
+	 *
+	 * @param JSONAdapterViewHolder the JSON adapter view holder
+	 * @param position the position
+	 */
 	@Override
 	public void onBindViewHolder(JSONAdapterViewHolder JSONAdapterViewHolder, int position) {
 		String jsonSelected = jsonData.get(position);
 		JSONAdapterViewHolder.jsonView.setText(jsonSelected);
 	}
 
+	/**
+	 * Gets the item count.
+	 *
+	 * @return the item count
+	 */
 	@Override
 	public int getItemCount() {
 		if (null == jsonData) return 0;
 		return jsonData.size();
 	}
 
-	public ArrayList<String> readJSON(Context context, String url, String titleJSON, String name){
+	/**
+	 * Read JSON.
+	 *
+	 * @param context the context
+	 * @param url the url
+	 * @param titleJSON the title JSON
+	 * @param name the name
+	 * @return the array list
+	 */
+	public ArrayList<String> readJSON(Context context, String url, String titleJSON, String name) {
 		String tip;
 		try {
 			InputStream is = context.getAssets().open(url);
@@ -86,13 +158,11 @@ public class JSONAdapter extends RecyclerView.Adapter<JSONAdapter.JSONAdapterVie
 			JSONObject obj = new JSONObject(tip);
 			JSONArray tipArray = obj.getJSONArray(titleJSON);
 
-			for(int i = 0; i<tipArray.length(); i++){
+			for (int i = 0; i < tipArray.length(); i++) {
 				JSONObject obj2 = tipArray.getJSONObject(i);
 				jsonList.add(obj2.getString(name));
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
+		} catch (IOException | JSONException e) {
 			e.printStackTrace();
 		}
 		return jsonList;
