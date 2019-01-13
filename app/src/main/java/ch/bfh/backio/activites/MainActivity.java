@@ -19,57 +19,29 @@ import com.mbientlab.metawear.android.BtleService;
 
 import java.util.UUID;
 
-import static ch.bfh.backio.R.drawable.ic_import_contacts_black_24dp;
-import static ch.bfh.backio.R.drawable.ic_home_black_24dp;
-import static ch.bfh.backio.R.drawable.ic_content_paste_black_24dp;
-import static ch.bfh.backio.R.drawable.ic_bluetooth_black_24dp;
-import static ch.bfh.backio.R.drawable.ic_import_contacts_green_24dp;
-import static ch.bfh.backio.R.drawable.ic_home_green_24dp;
-import static ch.bfh.backio.R.drawable.ic_content_paste_green_24dp;
-import static ch.bfh.backio.R.drawable.ic_bluetooth_green_24dp;
-import static ch.bfh.backio.R.id.*;
-
-// TODO: Auto-generated Javadoc
-
 /**
- * The Class MainActivity.
+ * TODO: The Class MainActivity.
+ *
+ * Description here...
  */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
-	
-	/** The Constant DIARY_FRAGMENT. */
+	/**
+	 * Fragment Tags which are used to prevent the MainActivity from creating too many Fragments
+	 */
 	private static final String DIARY_FRAGMENT = "DIARY_FRAGMENT";
-	
-	/** The Constant ADVISOR_FRAGMENT. */
 	private static final String ADVISOR_FRAGMENT = "ADVISOR_FRAGMENT";
-	
-	/** The Constant HOME_FRAGMENT. */
 	private static final String HOME_FRAGMENT = "HOME_FRAGMENT";
-	
-	/** The Constant SENSOR_FRAGMENT. */
 	private static final String SENSOR_FRAGMENT = "SENSOR_FRAGMENT";
-	
-	/** The Constant SENSOR_CONNECTED_FRAGMENT. */
 	private static final String SENSOR_CONNECTED_FRAGMENT = "SENSOR_CONNECTED_FRAGMENT";
 
-	/**
-	 * The service binder.
-	 */
+	private SensorServiceSingleton sensorServiceSingleton = SensorServiceSingleton.getInstance();
 	private static BtleService.LocalBinder serviceBinder;
-
-	/**
-	 * The metawear.
-	 */
 	private MetaWearBoard metawear;
 
 	/**
-	 * The sensor service.
-	 */
-	private SensorServiceSingleton sensorServiceSingleton = SensorServiceSingleton.getInstance();
-
-	/**
-	 * On create.
+	 * Called when the activity is starting.
 	 *
-	 * @param savedInstanceState the saved instance state
+	 * @param savedInstanceState Bundle in which the saved state is saved
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		Context context = MainActivity.this;
 		sensorServiceSingleton.initializeServiceWithContext(context);
 
-		findViewById(btn_diary).setOnClickListener(v -> {
+		findViewById(R.id.btn_diary).setOnClickListener(v -> {
 			DiaryFragment diaryFragment = (DiaryFragment) getFragmentManager().findFragmentByTag(DIARY_FRAGMENT);
 			if (diaryFragment == null || !diaryFragment.isVisible()) {
 				String message = "Button clicked!\nTagebuch";
@@ -88,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				ft.replace(android.R.id.content, new DiaryFragment(), DIARY_FRAGMENT).commit();
-				setButton(findViewById(btn_diary_image), ic_import_contacts_green_24dp);
+				setButton(findViewById(R.id.btn_diary_image), R.drawable.ic_import_contacts_green_24dp);
 			}
 		});
 
@@ -100,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				ft.replace(android.R.id.content, new AdvisorFragment(), ADVISOR_FRAGMENT).commit();
-				setButton(findViewById(btn_tips_image), ic_content_paste_green_24dp);
+				setButton(findViewById(R.id.btn_tips_image), R.drawable.ic_content_paste_green_24dp);
 			}
 		}));
 
@@ -121,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 				} else {
 					ft.replace(android.R.id.content, new SensorConnectedFragment(), SENSOR_CONNECTED_FRAGMENT).commit();
 				}
-				setButton(findViewById(btn_sensor_image), ic_bluetooth_green_24dp);
+				setButton(findViewById(R.id.btn_sensor_image), R.drawable.ic_bluetooth_green_24dp);
 			}
 		}));
 
@@ -133,14 +105,14 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				ft.replace(android.R.id.content, new HomeFragment(), HOME_FRAGMENT).commit();
-				setButton(findViewById(btn_home_image), ic_home_green_24dp);
+				setButton(findViewById(R.id.btn_home_image), R.drawable.ic_home_green_24dp);
 				//DatabaseInitializer.populateAsync(AppDatabase.getAppDatabase(this));
 			}
 		}));
 	}
 
 	/**
-	 * On destroy.
+	 * Perform any final cleanup before an activity is destroyed.
 	 */
 	@Override
 	public void onDestroy() {
@@ -150,31 +122,31 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 	/**
-	 * Sets the button.
+	 * TODO: Sets the button.
 	 *
 	 * @param clickedButton the clicked button
 	 * @param newImage      the new image
 	 */
 	private void setButton(ImageButton clickedButton, int newImage) {
-		ImageButton btnDiary = findViewById(btn_diary_image);
-		btnDiary.setImageResource(ic_import_contacts_black_24dp);
+		ImageButton btnDiary = findViewById(R.id.btn_diary_image);
+		btnDiary.setImageResource(R.drawable.ic_import_contacts_black_24dp);
 
 		ImageButton btnHome = findViewById(R.id.btn_home_image);
-		btnHome.setImageResource(ic_home_black_24dp);
+		btnHome.setImageResource(R.drawable.ic_home_black_24dp);
 
 		ImageButton btnSensor = findViewById(R.id.btn_sensor_image);
-		btnSensor.setImageResource(ic_bluetooth_black_24dp);
+		btnSensor.setImageResource(R.drawable.ic_bluetooth_black_24dp);
 
 		ImageButton btnTips = findViewById(R.id.btn_tips_image);
-		btnTips.setImageResource(ic_content_paste_black_24dp);
+		btnTips.setImageResource(R.drawable.ic_content_paste_black_24dp);
 
 		clickedButton.setImageResource(newImage);
 	}
 
 	/**
-	 * Gets the filter service uuids.
+	 * Retrieve an array of allowed service UUIDs.  If no filtering should be done, return null.
 	 *
-	 * @return the filter service uuids
+	 * @return Service UUIDs to scan for, null if all discovered devices should be shown
 	 */
 	@Override
 	public UUID[] getFilterServiceUuids() {
@@ -182,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 	/**
-	 * Gets the scan duration.
+	 * Value that can be returned if users don't want to set their own scan duration value.
 	 *
 	 * @return the scan duration
 	 */
@@ -192,9 +164,9 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 	/**
-	 * On device selected.
+	 * Called when the user has selected a Bluetooth device from the device list.
 	 *
-	 * @param device the device
+	 * @param device Device the user selected
 	 */
 	@Override
 	public void onDeviceSelected(final BluetoothDevice device) {
@@ -220,10 +192,11 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 	/**
-	 * On service connected.
+	 * Called when a connection to the Service has been established,
+	 * with the IBinder of the communication channel to the Service.
 	 *
-	 * @param name    the name
-	 * @param service the service
+	 * @param name    The concrete component name of the service
+	 * @param service The IBinder of the Service's communication channel
 	 */
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
@@ -231,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 	/**
-	 * On service disconnected.
+	 * Called when a connection to the Service has been lost.
 	 *
 	 * @param name the name
 	 */
@@ -241,9 +214,9 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 	/**
-	 * Creates the connect dialog.
+	 * Creates the progress dialog when connecting to the metawear device.
 	 *
-	 * @return the progress dialog
+	 * @return the created progress dialog
 	 */
 	private ProgressDialog createConnectDialog() {
 		ProgressDialog connectDialog = new ProgressDialog(this);
@@ -252,12 +225,13 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		connectDialog.setCancelable(false);
 		connectDialog.setCanceledOnTouchOutside(false);
 		connectDialog.setIndeterminate(true);
-		connectDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel), (dialogInterface, i) -> metawear.disconnectAsync());
+		connectDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel),
+			(dialogInterface, i) -> metawear.disconnectAsync());
 		return connectDialog;
 	}
 
 	/**
-	 * Reconnect.
+	 * TODO: Reconnect.
 	 *
 	 * @param board the board
 	 * @return the task
@@ -267,9 +241,9 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	}
 
 	/**
-	 * Checks if is metawear connected.
+	 * Checks if the metawear device is connected.
 	 *
-	 * @return true, if is metawear connected
+	 * @return true, if metawear is initialized and connected
 	 */
 	private boolean isMetawearConnected() {
 		return (metawear != null && metawear.isConnected());

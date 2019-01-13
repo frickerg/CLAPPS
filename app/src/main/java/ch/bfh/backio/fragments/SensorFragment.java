@@ -7,18 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import ch.bfh.backio.R;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SensorFragment.
+ * TODO: The Class SensorFragment.
+ *
+ * Description here...
  */
 public class SensorFragment extends Fragment {
 	/**
-	 * On create view.
+	 * Called to have the fragment instantiate its user interface view.
 	 *
-	 * @param inflater the inflater
-	 * @param container the container
-	 * @param savedInstanceState the saved instance state
-	 * @return the view
+	 * @param inflater           The LayoutInflater object that can be used to inflate
+	 *                           any views in the fragment,
+	 * @param container          If non-null, this is the parent view that the fragment's
+	 *                           UI should be attached to.  The fragment should not add the view itself,
+	 *                           but this can be used to generate the LayoutParams of the view.
+	 * @param savedInstanceState If non-null, this fragment is being re-constructed
+	 *                           from a previous saved state as given here.
+	 * @return Return the View for the fragment's UI, or null.
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

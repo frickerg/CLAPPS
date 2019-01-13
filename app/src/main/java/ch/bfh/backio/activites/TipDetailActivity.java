@@ -11,16 +11,17 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class TipDetailActivity.
+ * TODO: The Class TipDetailActivity.
+ *
+ * Description here...
  */
 public class TipDetailActivity extends AppCompatActivity {
 
 	/**
-	 * On create.
+	 * Called when the activity is starting.
 	 *
-	 * @param savedInstanceState the saved instance state
+	 * @param savedInstanceState Bundle in which the saved state is saved
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

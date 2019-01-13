@@ -11,19 +11,24 @@ import android.widget.Button;
 import android.widget.Toast;
 import ch.bfh.backio.R;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AdvisorFragment.
+ * TODO: The Class AdvisorFragment.
+ *
+ * Description here...
  */
 public class AdvisorFragment extends Fragment {
-	
+
 	/**
-	 * On create view.
+	 * Called to have the fragment instantiate its user interface view.
 	 *
-	 * @param inflater the inflater
-	 * @param container the container
-	 * @param savedInstanceState the saved instance state
-	 * @return the view
+	 * @param inflater           The LayoutInflater object that can be used to inflate
+	 *                           any views in the fragment,
+	 * @param container          If non-null, this is the parent view that the fragment's
+	 *                           UI should be attached to.  The fragment should not add the view itself,
+	 *                           but this can be used to generate the LayoutParams of the view.
+	 * @param savedInstanceState If non-null, this fragment is being re-constructed
+	 *                           from a previous saved state as given here.
+	 * @return Return the View for the fragment's UI, or null.
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,10 +36,15 @@ public class AdvisorFragment extends Fragment {
 	}
 
 	/**
-	 * On view created.
+	 * Called immediately after onCreateView has returned,
+	 * but before any saved state has been restored in to the view.
+	 * This gives subclasses a chance to initialize themselves
+	 * once they know their view hierarchy has been completely created.
+	 * The fragment's view hierarchy is not however attached to its parent at this point.
 	 *
-	 * @param view the view
-	 * @param savedInstanceState the saved instance state
+	 * @param view               The View returned by onCreateView
+	 * @param savedInstanceState If non-null, this fragment is being re-constructed
+	 *                           from a previous saved state as given here.
 	 */
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

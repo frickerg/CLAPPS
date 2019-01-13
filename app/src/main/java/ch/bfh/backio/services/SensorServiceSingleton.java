@@ -25,35 +25,21 @@ import java.util.List;
 
 import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestamp;
 
-// TODO: Auto-generated Javadoc
-
 /**
+ * The Class SensorServiceSingleton
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
 public class SensorServiceSingleton {
-	
-	/** The Constant instance. */
 	private static final SensorServiceSingleton instance = new SensorServiceSingleton();
-	
-	/** The board. */
+
 	private MetaWearBoard board;
-	
-	/** The device. */
-	private BluetoothDevice device;
-	
-	/** The acc. */
 	private AccelerometerBmi160 acc;
-	
-	/** The db values. */
+	private BluetoothDevice device;
+
 	private AppDatabase dbValues;
-	
-	/** The evaluate counter. */
+
 	private int evaluateCounter = 0;
-	
-	/** The init posture. */
 	private boolean initPosture = true;
-	
-	/** The x threshold. */
 	private float xThreshold;
 
 	/**
@@ -66,15 +52,15 @@ public class SensorServiceSingleton {
 	}
 
 	/**
-	 * Instantiates a new sensor service singleton.
+	 * Private Constructor Singleton Pattern.
 	 */
 	private SensorServiceSingleton() {
 	}
 
 	/**
-	 * Gets the single instance of SensorServiceSingleton.
+	 * Gets the singleton instance of SensorServiceSingleton.
 	 *
-	 * @return single instance of SensorServiceSingleton
+	 * @return singleton instance of SensorServiceSingleton
 	 */
 	public static SensorServiceSingleton getInstance() {
 		return instance;
@@ -141,7 +127,7 @@ public class SensorServiceSingleton {
 	/**
 	 * Close the connection to the mbientlab Sensor.
 	 *
-	 * @return the task
+	 * @return the asynchronous disconnect task
 	 */
 	public Task<Void> disconnectSensor() {
 		acc.stop();
@@ -223,7 +209,7 @@ public class SensorServiceSingleton {
 	}
 
 	/**
-	 * Gets the device.
+	 * TODO: Gets the device.
 	 *
 	 * @return the device
 	 */
@@ -232,7 +218,7 @@ public class SensorServiceSingleton {
 	}
 
 	/**
-	 * Configure route component.
+	 * TODO: Configure route component.
 	 *
 	 * @param source the source
 	 */

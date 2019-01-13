@@ -10,14 +10,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class JSONBroker.
+ * TODO: The Class JSONBroker.
+ *
+ * Description here...
  */
 public abstract class JSONBroker {
 	
 	/**
-	 * Retrieve intent extra text string.
+	 * TODO: Retrieve intent extra text string.
 	 *
 	 * @param intentThatStartedThisActivity the intent that started this activity
 	 * @return the string
@@ -30,7 +31,7 @@ public abstract class JSONBroker {
 	}
 
 	/**
-	 * Retrieve json object.
+	 * TODO: Retrieve json object.
 	 *
 	 * @param assetManager the asset manager
 	 * @param jsonFileName the json file name

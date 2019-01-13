@@ -16,22 +16,25 @@ import ch.bfh.backio.activites.ExerciseDetailActivity;
 
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ExerciseFragment.
+ * TODO: The Class ExerciseFragment.
+ *
+ * Description here...
  */
 public class ExerciseFragment extends Fragment implements ch.bfh.backio.services.JSONAdapter.JSONAdapterOnClickHandler {
-	
-	/** The JSON adapter. */
 	private JSONAdapter JSONAdapter = new JSONAdapter(this);
 
 	/**
-	 * On create view.
+	 * Called to have the fragment instantiate its user interface view.
 	 *
-	 * @param inflater the inflater
-	 * @param container the container
-	 * @param savedInstanceState the saved instance state
-	 * @return the view
+	 * @param inflater           The LayoutInflater object that can be used to inflate
+	 *                           any views in the fragment,
+	 * @param container          If non-null, this is the parent view that the fragment's
+	 *                           UI should be attached to.  The fragment should not add the view itself,
+	 *                           but this can be used to generate the LayoutParams of the view.
+	 * @param savedInstanceState If non-null, this fragment is being re-constructed
+	 *                           from a previous saved state as given here.
+	 * @return Return the View for the fragment's UI, or null.
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
