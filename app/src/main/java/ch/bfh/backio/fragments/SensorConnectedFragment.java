@@ -19,6 +19,8 @@ import ch.bfh.backio.services.SensorServiceSingleton;
  * The Class SensorFragment.
  */
 public class SensorConnectedFragment extends Fragment {
+	
+	/** The sensor service singleton. */
 	private SensorServiceSingleton sensorServiceSingleton = SensorServiceSingleton.getInstance();
 
 	/**
@@ -34,6 +36,12 @@ public class SensorConnectedFragment extends Fragment {
 		return inflater.inflate(R.layout.fragment_sensor_connected, container, false);
 	}
 
+	/**
+	 * On view created.
+	 *
+	 * @param view the view
+	 * @param savedInstanceState the saved instance state
+	 */
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		final TextView macAddressTextView = getActivity().findViewById(R.id.value_mac_address);

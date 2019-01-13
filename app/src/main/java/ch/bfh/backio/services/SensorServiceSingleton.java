@@ -31,13 +31,29 @@ import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestam
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
 public class SensorServiceSingleton {
+	
+	/** The Constant instance. */
 	private static final SensorServiceSingleton instance = new SensorServiceSingleton();
+	
+	/** The board. */
 	private MetaWearBoard board;
+	
+	/** The device. */
 	private BluetoothDevice device;
+	
+	/** The acc. */
 	private AccelerometerBmi160 acc;
+	
+	/** The db values. */
 	private AppDatabase dbValues;
+	
+	/** The evaluate counter. */
 	private int evaluateCounter = 0;
+	
+	/** The init posture. */
 	private boolean initPosture = true;
+	
+	/** The x threshold. */
 	private float xThreshold;
 
 	/**
@@ -49,9 +65,17 @@ public class SensorServiceSingleton {
 		dbValues = AppDatabase.getAppDatabase(ctxt);
 	}
 
+	/**
+	 * Instantiates a new sensor service singleton.
+	 */
 	private SensorServiceSingleton() {
 	}
 
+	/**
+	 * Gets the single instance of SensorServiceSingleton.
+	 *
+	 * @return single instance of SensorServiceSingleton
+	 */
 	public static SensorServiceSingleton getInstance() {
 		return instance;
 	}
@@ -116,6 +140,8 @@ public class SensorServiceSingleton {
 
 	/**
 	 * Close the connection to the mbientlab Sensor.
+	 *
+	 * @return the task
 	 */
 	public Task<Void> disconnectSensor() {
 		acc.stop();
@@ -196,10 +222,20 @@ public class SensorServiceSingleton {
 		}).start();
 	}
 
+	/**
+	 * Gets the device.
+	 *
+	 * @return the device
+	 */
 	public BluetoothDevice getDevice() {
 		return this.device;
 	}
 
+	/**
+	 * Configure route component.
+	 *
+	 * @param source the source
+	 */
 	private void configureRouteComponent(RouteComponent source) {
 		source.stream((Data data, Object... env) -> {
 			float x = data.value(Acceleration.class).x();

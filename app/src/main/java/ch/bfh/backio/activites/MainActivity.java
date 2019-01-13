@@ -35,10 +35,20 @@ import static ch.bfh.backio.R.id.*;
  * The Class MainActivity.
  */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
+	
+	/** The Constant DIARY_FRAGMENT. */
 	private static final String DIARY_FRAGMENT = "DIARY_FRAGMENT";
+	
+	/** The Constant ADVISOR_FRAGMENT. */
 	private static final String ADVISOR_FRAGMENT = "ADVISOR_FRAGMENT";
+	
+	/** The Constant HOME_FRAGMENT. */
 	private static final String HOME_FRAGMENT = "HOME_FRAGMENT";
+	
+	/** The Constant SENSOR_FRAGMENT. */
 	private static final String SENSOR_FRAGMENT = "SENSOR_FRAGMENT";
+	
+	/** The Constant SENSOR_CONNECTED_FRAGMENT. */
 	private static final String SENSOR_CONNECTED_FRAGMENT = "SENSOR_CONNECTED_FRAGMENT";
 
 	/**
@@ -256,6 +266,11 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		return board.connectAsync().continueWithTask(task -> task.isFaulted() ? reconnect(board) : task);
 	}
 
+	/**
+	 * Checks if is metawear connected.
+	 *
+	 * @return true, if is metawear connected
+	 */
 	private boolean isMetawearConnected() {
 		return (metawear != null && metawear.isConnected());
 	}
