@@ -12,7 +12,7 @@ import android.widget.Toast;
 import bolts.Task;
 import ch.bfh.backio.fragments.*;
 import ch.bfh.backio.R;
-import ch.bfh.backio.services.SensorService;
+import ch.bfh.backio.services.SensorServiceSingleton;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
@@ -30,19 +30,26 @@ import static ch.bfh.backio.R.drawable.ic_bluetooth_green_24dp;
 import static ch.bfh.backio.R.id.*;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class MainActivity.
  */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
 
-	/** The service binder. */
+	/**
+	 * The service binder.
+	 */
 	private static BtleService.LocalBinder serviceBinder;
 
-	/** The metawear. */
+	/**
+	 * The metawear.
+	 */
 	private MetaWearBoard metawear;
 
-	/** The sensor service. */
-	private SensorService sensorService;
+	/**
+	 * The sensor service.
+	 */
+	private SensorServiceSingleton sensorServiceSingleton = SensorServiceSingleton.getInstance();
 
 	/**
 	 * On create.
@@ -56,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		getApplicationContext().bindService(new Intent(this, BtleService.class), this, BIND_AUTO_CREATE);
 
 		Context context = MainActivity.this;
-		sensorService = new SensorService(context);
+		sensorServiceSingleton.initializeServiceWithContext(context);
 
 		findViewById(btn_diary).setOnClickListener(v -> {
 			String message = "Button clicked!\nTagebuch";
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			String message = "Button clicked!\nSensor";
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			if(isMetawearConnected()) {
+			if (isMetawearConnected()) {
 				ft.replace(android.R.id.content, new SensorConnectedFragment()).commit();
 			} else {
 				ft.replace(android.R.id.content, new SensorFragment()).commit();
@@ -110,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	 * Sets the button.
 	 *
 	 * @param clickedButton the clicked button
-	 * @param newImage the new image
+	 * @param newImage      the new image
 	 */
 	private void setButton(ImageButton clickedButton, int newImage) {
 		ImageButton btnDiary = findViewById(btn_diary_image);
@@ -167,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 				return task;
 			}).onSuccessTask(task -> {
 			System.out.println("success task");
-			metawear = sensorService.retrieveBoard(device, serviceBinder);
+			metawear = sensorServiceSingleton.retrieveBoard(device, serviceBinder);
 
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(android.R.id.content, new SensorConnectedFragment()).commit();
@@ -179,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 	/**
 	 * On service connected.
 	 *
-	 * @param name the name
+	 * @param name    the name
 	 * @param service the service
 	 */
 	@Override

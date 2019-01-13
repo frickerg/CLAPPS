@@ -42,9 +42,13 @@
 	<string name="text_awarness_pt7">Dabei muss es sich nicht immer um einen „richtigen“ Spaziergang handeln. Zwar ist Bewegung an der frischen Luft am gesündesten, doch der Chef sieht es bestimmt nicht gern, wenn die Mitarbeiter zu jeder vollen Stunde fünf Minuten vor dem Bürogebäude auf und ab gehen.</string>
 	<string name="text_awarness_pt8">Zum Glück geht es auch einfacher: Ein Gang zum Kopierer oder in die Kaffeeküche und öfter mal die Treppe zu benutzen tun es ja auch. Und vielleicht lassen sich gar das eine oder andere Minitrampolin oder Laufband auf der Büroetage integrieren.</string>
 
-	<!-- TODO: Remove or change this placeholder text -->
-	<string name="hello_blank_fragment">Hello blank fragment</string>
 	<string name="btn_sensor_disconnect">Sensor abkoppeln</string>
 	<string name="tip_tip1">Tipp: Mache eine Übung mit einem Pilates-Kissen</string>
 	<string name="tip_tip2">Tipp: Führe eine Ruderübung durch.</string>
+
+	<string name="mac_address_title">Adresse</string>
+	<string name="device_header">Mein Sensor</string>
+	<string name="device_name_title">Name</string>
+	<string name="status_connection_title">Status</string>
+	<string name="status_connected">Verbunden</string>
 </resources>

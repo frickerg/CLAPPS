@@ -32,45 +32,31 @@ import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestam
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
-public class SensorService {
-	
-	/** The board. */
+public class SensorServiceSingleton {
+	private static final SensorServiceSingleton instance = new SensorServiceSingleton();
 	private MetaWearBoard board;
-	
-	/** The led. */
-	private Led led;
-	
-	/** The accelerometer bmi 160 */
+	private BluetoothDevice device;
 	private AccelerometerBmi160 acc;
-
-	/** The accelerometer bosch */
-	private AccelerometerBosch accBosch;
-
-	/** The db values. */
-	// initialize database for sensor values
 	private AppDatabase dbValues;
-
-	/** The evaluate counter. */
-	//Posture evaluation
 	private int evaluateCounter = 0;
-	
-	/** The init posture. */
 	private boolean initPosture = true;
-	
-	/** The init X. */
-	private float initX;
-	
-	/** The x treshold. */
-	private float xTreshold;
+	private float xThreshold;
 
 	/**
 	 * Instantiates a new sensor service.
 	 *
 	 * @param ctxt the ctxt
 	 */
-	public SensorService(Context ctxt) {
+	public void initializeServiceWithContext(Context ctxt) {
 		dbValues = AppDatabase.getAppDatabase(ctxt);
 	}
+
+	private SensorServiceSingleton(){}
+
+	public static SensorServiceSingleton getInstance(){
+		return instance;
+	}
+
 
 	/**
 	 * Tries to build up a connection to the given MAC-Address of the mbientlab sensor via Bluetooth.
@@ -82,7 +68,7 @@ public class SensorService {
 	 */
 	public MetaWearBoard retrieveBoard(BluetoothDevice btDevice, BtleService.LocalBinder serviceBinder) {
 		//final BluetoothManager btManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
-
+		this.device = btDevice;
 		// the other one is in MainActivity and should absolutely stay there!
 		board = serviceBinder.getMetaWearBoard(btDevice);
 		board.connectAsync().onSuccessTask(task -> {
@@ -102,7 +88,7 @@ public class SensorService {
 				.commit();
 
 			// data route for Bosch accelerometer
-			noMotion.addRouteAsync(new RouteBuilder() {
+			noMotion.addRouteAsync(new RouteBuilder()  {
 				@Override
 				public void configure(RouteComponent source) {
 					source.stream(new Subscriber() {
@@ -159,13 +145,13 @@ public class SensorService {
 			@Override
 			public Void then(Task<Route> task) throws Exception {
 				if (task.isFaulted()) {
-					Log.d("SensorService: ", "Failed to connect");
+					Log.d("SensorServiceSingleton: ", "Failed to connect");
 					return null;
 				} else {
 					acc.start();
 					acc.acceleration().start();
 					playLed();
-					Log.d("SensorService: ", "Connected");
+					Log.d("SensorServiceSingleton: ", "Connected");
 				}
 				return null;
 			}
@@ -178,7 +164,7 @@ public class SensorService {
 	 */
 	public void disconnectSensor() {
 		board.disconnectAsync().continueWith(task -> {
-			Log.d("SensorService: ", "Disconnected");
+			Log.d("SensorServiceSingleton: ", "Disconnected");
 			return null;
 		});
 	}
@@ -187,7 +173,7 @@ public class SensorService {
 	 * Gets the Led Module from the sensor and lights up green 3 times.
 	 */
 	private void playLed() {
-		led = board.getModule(Led.class);
+		Led led = board.getModule(Led.class);
 		led.editPattern(Led.Color.GREEN);
 		led.play();
 	}
@@ -202,7 +188,7 @@ public class SensorService {
 			vibrate();
 			evaluateCounter = 0;
 		} else {
-			if (x < (x - xTreshold)) {
+			if (x < (x - xThreshold)) {
 				evaluateCounter++;
 			}
 		}
@@ -215,8 +201,7 @@ public class SensorService {
 	 */
 	private void initializePosture(float x) {
 		initPosture = false;
-		initX = x;
-		xTreshold = (initX / 100) * 25;
+		xThreshold = (x / 100) * 25;
 	}
 
 	/**
@@ -235,7 +220,7 @@ public class SensorService {
 	private void saveData(int parameter, float value) {
 		boolean goodPosture;
 
-		if (value < (value - xTreshold)) {
+		if (value < (value - xThreshold)) {
 			goodPosture = false;
 		} else {
 			goodPosture = true;
@@ -249,5 +234,9 @@ public class SensorService {
 			// pd.setPosture(goodPosture);
 			dbValues.valueDao().insertAll(newValue);
 		}).start();
+	}
+
+	public BluetoothDevice getDevice() {
+		return this.device;
 	}
 }
