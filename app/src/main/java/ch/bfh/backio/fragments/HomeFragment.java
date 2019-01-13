@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
 	 * @param savedInstanceState the saved instance state
 	 */
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		final Button sensorConnectButton = getView().findViewById(R.id.btn_connectSensor);
 		final ImageView img_posture = getView().findViewById(R.id.img_posture);
 		final AnimatedVectorDrawable img_posture_drawable = (AnimatedVectorDrawable) ContextCompat.getDrawable(getContext(), R.drawable.haltung_posa_to_posb);
 
@@ -53,14 +52,6 @@ public class HomeFragment extends Fragment {
 		});
 
 		img_posture_drawable.start();
-
-		sensorConnectButton.setOnClickListener((v -> {
-			//TODO: connection required here?
-		} ));
-
-
-
-
 	}
 
 }

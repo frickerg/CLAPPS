@@ -1,5 +1,6 @@
 package ch.bfh.backio.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
