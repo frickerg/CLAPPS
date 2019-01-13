@@ -35,6 +35,11 @@ import static ch.bfh.backio.R.id.*;
  * The Class MainActivity.
  */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
+	private static final String DIARY_FRAGMENT = "DIARY_FRAGMENT";
+	private static final String ADVISOR_FRAGMENT = "ADVISOR_FRAGMENT";
+	private static final String HOME_FRAGMENT = "HOME_FRAGMENT";
+	private static final String SENSOR_FRAGMENT = "SENSOR_FRAGMENT";
+	private static final String SENSOR_CONNECTED_FRAGMENT = "SENSOR_CONNECTED_FRAGMENT";
 
 	/**
 	 * The service binder.
@@ -66,32 +71,32 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 		sensorServiceSingleton.initializeServiceWithContext(context);
 
 		findViewById(btn_diary).setOnClickListener(v -> {
-			DiaryFragment diaryFragment = (DiaryFragment) getFragmentManager().findFragmentByTag("DIARY_FRAGMENT");
+			DiaryFragment diaryFragment = (DiaryFragment) getFragmentManager().findFragmentByTag(DIARY_FRAGMENT);
 			if (diaryFragment == null || !diaryFragment.isVisible()) {
 				String message = "Button clicked!\nTagebuch";
 				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(android.R.id.content, new DiaryFragment(), "DIARY_FRAGMENT").commit();
+				ft.replace(android.R.id.content, new DiaryFragment(), DIARY_FRAGMENT).commit();
 				setButton(findViewById(btn_diary_image), ic_import_contacts_green_24dp);
 			}
 		});
 
 		findViewById(R.id.btn_tips).setOnClickListener((v -> {
-			AdvisorFragment advisorFragment = (AdvisorFragment) getFragmentManager().findFragmentByTag("ADVISOR_FRAGMENT");
+			AdvisorFragment advisorFragment = (AdvisorFragment) getFragmentManager().findFragmentByTag(ADVISOR_FRAGMENT);
 			if (advisorFragment == null || !advisorFragment.isVisible()) {
 				String message = "Button clicked!\nTipps";
 				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(android.R.id.content, new AdvisorFragment(), "ADVISOR_FRAGMENT").commit();
+				ft.replace(android.R.id.content, new AdvisorFragment(), ADVISOR_FRAGMENT).commit();
 				setButton(findViewById(btn_tips_image), ic_content_paste_green_24dp);
 			}
 		}));
 
 		findViewById(R.id.btn_sensor).setOnClickListener((v -> {
-			SensorFragment sensorFragment = (SensorFragment) getFragmentManager().findFragmentByTag("SENSOR_FRAGMENT");
-			SensorConnectedFragment sensorConnectedFragment = (SensorConnectedFragment) getFragmentManager().findFragmentByTag("SENSOR_CONNECTED_FRAGMENT");
+			SensorFragment sensorFragment = (SensorFragment) getFragmentManager().findFragmentByTag(SENSOR_FRAGMENT);
+			SensorConnectedFragment sensorConnectedFragment = (SensorConnectedFragment) getFragmentManager().findFragmentByTag(SENSOR_CONNECTED_FRAGMENT);
 
 			final boolean isSensorFragmentUnfinished = ((sensorFragment == null || !sensorFragment.isVisible()) && !isMetawearConnected());
 			final boolean isSensorConnectedFragmentUnfinished = ((sensorConnectedFragment == null || !sensorConnectedFragment.isVisible()) && isMetawearConnected());
@@ -102,22 +107,22 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				if (isSensorFragmentUnfinished) {
-					ft.replace(android.R.id.content, new SensorFragment(), "SENSOR_FRAGMENT").commit();
+					ft.replace(android.R.id.content, new SensorFragment(), SENSOR_FRAGMENT).commit();
 				} else {
-					ft.replace(android.R.id.content, new SensorConnectedFragment(), "SENSOR_CONNECTED_FRAGMENT").commit();
+					ft.replace(android.R.id.content, new SensorConnectedFragment(), SENSOR_CONNECTED_FRAGMENT).commit();
 				}
 				setButton(findViewById(btn_sensor_image), ic_bluetooth_green_24dp);
 			}
 		}));
 
 		findViewById(R.id.btn_home).setOnClickListener((v -> {
-			HomeFragment homeFragment = (HomeFragment) getFragmentManager().findFragmentByTag("HOME_FRAGMENT");
+			HomeFragment homeFragment = (HomeFragment) getFragmentManager().findFragmentByTag(HOME_FRAGMENT);
 			if (homeFragment == null || !homeFragment.isVisible()) {
 				String message = "Button clicked!\nHome";
 				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(android.R.id.content, new HomeFragment(), "HOME_FRAGMENT").commit();
+				ft.replace(android.R.id.content, new HomeFragment(), HOME_FRAGMENT).commit();
 				setButton(findViewById(btn_home_image), ic_home_green_24dp);
 				//DatabaseInitializer.populateAsync(AppDatabase.getAppDatabase(this));
 			}
@@ -198,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements BleScannerFragmen
 			metawear = sensorServiceSingleton.retrieveBoard(device, serviceBinder);
 
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			ft.replace(android.R.id.content, new SensorConnectedFragment(), "SENSOR_CONNECTED_FRAGMENT").commit();
+			ft.replace(android.R.id.content, new SensorConnectedFragment(), SENSOR_CONNECTED_FRAGMENT).commit();
 
 			return task;
 		});
