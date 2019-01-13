@@ -3,16 +3,13 @@ package ch.bfh.backio.services;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
-import bolts.Continuation;
 import bolts.Task;
 import ch.bfh.backio.services.persistence.database.AppDatabase;
 import ch.bfh.backio.services.persistence.entity.Value;
 import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.Route;
-import com.mbientlab.metawear.Subscriber;
 import com.mbientlab.metawear.android.BtleService;
-import com.mbientlab.metawear.builder.RouteBuilder;
 import com.mbientlab.metawear.builder.RouteComponent;
 import com.mbientlab.metawear.data.Acceleration;
 import com.mbientlab.metawear.module.AccelerometerBmi160;
@@ -73,14 +70,14 @@ public class SensorServiceSingleton {
 		// the other one is in MainActivity and should absolutely stay there!
 		board = serviceBinder.getMetaWearBoard(btDevice);
 		board.connectAsync().onSuccessTask(connectAsyncTask -> {
-			// get and configure BMI160 accelerometer
+			// get and configureRouteComponent BMI160 accelerometer
 			acc = board.getModule(AccelerometerBmi160.class);
 			acc.configure()
 				.odr(OutputDataRate.ODR_50_HZ)
 				.range(AccelerometerBosch.AccRange.AR_2G)
 				.commit();
 
-			// get and configure Bosch accelerometer
+			// get and configureRouteComponent Bosch accelerometer
 			AccelerometerBosch accBosch = board.getModule(AccelerometerBosch.class);
 			final NoMotionDataProducer noMotion = accBosch.motion(NoMotionDataProducer.class);
 			noMotion.configure()
@@ -101,7 +98,7 @@ public class SensorServiceSingleton {
 				return null;
 			});
 			// data route for BMI160 accelerometer
-			return acc.acceleration().addRouteAsync(this::configure);
+			return acc.acceleration().addRouteAsync(this::configureRouteComponent);
 		}).continueWith((Task<Route> addedRouteTask) -> {
 			if (addedRouteTask.isFaulted()) {
 				Log.d("SensorServiceSingleton: ", "Failed to connect");
@@ -120,12 +117,14 @@ public class SensorServiceSingleton {
 	/**
 	 * Close the connection to the mbientlab Sensor.
 	 */
-	public void disconnectSensor() {
+	public Task<Void> disconnectSensor() {
 		acc.stop();
-		board.disconnectAsync().continueWith(task -> {
+		vibrate();
+
+		device = null;
+		this.board.tearDown();
+		return board.disconnectAsync().continueWith(task -> {
 			Log.d("SensorServiceSingleton: ", "Disconnected");
-			device = null;
-			vibrate();
 			return null;
 		});
 	}
@@ -201,7 +200,7 @@ public class SensorServiceSingleton {
 		return this.device;
 	}
 
-	private void configure(RouteComponent source) {
+	private void configureRouteComponent(RouteComponent source) {
 		source.stream((Data data, Object... env) -> {
 			float x = data.value(Acceleration.class).x();
 			String ts = data.formattedTimestamp();
