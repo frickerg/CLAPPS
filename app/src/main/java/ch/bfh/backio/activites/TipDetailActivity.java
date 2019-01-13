@@ -1,7 +1,10 @@
 package ch.bfh.backio.activites;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import ch.bfh.backio.R;
@@ -31,6 +34,7 @@ public class TipDetailActivity extends AppCompatActivity {
 		TextView tipText = findViewById(R.id.display_tip_text);
 		TextView tipSubtitle = findViewById(R.id.display_tip_subtitle);
 		TextView tipText2 = findViewById(R.id.display_tip_text2);
+		ImageView tipImg = findViewById(R.id.display_tip_img);
 
 		String extraText = JSONBroker.retrieveIntentExtraTextString(getIntent());
 		tipTitle.setText(extraText);
@@ -38,6 +42,8 @@ public class TipDetailActivity extends AppCompatActivity {
 		try {
 			JSONObject jsonObject = JSONBroker.retrieveJsonObject(getAssets(), "tip.json", "tip", extraText);
 			tipText.setText(jsonObject.getString("text"));
+			Bitmap img1 = BitmapFactory.decodeStream(getAssets().open(jsonObject.getString("img")));
+			tipImg.setImageBitmap(img1);
 			tipSubtitle.setText(jsonObject.getString("subtitle"));
 			tipText2.setText(jsonObject.getString("text2"));
 		} catch (JSONException | IOException e) {

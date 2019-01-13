@@ -1,13 +1,13 @@
 {"exercise":[{
   "title": "Rücken-Stretch – für einen entspannten Oberkörper",
-  "img": "../imgs/back-stretch.jpeg",
+  "img": "back_stretch.jpeg",
   "text": "Im Sitzen:   runder Rücken, Arme nach vorne ziehen Nacken entspannt hängen lassen. 5 Atemzüge, 1–2 Serien"
 },
 {
   "title": "Mobilisation Oberkörper – für einen beweglichen Oberkörper",
-  "img": "../imgs/mobilisation1.jpeg",
+  "img": "mobilisation1.jpeg",
   "text": "Im Sitzen: mit aufgerichtetem Körper hinsetzen Arme nach vorne strecken, Handflächen zeigen nach vorne",
-  "img2": "../imgs/mobilisation2.jpeg",
+  "img2": "mobilisation2.jpeg",
   "text2":"Mobilisation Oberkörper dynamisch 2 abwechslungsweise einen Arm kopfnah nach hinten und wieder zurückbewegen Oberkörper rotiert mit und Blick folgt der Hand 30–60 Sekunden"
 },
 {

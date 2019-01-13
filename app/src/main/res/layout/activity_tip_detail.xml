@@ -6,6 +6,9 @@
 	android:layout_height="match_parent"
 	android:layout_marginTop="@dimen/activity_vertical_margin"
 	tools:context=".activites.TipDetailActivity">
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -32,6 +35,11 @@
 			android:textColor="@color/textColor"
 			android:textSize="18sp" />
 
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/display_tip_img"/>
+
 		<TextView
 			android:id="@+id/display_tip_subtitle"
 			android:layout_width="wrap_content"
@@ -48,5 +56,6 @@
 			android:textColor="@color/textColor"
 			android:textSize="18sp" />
 	</LinearLayout>
+	</ScrollView>
 </RelativeLayout>
 
