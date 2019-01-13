@@ -29,6 +29,7 @@ import java.util.List;
 import static ch.bfh.backio.services.persistence.utils.Converters.dateToTimestamp;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Sensor Service offers all methods to interact with the mbientlab sensor.
  */
@@ -51,18 +52,18 @@ public class SensorServiceSingleton {
 		dbValues = AppDatabase.getAppDatabase(ctxt);
 	}
 
-	private SensorServiceSingleton(){}
-
-	public static SensorServiceSingleton getInstance(){
-		return instance;
+	private SensorServiceSingleton() {
 	}
 
+	public static SensorServiceSingleton getInstance() {
+		return instance;
+	}
 
 	/**
 	 * Tries to build up a connection to the given MAC-Address of the mbientlab sensor via Bluetooth.
 	 * When the connection is open, the gyroscope send with a frequency of 200 Hz data of the sensor.
 	 *
-	 * @param btDevice the bt device
+	 * @param btDevice      the bt device
 	 * @param serviceBinder the service binder
 	 * @return the meta wear board
 	 */
@@ -71,7 +72,7 @@ public class SensorServiceSingleton {
 		this.device = btDevice;
 		// the other one is in MainActivity and should absolutely stay there!
 		board = serviceBinder.getMetaWearBoard(btDevice);
-		board.connectAsync().onSuccessTask(task -> {
+		board.connectAsync().onSuccessTask(connectAsyncTask -> {
 			// get and configure BMI160 accelerometer
 			acc = board.getModule(AccelerometerBmi160.class);
 			acc.configure()
@@ -88,73 +89,30 @@ public class SensorServiceSingleton {
 				.commit();
 
 			// data route for Bosch accelerometer
-			noMotion.addRouteAsync(new RouteBuilder()  {
-				@Override
-				public void configure(RouteComponent source) {
-					source.stream(new Subscriber() {
-						@Override
-						public void apply(Data data, Object... env) {
-							Log.i("MainActivity", "No motion detected");
-
-							// write to db that no motion was detected
-							// value 1 for "no motion"
-							// parameter 1 is motion detection
-							saveData(1, 1f);
-
-						}
-					});
-				}
-			}).continueWith(new Continuation<Route, Void>() {
-				@Override
-				public Void then(Task<Route> task) throws Exception {
-					noMotion.start();
-					accBosch.start();
-					return null;
-				}
-			});
-
-
-			// data route for BMI160 accelerometer
-			return acc.acceleration().addRouteAsync(new RouteBuilder() {
-				@Override
-				public void configure(RouteComponent source) {
-					source.stream(new Subscriber() {
-						@Override
-						public void apply(Data data, Object... env) {
-
-							float x = data.value(Acceleration.class).x();
-							String ts = data.formattedTimestamp();
-
-							Log.d("SensorData: ", "X: " + x + " , Timestamp: " + ts);
-
-							if (initPosture) {
-								initializePosture(x);
-							}
-							evaluatePosition(x);
-
-							// parameter 5 is acceleration x axis
-							saveData(5, x);
-
-							List<Value> valueList = dbValues.valueDao().getAll();
-							Log.d("DBData: ", "Rows Count: " + valueList.size());
-						}
-					});
-				}
-			});
-		}).continueWith(new Continuation<Route, Void>() {
-			@Override
-			public Void then(Task<Route> task) throws Exception {
-				if (task.isFaulted()) {
-					Log.d("SensorServiceSingleton: ", "Failed to connect");
-					return null;
-				} else {
-					acc.start();
-					acc.acceleration().start();
-					playLed();
-					Log.d("SensorServiceSingleton: ", "Connected");
-				}
+			noMotion.addRouteAsync((RouteComponent source) -> source.stream((Data data, Object... env) -> {
+				Log.i("MainActivity", "No motion detected");
+				// write to db that no motion was detected
+				// value 1 for "no motion"
+				// parameter 1 is motion detection
+				saveData(1, 1f);
+			})).continueWith((Task<Route> routeTask) -> {
+				noMotion.start();
+				accBosch.start();
 				return null;
+			});
+			// data route for BMI160 accelerometer
+			return acc.acceleration().addRouteAsync(this::configure);
+		}).continueWith((Task<Route> addedRouteTask) -> {
+			if (addedRouteTask.isFaulted()) {
+				Log.d("SensorServiceSingleton: ", "Failed to connect");
+				return null;
+			} else {
+				acc.start();
+				acc.acceleration().start();
+				playLed();
+				Log.d("SensorServiceSingleton: ", "Connected");
 			}
+			return null;
 		});
 		return board;
 	}
@@ -163,8 +121,11 @@ public class SensorServiceSingleton {
 	 * Close the connection to the mbientlab Sensor.
 	 */
 	public void disconnectSensor() {
+		acc.stop();
 		board.disconnectAsync().continueWith(task -> {
 			Log.d("SensorServiceSingleton: ", "Disconnected");
+			device = null;
+			vibrate();
 			return null;
 		});
 	}
@@ -238,5 +199,25 @@ public class SensorServiceSingleton {
 
 	public BluetoothDevice getDevice() {
 		return this.device;
+	}
+
+	private void configure(RouteComponent source) {
+		source.stream((Data data, Object... env) -> {
+			float x = data.value(Acceleration.class).x();
+			String ts = data.formattedTimestamp();
+
+			Log.d("SensorData: ", "X: " + x + " , Timestamp: " + ts);
+
+			if (initPosture) {
+				initializePosture(x);
+			}
+			evaluatePosition(x);
+
+			// parameter 5 is acceleration x axis
+			saveData(5, x);
+
+			List<Value> valueList = dbValues.valueDao().getAll();
+			Log.d("DBData: ", "Rows Count: " + valueList.size());
+		});
 	}
 }
