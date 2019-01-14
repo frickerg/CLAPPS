@@ -9,7 +9,7 @@
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
 	tools:context=".fragments.HomeFragment">
-	
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -52,24 +52,25 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:id="@+id/daily_tip">
 
 			<ImageView
-				android:id="@+id/img_training1"
+				android:id="@+id/daily_tip_img"
 				android:layout_width="187dp"
 				android:layout_height="match_parent"
 				android:scaleType="fitCenter"
-				android:src="@drawable/training1" />
+				android:src="@drawable/chair" />
 
 			<TextView
-				android:id="@+id/textView2"
+				android:id="@+id/daily_tip_text"
 				android:layout_width="wrap_content"
 				android:layout_height="81dp"
 				android:layout_marginTop="5dp"
 				android:layout_weight="1"
-				android:text="@string/tip_tip2"
+				android:text="@string/tip_tip1"
 				android:textAppearance="@android:style/TextAppearance.Material.Medium"
-				tools:text="@string/tip_tip2" />
+				tools:text="@string/tip_tip1" />
 		</LinearLayout>
 
 		<View
@@ -81,24 +82,25 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:id="@+id/daily_exercise">
 
 			<ImageView
-				android:id="@+id/imageView2"
+				android:id="@+id/daily_exercise_img"
 				android:layout_width="187dp"
 				android:layout_height="82dp"
 				android:scaleType="fitCenter"
-				android:src="@drawable/training2" />
+				android:src="@drawable/drehsitz" />
 
 			<TextView
-				android:id="@+id/textView"
+				android:id="@+id/daily_exercise_text"
 				android:layout_width="wrap_content"
 				android:layout_height="73dp"
 				android:layout_marginTop="5dp"
 				android:layout_weight="1"
-				android:text="@string/tip_tip1"
+				android:text="@string/tip_tip2"
 				android:textAppearance="@android:style/TextAppearance.Material.Medium"
-				tools:text="@string/tip_tip1" />
+				tools:text="@string/tip_tip2" />
 		</LinearLayout>
 
 

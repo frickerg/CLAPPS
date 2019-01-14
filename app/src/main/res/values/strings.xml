@@ -44,8 +44,8 @@
 	<string name="text_awarness_pt8">Zum Glück geht es auch einfacher: Ein Gang zum Kopierer oder in die Kaffeeküche und öfter mal die Treppe zu benutzen tun es ja auch. Und vielleicht lassen sich gar das eine oder andere Minitrampolin oder Laufband auf der Büroetage integrieren.</string>
 
 	<string name="btn_sensor_disconnect">Sensor abkoppeln</string>
-	<string name="tip_tip1">Tipp: Mache eine Übung mit einem Pilates-Kissen</string>
-	<string name="tip_tip2">Tipp: Führe eine Ruderübung durch.</string>
+	<string name="tip_tip1">Tipp: Den Stuhl richtig einstellen</string>
+	<string name="tip_tip2">Übung: Drehsitz Übung</string>
 
 	<string name="mac_address_title">Adresse</string>
 	<string name="device_header">Mein Sensor</string>

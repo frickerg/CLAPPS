@@ -7,6 +7,9 @@
 	android:layout_marginTop="@dimen/activity_vertical_margin"
 	tools:context=".activites.ExerciseDetailActivity">
 
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -32,6 +35,11 @@
 			android:textColor="@color/textColor"
 			android:textSize="18sp" />
 
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/display_exercise_img1"/>
+
 		<TextView
 			android:id="@+id/display_exercise_text2"
 			android:layout_width="wrap_content"
@@ -40,5 +48,11 @@
 			android:textColor="@color/textColor"
 			android:textSize="18sp" />
 
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/display_exercise_img2"/>
+
 	</LinearLayout>
+	</ScrollView>
 </RelativeLayout>
