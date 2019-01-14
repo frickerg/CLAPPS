@@ -4,19 +4,28 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import bolts.Task;
 import ch.bfh.backio.fragments.*;
 import ch.bfh.backio.R;
+import ch.bfh.backio.services.JSONBroker;
 import ch.bfh.backio.services.SensorServiceSingleton;
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.android.BtleService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.UUID;
 
 import static ch.bfh.backio.R.drawable.ic_import_contacts_black_24dp;
@@ -35,19 +44,19 @@ import static ch.bfh.backio.R.id.*;
  * The Class MainActivity.
  */
 public class MainActivity extends AppCompatActivity implements BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
-	
+
 	/** The Constant DIARY_FRAGMENT. */
 	private static final String DIARY_FRAGMENT = "DIARY_FRAGMENT";
-	
+
 	/** The Constant ADVISOR_FRAGMENT. */
 	private static final String ADVISOR_FRAGMENT = "ADVISOR_FRAGMENT";
-	
+
 	/** The Constant HOME_FRAGMENT. */
 	private static final String HOME_FRAGMENT = "HOME_FRAGMENT";
-	
+
 	/** The Constant SENSOR_FRAGMENT. */
 	private static final String SENSOR_FRAGMENT = "SENSOR_FRAGMENT";
-	
+
 	/** The Constant SENSOR_CONNECTED_FRAGMENT. */
 	private static final String SENSOR_CONNECTED_FRAGMENT = "SENSOR_CONNECTED_FRAGMENT";
 
