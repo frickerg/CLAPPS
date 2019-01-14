@@ -90,7 +90,7 @@
 				android:layout_width="187dp"
 				android:layout_height="82dp"
 				android:scaleType="fitCenter"
-				android:src="@drawable/training2" />
+				android:src="@drawable/drehsitz" />
 
 			<TextView
 				android:id="@+id/daily_exercise_text"
